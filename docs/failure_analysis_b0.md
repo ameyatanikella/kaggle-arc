@@ -21,3 +21,10 @@ Categories, per the brief: perception, model class, experiment choice, goal infe
 2. Model-written executors with replanning loops can burn many actions on a simulator mismatch (sk48: 58 actions). A harness guard that stops a snippet after K consecutive prediction mismatches would be a **correction-type** change. B0's existing guards cover no-ops and repeats, not divergence from the model's own predictions, and the harness cannot see those predictions.
 3. More tokens per stuck game would not obviously help: the scheduler already deprioritizes these games, and the replay elasticity is about +2.3 points for +20% tokens.
 4. Gains of the size the leaders show (+20–40 points) almost certainly come from model capability or fine-tuning, not from harness text. That is outside our compute budget. Within budget, the realistic aim is B0 + small, safe corrections, plus the best-of-2 final selection.
+
+## Checked and rejected: a level-1 no-op loop guard (2026-10-12)
+All 100 B0 transcripts were scanned with `scripts/noop_loops.py`.
+- **Level 1 (no guards):** 23% of actions are no-ops, with 12 runs of 5 or more consecutive no-ops and a maximum of 132 in one snippet (sk48).
+- **Levels 2 and up (stale-state guard armed):** the longest run of consecutive no-ops is 1.
+
+A guard that stops a snippet after K consecutive no-ops on level 1 would affect 3–5 of 100 runs and prevent 120–147 actions in total. The counterfactual mean score gain is **+0.004 to +0.006 points**: level 1 carries the smallest weight, and the affected levels mostly were not cleared anyway. **Not worth implementing.** B0's `ARC3_GUARDS_FROM_LEVEL=2` stands.
