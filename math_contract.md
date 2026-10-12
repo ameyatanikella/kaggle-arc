@@ -54,5 +54,5 @@ This evidence comes from engine access the agent does not have. It shows whether
   - Correctly refuses the 3 wrap-around tracks.
 - **Row 8 (`zm_solve`):** tr87's movement keys form Z₇ and Z₅; 20/20 cheapest-press plans matched on the engine.
 - **Row 13 (`bfs_plan` "exhausted"):**
-  - 7 of 25 games returned "exhausted" for goals humans reach. The cause is an incomplete action set (component-centre clicks only) or state key.
+  - 7 of 25 games returned "exhausted" for goals humans reach. Hidden state is proven by row 14's conflict test on the engine in 2 of them (g50t 7/101, sc25 4/4), so the frame key merged distinct states. In the other 5 the action set was incomplete (component-centre clicks only).
   - "Unreachable in the model" is not "unreachable".
