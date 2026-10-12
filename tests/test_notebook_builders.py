@@ -72,12 +72,14 @@ def test_b2_builder_writes_to_tmp_and_parses():
 
 def test_paired_builder_rerun_and_commit_paths():
     import build_paired
-    out = build_paired.main("tester", "pairtest", "b2", 2, {"B2_BAR_FIX": "1"})
+    out = build_paired.main("tester", "pairtest", {}, {"B2_BAR_FIX": "1"}, "b", 2, "ba")
     nb = json.loads((out / "notebook.ipynb").read_text())
     srcs = ["".join(c["source"]) for c in nb["cells"] if c["cell_type"] == "code"]
     assert all(_code_ok(s) for s in srcs)
     joined = "\n".join(srcs)
-    assert "if TRUE_SUBMISSION and SUBMIT_ARM == 'b2':" in joined       # rerun installs B2 only for b2 arm
+    assert "if TRUE_SUBMISSION and SUBMIT_SWITCHES:" in joined          # rerun installs only the submit arm's switches
+    assert 'SUBMIT_SWITCHES = {"B2_BAR_FIX": "1"}' in joined
+    assert 'PAIRED_ARMS = [["b", {"B2_BAR_FIX": "1"}], ["a", {}]]' in joined   # order ba
     assert "if not PAIRED_DONE:\n    await bm.run(" in joined           # commit path skips the 8h benchmark
     assert "timeout=ARM_SECONDS + 900" in joined
     assert "B0_SMOKE = False" in joined
@@ -85,3 +87,7 @@ def test_paired_builder_rerun_and_commit_paths():
     assert "submission.parquet" in run_cell
     import shutil
     shutil.rmtree(out)
+    out2 = build_paired.main("tester", "pairtest2", {}, {"B2_BAR_FIX": "1"}, "a", 1, "ab")
+    j2 = "\n".join("".join(c["source"]) for c in json.loads((out2 / "notebook.ipynb").read_text())["cells"])
+    assert "SUBMIT_SWITCHES = {}" in j2                                   # submit arm a = plain B0 rerun
+    shutil.rmtree(out2)
