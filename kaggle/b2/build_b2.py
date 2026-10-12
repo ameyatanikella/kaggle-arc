@@ -22,12 +22,14 @@ def main(username: str, variant: str, switches: dict) -> Path:
     nb = json.loads((pdir / "notebook.ipynb").read_text())
     meta = json.loads((pdir / "kernel-metadata.json").read_text())
     src = (HERE / "b2_patches.py").read_text()
+    tools_src = (HERE / "sandbox_tools.py").read_text()
     env_lines = "\n".join(f"os.environ[{k!r}] = {v!r}" for k, v in sorted(switches.items()))
     cell_src = (
         "# B2 patches (switchable; all OFF == B0). Written to /tmp so it is not a notebook output.\n"
         "import os, sys, importlib\n"
         f"{env_lines}\n"
         "open('/tmp/b2_patches.py', 'w').write(" + repr(src) + ")\n"
+        "open('/tmp/sandbox_tools.py', 'w').write(" + repr(tools_src) + ")\n"
         "sys.path.insert(0, '/tmp')\n"
         "import b2_patches\n"
         "importlib.reload(b2_patches)\n"
