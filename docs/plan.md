@@ -15,18 +15,21 @@ The entry and team-merger deadline is 2026-10-26 23:59 UTC.
 - On completed levels the agent uses a median of 1.55× fewer actions than the human baseline, and 80% of completed levels are at or under baseline.
 - **Implication.** Spending extra real actions on probes is nearly free in score until a level's human/agent ratio drops below about 1.07, which is where `min(1.15, ratio²)` starts to bind. Thinking tokens are the scarce resource. Action-minimizing intervention design (rank / min-cost-basis selection) therefore targets the wrong cost. The relevant cost is **tokens to a correct world model**. Experiment design should trade cheap actions for expensive deliberation.
 
-## B2 candidate changes, in priority order (each behind its own switch)
-1. **Probe-over-deliberate policy.** Change the prompt so it no longer demands minimal actions when uncertain. The agent should run cheap systematic probes instead of long reasoning, with an explicit statement that actions are cheap until the level's spend nears the human-par region. Hypothesis: more levels completed for the same tokens. Risk: more wasted actions on completed levels (bounded by the 2.6-point inefficiency pool).
-2. **Systematic probe tools** in the sandbox, so the model does not rewrite them each time:
-   - `probe_effects()`: try each available action once and return a compact effect table.
-   - Undo-aware variants.
-   - `distinguish(models, ...)`: shortest separating sequence between the model's own candidate simulators (`arc3/algebra/distinguish.py`).
-   - `gf2_min_cost` for toggle puzzles.
+**Exchange rate** (counterfactual on the same log): scaling every completed level's actions by 1.10/1.25/1.5 costs 1.0/3.2/6.8 points. One more completed level on an unfinished run is worth +13.5 on that run (+9.1 averaged over all runs). Extra actions are therefore only worth it when they are *targeted at stuck levels*. They are not free in general.
 
-   These save generation tokens and are measured by tool-usage counts and by B2-vs-B0 pairs.
-3. **Cross-level memory pinning.** Keep the rules of solved levels and their winning action sequences in the system prompt. Another M2 winner, sirikilohit, used this; it is unmeasured by us.
-4. **Stuck audit.** Add a strategy-audit prompt once a level consumes a large share of the game's budget, following lordhansolo (also an M2 winner).
-5. **Throughput.** Move to the NVFP4 + built-in MTP model variant, whose reported peak decode is 1,135 vs 946 tok/s. Highest engineering risk; only attempt with GPU access.
+**External evidence** (rellik13's M2 write-up, Apache-2.0 repo, single noisy runs):
+- Adding advice text to prompts hurt, including at level starts.
+- Removing misleading text helped.
+- Pinning solved-level rules helped (+2.8).
+- Longer retained history helped the most (14.5 → 22.5).
+- Pruning experts (REAP) and fresh-context restarts did not help.
+
+## B2 candidate changes, in priority order (each behind its own switch; all OFF reproduces B0 exactly)
+1. **Corrections, no new advice.** B0's system prompt says both "do not get distracted by [the edge bar]" and "count remaining budget into your plans". The bar is usually the action budget, so delete the misleading line. A second candidate: the "Optimize for as few in-game actions as possible" line conflicts with the measured bottleneck. Test it *only* as a separate arm, because it may act as advice.
+2. **Solved-level memory pinning.** When a level is cleared, pin facts from that level in the system prompt: the action count, the winning action tail, and the rule the model wrote ("Rule for level N:"). Port of rellik13's M85 (Apache-2.0), reported at +2.8 in their harness. In B0, history already survives level changes until the 118K→59K trim, so the expected gain is smaller. Measure "rules captured" and the number of levels reached.
+3. **Systematic probe tools in the sandbox.** `probe_effects()`, `distinguish(models, ...)` and `gf2_min_cost`. They cost about 5 lines of system-prompt documentation. Measure actual tool usage. If they go unused, they are removed (pitfall: a component that controls nothing).
+4. **Stuck audit.** Following lordhansolo, a strategy-audit prompt fires after a level consumes a large share of tokens. Because it adds text, it is lower priority.
+5. **Throughput.** Move to the NVFP4 + built-in MTP model variant, whose reported peak decode is 1,135 vs 946 tok/s, or tune streams and context. Highest expected value per rellik13 and Franzen ("more tokens = more levels"), but it needs GPU-side engineering and validation.
 
 ## Evaluation protocol (fixed in advance)
 - **Local dev split:** the 25 public games. All are contaminated: inspected by me, and used by Franzen and Tufa during development. No public-game split is a true holdout. The hidden LB is the only generalization evidence.
