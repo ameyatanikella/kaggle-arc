@@ -172,4 +172,107 @@ def zm_solve(A, b, m, cost=None, max_states=2000000):
     return None if best is None else {"presses": best[0], "cost": best[1]}
 
 
-B2_TOOL_NAMES = ("bfs_plan", "distinguish", "gf2_solve", "zm_solve")
+
+
+def fit_boolean(rows, values, max_degree=2, max_terms=4):
+    """Sparsest exact multilinear fit y = sum_S theta_S prod_{i in S} b_i over observed
+    Boolean configurations `rows` (lists of 0/1). Smallest support first (MDL). Returns
+    {'terms': {(i,..): coef}, 'alternatives': n_other_supports_same_size,
+     'unidentified': [monomials not pinned by the data]} or None if no fit <= max_terms.
+    Several alternatives = choose a configuration that separates them before trusting it."""
+    from fractions import Fraction as _F
+    n = len(rows[0]) if rows else 0
+    monos = [()]
+    for d in range(1, max_degree + 1):
+        monos += list(_b2it.combinations(range(n), d))
+    feat = [[int(all(r[i] for i in m)) for m in monos] for r in rows]
+    y = [_F(v) for v in values]
+
+    def solve(cols):
+        A = [[_F(f[j]) for j in cols] + [yy] for f, yy in zip(feat, y)]
+        piv, rr = [], 0
+        for c in range(len(cols)):
+            p = next((i for i in range(rr, len(A)) if A[i][c] != 0), None)
+            if p is None:
+                continue
+            A[rr], A[p] = A[p], A[rr]
+            A[rr] = [x / A[rr][c] for x in A[rr]]
+            for i in range(len(A)):
+                if i != rr and A[i][c] != 0:
+                    A[i] = [a - A[i][c] * b for a, b in zip(A[i], A[rr])]
+            piv.append(c)
+            rr += 1
+        if any(A[i][-1] != 0 for i in range(rr, len(A))):
+            return None
+        x = [_F(0)] * len(cols)
+        for i, c in enumerate(piv):
+            x[c] = A[i][-1]
+        return x
+    for k in range(0, max_terms + 1):
+        sols = []
+        for cols in _b2it.combinations(range(len(monos)), k):
+            if k == 0:
+                if all(v == 0 for v in y):
+                    sols.append({})
+                continue
+            x = solve(cols)
+            if x is not None and all(v != 0 for v in x):
+                sols.append({monos[j]: (int(v) if v.denominator == 1 else float(v)) for j, v in zip(cols, x)})
+        if sols:
+            pinned = set()
+            for j, m in enumerate(monos):
+                e = [0] * len(monos)
+                e[j] = 1
+                if solve_rank_ok(feat, e):
+                    pinned.add(m)
+            return {"terms": sols[0], "alternatives": len(sols) - 1,
+                    "unidentified": [m for m in monos if m not in pinned]}
+    return None
+
+
+def solve_rank_ok(feat, e):
+    """True iff unit vector e lies in the row space of feat (exact)."""
+    from fractions import Fraction as _F
+
+    def rank(M):
+        M = [[_F(v) for v in r] for r in M]
+        rk = 0
+        for c in range(len(M[0]) if M else 0):
+            p = next((i for i in range(rk, len(M)) if M[i][c] != 0), None)
+            if p is None:
+                continue
+            M[rk], M[p] = M[p], M[rk]
+            for i in range(len(M)):
+                if i != rk and M[i][c] != 0:
+                    f = M[i][c] / M[rk][c]
+                    M[i] = [a - f * b for a, b in zip(M[i], M[rk])]
+            rk += 1
+        return rk
+    return bool(feat) and rank(feat + [e]) == rank(feat)
+
+
+def fit_guarded(xs, ys):
+    """1-D rule with a guard: y = a*x+b, or y = a*x+b below a threshold and a constant
+    at/after it (wall, cap, saturation). Simplest exact rule first. Returns dict or None."""
+    pts = sorted(zip(xs, ys))
+
+    def aff(p):
+        if len(p) < 2:
+            return (0.0, p[0][1]) if p else None
+        (x0, y0), (x1, y1) = p[0], p[-1]
+        if x1 == x0:
+            return None
+        a = (y1 - y0) / (x1 - x0)
+        b = y0 - a * x0
+        return (a, b) if all(abs(a * x + b - y) < 1e-9 for x, y in p) else None
+    f = aff(pts)
+    if f:
+        return {"kind": "affine", "a": f[0], "b": f[1]}
+    for k in range(1, len(pts)):
+        f = aff(pts[:k])
+        if f and all(abs(y - pts[k][1]) < 1e-9 for _, y in pts[k:]):
+            return {"kind": "guarded", "a": f[0], "b": f[1], "threshold": pts[k][0], "value_after": pts[k][1]}
+    return None
+
+
+B2_TOOL_NAMES = ("bfs_plan", "distinguish", "gf2_solve", "zm_solve", "fit_boolean", "fit_guarded")

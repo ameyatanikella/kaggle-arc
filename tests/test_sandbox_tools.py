@@ -34,3 +34,15 @@ def test_gf2_and_zm():
     assert T.gf2_solve([[1, 1], [1, 1]], [1, 0]) is None
     assert T.zm_solve([[2]], [1], 4) is None
     assert T.zm_solve([[1, 1]], [3], 4, cost=[1, 2])["presses"] == [3, 0]
+
+
+def test_fit_boolean_or_xor_and_guarded():
+    two = T.fit_boolean([[1, 0], [0, 1]], [1, 1])
+    assert (0, 1) in two["unidentified"]                      # interaction not pinned yet
+    # without (0,0) the sparser rule 1 - b1*b2 also fits: MDL picks it (genuine ambiguity)
+    amb = T.fit_boolean([[1, 0], [0, 1], [1, 1]], [1, 1, 0])
+    assert amb["terms"] == {(): 1, (0, 1): -1}
+    xor = T.fit_boolean([[0, 0], [1, 0], [0, 1], [1, 1]], [0, 1, 1, 0])
+    assert xor["terms"] == {(0,): 1, (1,): 1, (0, 1): -2} and xor["unidentified"] == []
+    g = T.fit_guarded(list(range(9)), [min(x, 5) for x in range(9)])
+    assert g["kind"] == "guarded" and g["value_after"] == 5
