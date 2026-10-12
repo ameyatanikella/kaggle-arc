@@ -105,6 +105,52 @@ def _install_prompt_fixes(T) -> None:
     T._build_system_prompt = _build_system_prompt
 
 
+# --------------------------------------------------------------------------- stuck nudge
+STUCK_TOKENS = int(os.environ.get("B2_STUCK_TOKENS", "45000"))
+STUCK_MAX_ACTIONS = int(os.environ.get("B2_STUCK_MAX_ACTIONS", "40"))
+STUCK_TEXT = ("\n\nProgress check: about {k}K generated tokens and {m} actions spent on this level "
+              "without clearing it. Experiments are cheap compared with extended reasoning: if your "
+              "current idea has not worked, test an untried mechanic or goal hypothesis directly with "
+              "a few actions and update from what changes.")
+
+
+def _install_stuck_nudge(T) -> None:
+    """Measured motivation: on the level where B0 runs fail, they had used a median of
+    0.73x the human baseline actions (Franzen v3 log), and in a real Flash-Next run
+    several stuck levels used 0.2-0.3x baseline actions after ~30K reasoning tokens.
+    Fires only when a level has consumed >= STUCK_TOKENS generated tokens with
+    <= STUCK_MAX_ACTIONS actions, and at most once per STUCK_TOKENS tokens."""
+    A = T.ToolAgent
+    inner = A._build_user_prompt
+    if getattr(inner, "_b2_stuck", False):
+        return
+
+    def _build_user_prompt(self, action_num, *args, **kwargs):
+        out = inner(self, action_num, *args, **kwargs)
+        try:
+            tok = int(getattr(self, "_session_generated_tokens", 0)) - int(getattr(self, "_tokens_at_level_start", 0))
+            summ = getattr(self, "_last_step_summary", None) or {}
+            acts = max(0, int(T._priority_action_count(summ)) - int(getattr(self, "_actions_at_level_start", 0)))
+            start = int(getattr(self, "_tokens_at_level_start", 0))
+            if getattr(self, "_b2_stuck_level_start", None) != start:
+                self._b2_stuck_level_start = start
+                self._b2_stuck_next = STUCK_TOKENS
+            if tok >= self._b2_stuck_next and acts <= STUCK_MAX_ACTIONS:
+                out += STUCK_TEXT.format(k=tok // 1000, m=acts)
+                self._b2_stuck_next = tok + STUCK_TOKENS
+                with _LOCK:
+                    STATS["stuck_nudges"] = STATS.get("stuck_nudges", 0) + 1
+        except Exception as exc:
+            _err(exc)
+        return out
+
+    for f in dir(inner):
+        if f.endswith("_wrapped"):
+            setattr(_build_user_prompt, f, getattr(inner, f))
+    _build_user_prompt._b2_stuck = True
+    A._build_user_prompt = _build_user_prompt
+
+
 # --------------------------------------------------------------------------- solved memory
 M_ACTIONS_KEPT = 30
 M_REASONING_CHARS = 900
@@ -343,6 +389,9 @@ def install() -> dict:
     if _on("B2_PROMPT_FIXES"):
         _install_prompt_fixes(T)
         STATS["installed"].append("prompt_fixes")
+    if _on("B2_STUCK_NUDGE"):
+        _install_stuck_nudge(T)
+        STATS["installed"].append("stuck_nudge")
     print("B2 patches installed:", json.dumps(STATS["installed"]), flush=True)
     return dict(STATS)
 
