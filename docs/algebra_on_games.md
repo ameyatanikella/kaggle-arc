@@ -18,7 +18,8 @@ They do **not** measure agent performance or score. The model still has to disco
 
 The first version used a frequency-based HUD mask. It reported 0% superposition on ft09, which comes out as an exact XOR game once the bar's second pixel is masked. The comparisons are therefore conservative only after this fix.
 
-## 1. Click mechanics: which model class holds? (15 games with ACTION6)
+## 1. Click mechanics: which model class holds? (19 games with ACTION6: 12 with an effective component-centre click at level 1, 7 without)
+These are level-1 observations from the start state, not certifications of whole-game mechanics.
 Effective buttons are clicks at component centres that change more than 4 non-counter pixels. Pair and triple tests are run from the start state.
 
 | Class (definition) | Games | Tool whose assumptions hold |
@@ -58,7 +59,7 @@ The reference predictor is XOR superposition of the three singles.
 **Reading.**
 - In bp35 and s5i5 the low-degree multilinear model predicts unseen combinations that the XOR model gets wrong (99% vs 75% and 85% vs 37% of pixels). This is real-game support for the polynomial extension over GF(2).
 - In cn04, three buttons toggle the same pixels. That is 3-way parity, which needs a degree-3 term over the reals. `fit_boolean` correctly answers "no rule with ≤ 4 terms of degree ≤ 2" rather than guessing, and XOR is exact.
-- The two classes are therefore complementary. The cheap pair superposition test selects between them: 100% superposition means use XOR, otherwise use the polynomial fit.
+- The two classes are therefore complementary. Pair superposition is only evidence for a candidate class, not a selector. f = a⊕b⊕c⊕abc agrees with XOR on every singleton and pair yet differs on the triple, and failing XOR does not establish a degree-2 model (r11l, lf52). A class must keep being checked on further combinations and later states.
 - In order-dependent games both fail, as they should.
 
 ## 3. Movement: guarded affine (`fit_guarded`) and wrap-around (`zm_solve`)
@@ -104,16 +105,16 @@ The BFS results are identical across two independent runs.
 **Plans found: 13 games.** All 13 plans complete level 1 when replayed on a fresh instance. They use 0.09–0.95 of the human baseline's actions (median 0.34).
 
 **"Exhausted" without a plan: 7 games.** Humans complete all of these levels, so each claim is wrong about the real game, though correct about the model it was given. The visible-Markov check (§F of the script) separates the two causes:
-- **Hidden state, proven: g50t and sc25.** Two histories reach the same frame, and the same action then gives different frames. In sc25 the keys change nothing visible at the start, yet they change what later actions do. A frame-keyed BFS merges these states and prunes reachable ones.
-- **Action set incomplete: ka59, lf52, sb26, su15, tn36.** No conflict was found in the histories checked, which is not a proof that there is no hidden state. The action set used only component-centre clicks. These games evidently need clicks elsewhere, such as destination cells, and tn36 has no effective component-centre click at all.
+- **State not determined by the MASKED frame: g50t and sc25** (whether the raw observation determines it is being checked by `scripts/exhausted_witness.py`). Two histories reach the same frame, and the same action then gives different frames. In sc25 the keys change nothing visible at the start, yet they change what later actions do. A frame-keyed BFS merges these states and prunes reachable ones.
+- **Hypothesis, not yet witnessed — action set incomplete: ka59, lf52, sb26, su15, tn36.** No conflict found is not a diagnosis; inadequate goal test, state merging or context-dependent action availability are also possible. 'exhausted' means only: no plan in the supplied graph (start-state action set, interior-frame key, engine goal test). No conflict was found in the histories checked, which is not a proof that there is no hidden state. The action set used only component-centre clicks. These games evidently need clicks elsewhere, such as destination cells, and tn36 has no effective component-centre click at all.
 
 **Budget hit without a plan: 5 games.** The engine simulator runs at about 130 nodes/s, so this says nothing about the games. A model-written simulator is typically far faster.
 
 lp85 shows one hidden-state conflict, yet BFS still found a valid plan: aliasing does not always block. The consequence for `bfs_plan`, `distinguish` and any model-written simulator is that an "exhausted" result should be treated as "my action set or state key is incomplete" before it is treated as "the goal is unreachable". The tool's documentation says this (`unreachable in your model`), and it is now measured on 7 of 25 real games.
 
 ## 5. What this means for the competition
-- **What the tools do once the model is right.** When the right model is supplied, every returned plan completes the level. The plans are far shorter than the human baselines (median 0.34 of the level-1 baseline). This confirms the measured loss decomposition (50.9 points lost to levels not completed vs 2.6 to inefficiency). The binding step is **identifying the mechanic and encoding it**, which no tool here does for the model.
-- **Coverage.** Exact algebraic classes cover a minority of click mechanics: XOR 2/15, polynomial a further 2/15, inverse/cyclic 2/15 plus tr87's keys. Steady-plus-wall motion is common, 25 tracks across 11 games, but it is also easy for a model to handle without a tool.
+- **What the tools do once the model is right.** With the engine itself as the simulator, all 13 BFS plans completed level 1 on replay. The GF(2) and Z_m results are target reconstructions, not level completions; the triple tests are held-out predictions. These are three different kinds of success. The plans are far shorter than the human baselines (median 0.34 of the level-1 baseline). This shows short solutions exist in the tested cases. It does **not** compare agent efficiency with humans: these paths come after privileged exploration, and human baselines include first-time learning. It is consistent with the separately measured loss decomposition but does not confirm it. The binding step is **identifying the mechanic and encoding it**, which no tool here does for the model.
+- **Coverage.** Exact algebraic classes cover a minority of click mechanics: XOR 2 of the 12 games with an effective click (19 with ACTION6), polynomial candidate a further 2, inverse/cyclic 2, plus tr87's keys. Steady-plus-wall motion is common, 25 tracks across 11 games, but it is also easy for a model to handle without a tool.
 - **Two failure modes seen on real games.**
   - (a) A toggle solver applied outside its class gives a confident wrong plan. Fixed in the prompt text, but the model still has to run the checks.
   - (b) `bfs_plan` reports "exhausted" (unreachable) for goals humans reach when the model's action set or state key is incomplete (§4).

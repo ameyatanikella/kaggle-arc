@@ -47,12 +47,12 @@ This evidence comes from engine access the agent does not have. It shows whether
   - In an order-dependent game (r11l) one confident plan failed on the engine.
   - The prerequisite check is therefore load-bearing. It has been stated in `TOOL_DOC` since commit 1ec396b.
 - **Rows 1–4 (`fit_boolean`, degree ≤ 2):**
-  - Predicts held-out 3-button combinations exactly where XOR superposition fails: bp35 99% vs 75% of pixels; s5i5 85% vs 37%.
+  - Predicts held-out 3-button combinations better than XOR where XOR fails, but not exactly: bp35 11/12 frames (99% vs 75% of pixels); s5i5 10/12 frames (85% vs 37%).
   - Correctly reports "no fit" for 3-way parity (cn04), which needs degree 3 over the reals.
 - **Row 15 (`fit_guarded`):**
   - Exact on all 25 steady-motion tracks, with all 22 wall intervals containing the observed stop.
   - Correctly refuses the 3 wrap-around tracks.
 - **Row 8 (`zm_solve`):** tr87's movement keys form Z₇ and Z₅; 20/20 cheapest-press plans matched on the engine.
 - **Row 13 (`bfs_plan` "exhausted"):**
-  - 7 of 25 games returned "exhausted" for goals humans reach. Hidden state is proven by row 14's conflict test on the engine in 2 of them (g50t 7/101, sc25 4/4), so the frame key merged distinct states. In the other 5 the action set was incomplete (component-centre clicks only).
+  - 7 of 25 games returned "exhausted" for goals humans reach. In 2 of them (g50t 7/101, sc25 4/4) row 14's test shows the masked frame key merged distinct states (raw-observation check pending). For the other 5 an incomplete action set is a hypothesis without a witness yet.
   - "Unreachable in the model" is not "unreachable".
