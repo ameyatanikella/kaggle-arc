@@ -28,3 +28,14 @@ All 100 B0 transcripts were scanned with `scripts/noop_loops.py`.
 - **Levels 2 and up (stale-state guard armed):** the longest run of consecutive no-ops is 1.
 
 A guard that stops a snippet after K consecutive no-ops on level 1 would affect 3–5 of 100 runs and prevent 120–147 actions in total. The counterfactual mean score gain is **+0.004 to +0.006 points**: level 1 carries the smallest weight, and the affected levels mostly were not cleared anyway. **Not worth implementing.** B0's `ARC3_GUARDS_FROM_LEVEL=2` stands.
+
+## Error scan of all 9,278 tool results (100 B0 transcripts)
+| Event | Share of tool results | Assessment |
+|---|---|---|
+| Python traceback (any) | 8.6% | Normal for a code-writing agent. Usually fixed on the next call |
+| NameError | 2.1% | Mostly variables from earlier snippets, which reset by design, plus 19× `open`, which the sandbox blocks. No systematic harness cause |
+| Tool timeout (30 s) | 0.7% | Rare. No case for a longer timeout |
+| Refused import | 0.5% | Rare |
+| Reply hit `max_tokens` (`finish_reason: length`) | 89 replies in 44 runs | The reasoning is kept and the turn continues. Small share of the total tokens |
+
+No further correction-type change has a measurable expected effect.
