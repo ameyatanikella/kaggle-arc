@@ -34,7 +34,7 @@ def _check_meta(meta):
 
 def test_b0_rerun_path_unchanged():
     import build_b0
-    build_b0.main("tester")
+    build_b0.main("axizcc")          # same as the real build: the push dir stays valid
     orig = json.loads((ROOT / "kaggle/b0/franzen_m2_v3_original.ipynb").read_text())
     new = json.loads((ROOT / "kaggle/b0/push/notebook.ipynb").read_text())
     assert len(new["cells"]) == len(orig["cells"]) + 1          # one intro markdown cell added
@@ -58,7 +58,7 @@ def test_b0_rerun_path_unchanged():
 
 def test_b2_builder_writes_to_tmp_and_parses():
     import build_b2
-    out = build_b2.main("tester", "b2test", {"B2_BAR_FIX": "1", "B2_TOOLS": "1"})
+    out = build_b2.main("axizcc", "b2test", {"B2_BAR_FIX": "1", "B2_TOOLS": "1"})
     nb = json.loads((out / "notebook.ipynb").read_text())
     srcs = ["".join(c["source"]) for c in nb["cells"] if c["cell_type"] == "code"]
     assert all(_code_ok(s) for s in srcs)
@@ -72,7 +72,7 @@ def test_b2_builder_writes_to_tmp_and_parses():
 
 def test_paired_builder_rerun_and_commit_paths():
     import build_paired
-    out = build_paired.main("tester", "pairtest", {}, {"B2_BAR_FIX": "1"}, "b", 2, "ba")
+    out = build_paired.main("axizcc", "pairtest", {}, {"B2_BAR_FIX": "1"}, "b", 2, "ba")
     nb = json.loads((out / "notebook.ipynb").read_text())
     srcs = ["".join(c["source"]) for c in nb["cells"] if c["cell_type"] == "code"]
     assert all(_code_ok(s) for s in srcs)
@@ -87,7 +87,7 @@ def test_paired_builder_rerun_and_commit_paths():
     assert "submission.parquet" in run_cell
     import shutil
     shutil.rmtree(out)
-    out2 = build_paired.main("tester", "pairtest2", {}, {"B2_BAR_FIX": "1"}, "a", 1, "ab")
+    out2 = build_paired.main("axizcc", "pairtest2", {}, {"B2_BAR_FIX": "1"}, "a", 1, "ab")
     j2 = "\n".join("".join(c["source"]) for c in json.loads((out2 / "notebook.ipynb").read_text())["cells"])
     assert "SUBMIT_SWITCHES = {}" in j2                                   # submit arm a = plain B0 rerun
     shutil.rmtree(out2)
@@ -95,7 +95,7 @@ def test_paired_builder_rerun_and_commit_paths():
 
 def test_b2_minimal_commit_skips_only_benchmark():
     import build_b2
-    out = build_b2.main("tester", "b2min", {"B2_TOOLS": "1"}, "minimal")
+    out = build_b2.main("axizcc", "b2min", {"B2_TOOLS": "1"}, "minimal")
     nb = json.loads((out / "notebook.ipynb").read_text())
     srcs = ["".join(c["source"]) for c in nb["cells"] if c["cell_type"] == "code"]
     run = next(s for s in srcs if "await bm.run(" in s)
