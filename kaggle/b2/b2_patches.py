@@ -66,6 +66,45 @@ def _install_bar_fix(T) -> None:
     T._build_system_prompt = _build_system_prompt
 
 
+# --------------------------------------------------------------------------- prompt fixes
+_EPHEMERAL_CODE_DESC = "Python code to run. The snippet is ephemeral and is not saved across tool calls."
+_RETAINED_CODE_DESC = ("Python code to run. Variables reset between calls; functions you define are "
+                       "retained as described in the system prompt.")
+_FUSED_BULLETS = "Sometime they might also be 1x1 tokens.- Some games"
+_SPLIT_BULLETS = "Sometimes they might also be 1x1 tokens.\n- Some games"
+
+
+def _install_prompt_fixes(T) -> None:
+    """Corrections only: (1) the python tool schema calls snippets 'ephemeral and not
+    saved' although B0 retains model-defined functions for the whole game
+    (ARC3_PERSISTENT_FUNCTIONS=1) - the two statements contradict; (2) two system-prompt
+    bullets are fused by a missing newline."""
+    persistent = os.environ.get("ARC3_PERSISTENT_FUNCTIONS", "0").strip().lower() in {"1", "true", "on", "yes"}
+    if persistent and T._PYTHON_TOOL_DESCRIPTION.startswith("Run one ephemeral Python snippet"):
+        T._PYTHON_TOOL_DESCRIPTION = T._PYTHON_TOOL_DESCRIPTION.replace(
+            "Run one ephemeral Python snippet", "Run one Python snippet", 1)
+    A = T.ToolAgent
+    inner_tools = A._tools
+
+    def _tools(self, state_path):
+        tools = inner_tools(self, state_path)
+        if persistent:
+            for t in tools:
+                props = t.get("function", {}).get("parameters", {}).get("properties", {})
+                code = props.get("code")
+                if isinstance(code, dict) and code.get("description") == _EPHEMERAL_CODE_DESC:
+                    code["description"] = _RETAINED_CODE_DESC
+        return tools
+
+    A._tools = _tools
+    inner_sp = T._build_system_prompt
+
+    def _build_system_prompt(*args, **kwargs):
+        return inner_sp(*args, **kwargs).replace(_FUSED_BULLETS, _SPLIT_BULLETS)
+
+    T._build_system_prompt = _build_system_prompt
+
+
 # --------------------------------------------------------------------------- solved memory
 M_ACTIONS_KEPT = 30
 M_REASONING_CHARS = 900
@@ -301,6 +340,9 @@ def install() -> dict:
     if _on("B2_TOOLS"):
         _install_tools(T)
         STATS["installed"].append("tools")
+    if _on("B2_PROMPT_FIXES"):
+        _install_prompt_fixes(T)
+        STATS["installed"].append("prompt_fixes")
     print("B2 patches installed:", json.dumps(STATS["installed"]), flush=True)
     return dict(STATS)
 
