@@ -1,0 +1,84 @@
+{
+ "generated_utc": "2026-10-12T10:17:53Z",
+ "repo_commit": "a9f01ae",
+ "b0": {
+  "source_notebook": {
+   "path": "kaggle/b0/franzen_m2_v3_original.ipynb",
+   "sha256": "589eaf393f416effe925c6830fc00fcdc0d6da91193b29ff0029282cbd6ee96e",
+   "origin": "https://www.kaggle.com/code/dfranzen/arc-agi-3-milestone-2-solution (v3, Apache-2.0)"
+  },
+  "harness_upstream": {
+   "repo": "https://github.com/Tufalabs/duck-harness",
+   "commit": "7652836056c59e044f093e3c13ed7438c814169e"
+  },
+  "harness_patch": {
+   "path": "kaggle/b0/harness-changes.patch",
+   "sha256": "80aef535ee80970622127f3ee1917e1b127db22ebe07ece40fc8558a63b4484d"
+  },
+  "kaggle_inputs": {
+   "datasets": [
+    "dfranzen/pennyroyal-v253",
+    "dfranzen/taaf-kaggle-source-bundle-copy"
+   ],
+   "models": [
+    "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1",
+    "dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1"
+   ],
+   "competition": "arc-prize-2026-arc-agi-3"
+  },
+  "model_licenses": {
+   "Qwen3.8-Flash-Next": "Qwen Community License 1.0 (see competition_contract.md risk note)"
+  },
+  "serving": "SGLang Pennyroyal v2.5.3 (commit d00d88e) + Franzen patches (third_party/franzen-m2/serving)"
+ },
+ "b2": {
+  "b2_patches.py": "4e5f7fdb2d22a619bb66bc9c4ed4b5c1512e26b5bb2c33d665cbdc8967cdbdf2",
+  "sandbox_tools.py": "7c066b225b0b53b7734fe830709f934fcf568eb0457b279614524efc6f7a5ec5",
+  "solved_memory_origin": "https://github.com/LohitSiriki/arc-agi-3-milestone2-solution (Apache-2.0), cell 42 (M85)"
+ },
+ "local_env": {
+  "python": "Python 3.12.15",
+  "packages": {
+   "arc-agi": "0.9.9",
+   "arcengine": "0.9.3",
+   "kaggle": "2.2.4",
+   "numpy": "2.5.4",
+   "pandas": "3.0.6",
+   "pyarrow": "26.0.0",
+   "pydantic": "2.14.1",
+   "pytest": "9.1.1",
+   "scipy": "1.18.1"
+  }
+ },
+ "harness_env_lock": {
+  "path": "build/b0src/ARC3-Inference/uv.lock",
+  "sha256": "42427e0feea105740201e4b469b47c3535abc11ad15b6469354bc8dd3a0deef2"
+ },
+ "public_games": [
+  "ar25-0c556536",
+  "bp35-0a0ad940",
+  "cd82-fb555c5d",
+  "cn04-2fe56bfb",
+  "dc22-fdcac232",
+  "ft09-0d8bbf25",
+  "g50t-5849a774",
+  "ka59-38d34dbb",
+  "lf52-271a04aa",
+  "lp85-305b61c3",
+  "ls20-9607627b",
+  "m0r0-492f87ba",
+  "r11l-495a7899",
+  "re86-8af5384d",
+  "s5i5-18d95033",
+  "sb26-7fbdac44",
+  "sc25-635fd71a",
+  "sk48-d8078629",
+  "sp80-589a99af",
+  "su15-1944f8ab",
+  "tn36-ef4dde99",
+  "tr87-cd924810",
+  "tu93-0768757b",
+  "vc33-5430563c",
+  "wa30-ee6fef47"
+ ]
+}
