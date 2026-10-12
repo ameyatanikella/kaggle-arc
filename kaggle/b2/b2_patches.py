@@ -334,7 +334,10 @@ TOOLS_DOC = (
     "observations differ between your candidate simulators `sim(state, action) -> (next_state, obs)` "
     "- use it to choose one probe that separates competing hypotheses. "
     "`gf2_solve(A, b, cost=None)` gives the cheapest press set for toggle/XOR systems "
-    "(A[i][j]=1 if press j flips cell i); `zm_solve(A, b, m)` the same for cyclic counters mod m.\n"
+    "(A[i][j]=1 if press j flips cell i); `zm_solve(A, b, m)` the same for cyclic counters mod m. "
+    "`fit_boolean(rows, values)` gives the sparsest exact polynomial rule over 0/1 switch states and lists "
+    "terms the data cannot yet pin down (test the configuration that would); `fit_guarded(xs, ys)` finds "
+    "a linear rule with a wall/threshold cut-off.\n"
 )
 _TOOLS_REG_ANCHOR = '        runtime_globals["last_action_call_result"] = action_result'
 _TOOLS_SRC_ANCHOR = "HOST_STDOUT = sys.stdout"
@@ -348,7 +351,7 @@ def _install_tools(T) -> None:
     if "B2_TOOL_NAMES" in b:
         return
     assert b.count(_TOOLS_SRC_ANCHOR) == 1 and b.count(_TOOLS_REG_ANCHOR) == 1, "sandbox bootstrap changed"
-    names = ("bfs_plan", "distinguish", "gf2_solve", "zm_solve")
+    names = ("bfs_plan", "distinguish", "gf2_solve", "zm_solve", "fit_boolean", "fit_guarded")
     reg = "".join(f'\n        runtime_globals["{n}"] = {n}' for n in names)
     b = b.replace(_TOOLS_SRC_ANCHOR, src + "\n\n" + _TOOLS_SRC_ANCHOR, 1)
     b = b.replace(_TOOLS_REG_ANCHOR, _TOOLS_REG_ANCHOR + reg, 1)
@@ -367,7 +370,7 @@ def _install_tools(T) -> None:
 
 def tool_usage_from_requests(path: str) -> dict:
     """Count how often generated code called each helper (for 'does it control behaviour?')."""
-    counts = {n: 0 for n in ("bfs_plan", "distinguish", "gf2_solve", "zm_solve")}
+    counts = {n: 0 for n in ("bfs_plan", "distinguish", "gf2_solve", "zm_solve", "fit_boolean", "fit_guarded")}
     calls = 0
     with open(path) as f:
         for line in f:
