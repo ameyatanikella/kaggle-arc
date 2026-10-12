@@ -67,32 +67,52 @@ class VolatileMask:
     """Learns pixels whose changes are not gameplay (step bars, timers).
 
     A changed region counts as HUD-like when it lies entirely within an edge band.
-    Once a band pixel has shown HUD-like change in >= `min_hits` transitions, it is
-    masked for state identity. Interior pixels are never masked by this rule.
+    A shrinking bar changes a *different* pixel each step, so hits are counted per
+    edge line (a row of the top/bottom band, a column of the left/right band), not
+    per pixel. Once a line has shown HUD-like change in >= `min_hits` transitions,
+    the whole line is masked for state identity. Interior pixels are never masked.
     """
 
     def __init__(self, shape=(64, 64), band: int = 4, min_hits: int = 2):
         self.band = band
         self.min_hits = min_hits
-        self.hits = np.zeros(shape, dtype=np.int32)
+        self.shape = shape
         h, w = shape
         self.edge = np.zeros(shape, dtype=bool)
         self.edge[:band, :] = True
         self.edge[-band:, :] = True
         self.edge[:, :band] = True
         self.edge[:, -band:] = True
+        self.row_hits = np.zeros(h, dtype=np.int32)
+        self.col_hits = np.zeros(w, dtype=np.int32)
         self.mask = np.zeros(shape, dtype=bool)
 
     def update(self, before: np.ndarray, after: np.ndarray) -> None:
         d = before != after
         if not d.any():
             return
+        h, w = self.shape
         lab, n = ndimage.label(d, structure=np.ones((3, 3), bool))
+        rows_hit, cols_hit = set(), set()
         for i in range(1, n + 1):
-            comp = lab == i
-            if np.all(self.edge[comp]):
-                self.hits[comp] += 1
-        self.mask = self.hits >= self.min_hits
+            ys, xs = np.nonzero(lab == i)
+            if not np.all(self.edge[ys, xs]):
+                continue
+            # attribute to the nearest edge: horizontal bands -> rows, vertical -> cols
+            dist = {"top": ys.max(), "bottom": h - 1 - ys.min(), "left": xs.max(), "right": w - 1 - xs.min()}
+            side = min(dist, key=dist.get)
+            if side in ("top", "bottom"):
+                rows_hit.update(int(y) for y in np.unique(ys))
+            else:
+                cols_hit.update(int(x) for x in np.unique(xs))
+        for y in rows_hit:
+            self.row_hits[y] += 1
+        for x in cols_hit:
+            self.col_hits[x] += 1
+        m = np.zeros(self.shape, dtype=bool)
+        m[self.row_hits >= self.min_hits, :] = True
+        m[:, self.col_hits >= self.min_hits] = True
+        self.mask = m & self.edge
 
     def key(self, grid: np.ndarray) -> bytes:
         g = grid.copy()
