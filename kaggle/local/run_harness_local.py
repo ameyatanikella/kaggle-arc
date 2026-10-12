@@ -90,6 +90,9 @@ def main():
     import taaf.benchmark
     import taaf.game_api
     from inference.framework.solver import HarnessSolver
+    sys.path.insert(0, str(ROOT / "kaggle" / "b2"))
+    import b2_patches
+    b2_patches.install()
 
     env_dir = str(ROOT / "data" / "environment_files")
     spec = taaf.game_api.ArcadeSpec(operation_mode=arc_agi.OperationMode.OFFLINE, environments_dir=env_dir)
@@ -111,6 +114,9 @@ def main():
     t0 = time.time()
     soft_end = datetime.now() + timedelta(minutes=a.minutes + 1.5)
     asyncio.run(bm.run(soft_end_time=soft_end, runtime_environment=None, minimal_diagnostics=False))
+    summ = b2_patches.b2_summary()
+    (out / "b2_summary.json").write_text(json.dumps(summ, indent=1))
+    print("B2 summary:", json.dumps(summ))
     print(f"done in {time.time() - t0:.1f}s; outputs in {out}")
 
 
