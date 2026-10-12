@@ -10,3 +10,5 @@ runs/**/*.jsonl.gz
 .DS_Store
 build/
 dist/
+build/
+runs/harness_*/

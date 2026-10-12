@@ -1,0 +1,2436 @@
+Starting benchmark...
+
+priority gate active: 10 concurrent streams
+tn36-ef4dde99: warmup RESET issued before the analyzer is reachable
+
+[sys] RAM 107.0/176.9 | swap none | proc 0.4 GB, 160 threads, 75 fds | GPU0 93.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.0/19.5
+[sys] RAM 108.4/176.9 | swap none | proc 0.4 GB, 160 threads, 75 fds | GPU0 93.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.1/19.5
+[sys] RAM 108.8/176.9 | swap none | proc 0.5 GB, 160 threads, 75 fds | GPU0 93.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.1/19.5
+[sys] RAM 109.6/176.9 | swap none | proc 0.5 GB, 161 threads, 77 fds | GPU0 93.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.1/19.5
+[sys] RAM 110.8/176.9 | swap none | proc 0.5 GB, 160 threads, 75 fds | GPU0 93.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.1/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.99s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 0)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    0.63
+median score:  0.00
+total actions: 398
+total tokens:  318107
+generated tokens/sec: 526.55 (job wallclock)
+total wallclock: 4786.5s
+
+per-game (mean across passes):
+  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0
+  bp35-0a0ad940: score=0.00, levels=0.0/9, actions=4, tokens=6796
+  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0
+  cn04-2fe56bfb: score=1.19, levels=0.2/6, actions=4, tokens=5781
+  dc22-fdcac232: score=1.04, levels=0.2/6, actions=16, tokens=8965
+  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0
+  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0
+  ka59-38d34dbb: score=0.00, levels=0.0/7, actions=0, tokens=0
+  lf52-271a04aa: score=0.00, levels=0.0/10, actions=0, tokens=0
+  lp85-305b61c3: score=4.17, levels=0.8/8, actions=10, tokens=9760
+  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0
+  m0r0-492f87ba: score=0.83, levels=0.2/6, actions=9, tokens=9502
+  r11l-495a7899: score=0.00, levels=0.0/6, actions=0, tokens=0
+  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0
+  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0
+  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0
+  sc25-635fd71a: score=0.00, levels=0.0/6, actions=0, tokens=0
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=12, tokens=5844
+  sp80-589a99af: score=0.00, levels=0.0/6, actions=0, tokens=0
+  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0
+  tn36-ef4dde99: score=0.89, levels=0.2/7, actions=10, tokens=9826
+  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0
+  tu93-0768757b: score=1.67, levels=0.5/9, actions=8, tokens=7226
+  vc33-5430563c: score=5.36, levels=0.8/7, actions=14, tokens=9931
+  wa30-ee6fef47: score=0.56, levels=0.2/9, actions=10, tokens=5892
+
+[sys] RAM 111.7/176.9 | swap none | proc 0.6 GB, 160 threads, 76 fds | GPU0 93.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.2/19.5
+[sys] RAM 112.6/176.9 | swap none | proc 0.6 GB, 160 threads, 76 fds | GPU0 93.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.2/19.5
+[sys] RAM 115.9/176.9 | swap none | proc 0.7 GB, 160 threads, 76 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.2/19.5
+[sys] RAM 114.9/176.9 | swap none | proc 0.7 GB, 160 threads, 76 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.3/19.5
+[sys] RAM 114.0/176.9 | swap none | proc 0.8 GB, 160 threads, 76 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.3/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.72s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 0)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    1.22
+median score:  0.00
+total actions: 944
+total tokens:  691496
+generated tokens/sec: 572.92 (job wallclock)
+total wallclock: 21517.9s
+
+per-game (mean across passes):
+  ar25-0c556536: score=0.00, levels=0.0/8, actions=37, tokens=1403
+  bp35-0a0ad940: score=0.31, levels=0.2/9, actions=9, tokens=15505
+  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=1534
+  cn04-2fe56bfb: score=1.19, levels=0.2/6, actions=12, tokens=16823
+  dc22-fdcac232: score=1.04, levels=0.2/6, actions=18, tokens=13404
+  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0
+  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0
+  ka59-38d34dbb: score=0.89, levels=0.2/7, actions=5, tokens=3520
+  lf52-271a04aa: score=0.00, levels=0.0/10, actions=2, tokens=4193
+  lp85-305b61c3: score=10.42, levels=1.2/8, actions=17, tokens=15836
+  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0
+  m0r0-492f87ba: score=0.83, levels=0.2/6, actions=14, tokens=16652
+  r11l-495a7899: score=1.19, levels=0.2/6, actions=2, tokens=2712
+  re86-8af5384d: score=0.69, levels=0.2/8, actions=5, tokens=1448
+  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=612
+  sb26-7fbdac44: score=0.69, levels=0.2/8, actions=4, tokens=1592
+  sc25-635fd71a: score=0.00, levels=0.0/6, actions=2, tokens=2511
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=32, tokens=15275
+  sp80-589a99af: score=1.19, levels=0.2/6, actions=3, tokens=2294
+  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0
+  tn36-ef4dde99: score=2.68, levels=0.5/7, actions=16, tokens=13961
+  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0
+  tu93-0768757b: score=3.33, levels=0.8/9, actions=19, tokens=13578
+  vc33-5430563c: score=5.36, levels=0.8/7, actions=18, tokens=16574
+  wa30-ee6fef47: score=0.56, levels=0.2/9, actions=14, tokens=13442
+
+[sys] RAM 114.4/176.9 | swap none | proc 0.9 GB, 160 threads, 76 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.3/19.5
+[sys] RAM 115.1/176.9 | swap none | proc 0.9 GB, 160 threads, 76 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.4/19.5
+[sys] RAM 115.8/176.9 | swap none | proc 1.0 GB, 160 threads, 76 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.4/19.5
+[sys] RAM 116.6/176.9 | swap none | proc 1.0 GB, 161 threads, 79 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.4/19.5
+[sys] RAM 118.8/176.9 | swap none | proc 1.1 GB, 160 threads, 76 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.5/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 1.87s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 0)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    2.60
+median score:  0.00
+total actions: 1544
+total tokens:  1052920
+generated tokens/sec: 582.06 (job wallclock)
+total wallclock: 27111.1s
+
+per-game (mean across passes):
+  ar25-0c556536: score=4.02, levels=0.8/8, actions=59, tokens=10112
+  bp35-0a0ad940: score=0.31, levels=0.2/9, actions=9, tokens=15505
+  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=7, tokens=8520
+  cn04-2fe56bfb: score=1.19, levels=0.2/6, actions=12, tokens=16823
+  dc22-fdcac232: score=1.04, levels=0.2/6, actions=18, tokens=13404
+  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0
+  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0
+  ka59-38d34dbb: score=0.89, levels=0.2/7, actions=8, tokens=12649
+  lf52-271a04aa: score=0.45, levels=0.2/10, actions=8, tokens=13157
+  lp85-305b61c3: score=10.42, levels=1.2/8, actions=17, tokens=15836
+  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0
+  m0r0-492f87ba: score=0.83, levels=0.2/6, actions=14, tokens=16652
+  r11l-495a7899: score=3.57, levels=0.5/6, actions=9, tokens=11779
+  re86-8af5384d: score=6.94, levels=1.0/8, actions=53, tokens=10646
+  s5i5-18d95033: score=0.35, levels=0.2/8, actions=8, tokens=10909
+  sb26-7fbdac44: score=19.44, levels=1.8/8, actions=32, tokens=11254
+  sc25-635fd71a: score=2.37, levels=0.5/6, actions=17, tokens=11633
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=32, tokens=15275
+  sp80-589a99af: score=1.19, levels=0.2/6, actions=8, tokens=11515
+  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0
+  tn36-ef4dde99: score=2.68, levels=0.5/7, actions=16, tokens=13961
+  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0
+  tu93-0768757b: score=3.33, levels=0.8/9, actions=19, tokens=13578
+  vc33-5430563c: score=5.36, levels=0.8/7, actions=18, tokens=16574
+  wa30-ee6fef47: score=0.56, levels=0.2/9, actions=14, tokens=13442
+
+[sys] RAM 119.7/176.9 | swap none | proc 1.1 GB, 161 threads, 78 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.5/19.5
+[sys] RAM 116.8/176.9 | swap none | proc 1.2 GB, 160 threads, 76 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.5/19.5
+[sys] RAM 115.9/176.9 | swap none | proc 1.2 GB, 160 threads, 76 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.6/19.5
+[sys] RAM 115.8/176.9 | swap none | proc 1.2 GB, 160 threads, 76 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.6/19.5
+[sys] RAM 116.0/176.9 | swap none | proc 1.2 GB, 160 threads, 76 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.6/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.71s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 0)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    3.40
+median score:  0.00
+total actions: 1939
+total tokens:  1446284
+generated tokens/sec: 599.68 (job wallclock)
+total wallclock: 52837.2s
+
+per-game (mean across passes):
+  ar25-0c556536: score=6.94, levels=1.0/8, actions=64, tokens=11885
+  bp35-0a0ad940: score=0.31, levels=0.2/9, actions=13, tokens=18070
+  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=9, tokens=14978
+  cn04-2fe56bfb: score=1.19, levels=0.2/6, actions=17, tokens=21063
+  dc22-fdcac232: score=1.04, levels=0.2/6, actions=18, tokens=13404
+  ft09-0d8bbf25: score=11.90, levels=1.0/6, actions=12, tokens=7863
+  g50t-5849a774: score=0.00, levels=0.0/7, actions=3, tokens=7311
+  ka59-38d34dbb: score=0.89, levels=0.2/7, actions=17, tokens=18936
+  lf52-271a04aa: score=0.45, levels=0.2/10, actions=9, tokens=15644
+  lp85-305b61c3: score=10.42, levels=1.2/8, actions=17, tokens=15836
+  ls20-9607627b: score=0.00, levels=0.0/7, actions=5, tokens=7667
+  m0r0-492f87ba: score=0.83, levels=0.2/6, actions=18, tokens=22428
+  r11l-495a7899: score=7.14, levels=0.8/6, actions=13, tokens=16848
+  re86-8af5384d: score=6.94, levels=1.0/8, actions=61, tokens=14463
+  s5i5-18d95033: score=0.35, levels=0.2/8, actions=11, tokens=14025
+  sb26-7fbdac44: score=19.44, levels=1.8/8, actions=32, tokens=11254
+  sc25-635fd71a: score=2.37, levels=0.5/6, actions=18, tokens=13272
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=39, tokens=21554
+  sp80-589a99af: score=1.19, levels=0.2/6, actions=11, tokens=16495
+  su15-1944f8ab: score=0.56, levels=0.2/9, actions=5, tokens=8741
+  tn36-ef4dde99: score=2.68, levels=0.5/7, actions=24, tokens=19620
+  tr87-cd924810: score=1.19, levels=0.2/6, actions=9, tokens=6611
+  tu93-0768757b: score=3.33, levels=0.8/9, actions=19, tokens=13578
+  vc33-5430563c: score=5.36, levels=0.8/7, actions=18, tokens=16574
+  wa30-ee6fef47: score=0.56, levels=0.2/9, actions=14, tokens=13442
+
+[sys] RAM 116.9/176.9 | swap none | proc 1.3 GB, 160 threads, 76 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.6/19.5
+[sys] RAM 116.6/176.9 | swap none | proc 1.3 GB, 160 threads, 76 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.7/19.5
+[finished] ft09-0d8bbf25 state=won level=6/6 score=100.00 actions=82 tokens=62017 per-level=4/43,9/12,14/23,21/28,21/65,13/37 note="tokens=62017"
+[sys] RAM 117.5/176.9 | swap none | proc 1.3 GB, 160 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.7/19.5
+[sys] RAM 117.4/176.9 | swap none | proc 1.4 GB, 160 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.7/19.5
+[sys] RAM 116.9/176.9 | swap none | proc 1.4 GB, 160 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.8/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.71s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 1)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    4.23
+median score:  0.00
+total actions: 2330
+total tokens:  1826037
+generated tokens/sec: 605.74 (job wallclock)
+total wallclock: 69889.5s
+
+per-game (mean across passes):
+  ar25-0c556536: score=6.94, levels=1.0/8, actions=64, tokens=11885
+  bp35-0a0ad940: score=0.50, levels=0.5/9, actions=19, tokens=30321
+  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=9, tokens=14978
+  cn04-2fe56bfb: score=2.38, levels=0.5/6, actions=19, tokens=29685
+  dc22-fdcac232: score=1.04, levels=0.2/6, actions=21, tokens=15913
+  ft09-0d8bbf25: score=25.00, levels=1.5/6, actions=20, tokens=15504
+  g50t-5849a774: score=0.89, levels=0.2/7, actions=17, tokens=16841
+  ka59-38d34dbb: score=0.89, levels=0.2/7, actions=17, tokens=19428
+  lf52-271a04aa: score=0.45, levels=0.2/10, actions=9, tokens=15644
+  lp85-305b61c3: score=10.42, levels=1.2/8, actions=18, tokens=16720
+  ls20-9607627b: score=0.27, levels=0.2/7, actions=30, tokens=18882
+  m0r0-492f87ba: score=4.23, levels=0.8/6, actions=32, tokens=31795
+  r11l-495a7899: score=7.14, levels=0.8/6, actions=13, tokens=16848
+  re86-8af5384d: score=6.94, levels=1.0/8, actions=61, tokens=14463
+  s5i5-18d95033: score=0.35, levels=0.2/8, actions=11, tokens=14025
+  sb26-7fbdac44: score=19.44, levels=1.8/8, actions=32, tokens=11254
+  sc25-635fd71a: score=2.37, levels=0.5/6, actions=18, tokens=13272
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=41, tokens=28303
+  sp80-589a99af: score=1.19, levels=0.2/6, actions=11, tokens=16495
+  su15-1944f8ab: score=1.67, levels=0.5/9, actions=11, tokens=16701
+  tn36-ef4dde99: score=3.25, levels=0.8/7, actions=35, tokens=29208
+  tr87-cd924810: score=1.19, levels=0.2/6, actions=13, tokens=12589
+  tu93-0768757b: score=3.33, levels=0.8/9, actions=20, tokens=15730
+  vc33-5430563c: score=5.36, levels=0.8/7, actions=18, tokens=16574
+  wa30-ee6fef47: score=0.56, levels=0.2/9, actions=14, tokens=13442
+
+[sys] RAM 116.6/176.9 | swap none | proc 1.4 GB, 116 threads, 80 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.8/19.5
+[sys] RAM 116.2/176.9 | swap none | proc 1.5 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.8/19.5
+[sys] RAM 117.2/176.9 | swap none | proc 1.5 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.8/19.5
+[sys] RAM 117.1/176.9 | swap none | proc 1.5 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.9/19.5
+[sys] RAM 117.7/176.9 | swap none | proc 1.5 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.9/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.22s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 1)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    4.73
+median score:  0.00
+total actions: 2699
+total tokens:  2177491
+generated tokens/sec: 602.05 (job wallclock)
+total wallclock: 93712.1s
+
+per-game (mean across passes):
+  ar25-0c556536: score=6.94, levels=1.0/8, actions=64, tokens=11885
+  bp35-0a0ad940: score=0.50, levels=0.5/9, actions=19, tokens=30321
+  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=9, tokens=14978
+  cn04-2fe56bfb: score=2.38, levels=0.5/6, actions=21, tokens=33332
+  dc22-fdcac232: score=2.23, levels=0.5/6, actions=34, tokens=27913
+  ft09-0d8bbf25: score=25.00, levels=1.5/6, actions=20, tokens=15504
+  g50t-5849a774: score=0.89, levels=0.2/7, actions=17, tokens=16841
+  ka59-38d34dbb: score=1.79, levels=0.5/7, actions=30, tokens=29089
+  lf52-271a04aa: score=0.91, levels=0.5/10, actions=15, tokens=23873
+  lp85-305b61c3: score=14.58, levels=2.0/8, actions=32, tokens=26968
+  ls20-9607627b: score=0.27, levels=0.2/7, actions=30, tokens=18882
+  m0r0-492f87ba: score=4.23, levels=0.8/6, actions=33, tokens=33011
+  r11l-495a7899: score=8.33, levels=1.0/6, actions=16, tokens=23806
+  re86-8af5384d: score=6.94, levels=1.0/8, actions=61, tokens=14463
+  s5i5-18d95033: score=0.35, levels=0.2/8, actions=11, tokens=14025
+  sb26-7fbdac44: score=19.44, levels=1.8/8, actions=32, tokens=11254
+  sc25-635fd71a: score=2.37, levels=0.5/6, actions=27, tokens=20505
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=41, tokens=28303
+  sp80-589a99af: score=2.38, levels=0.5/6, actions=14, tokens=20110
+  su15-1944f8ab: score=1.67, levels=0.5/9, actions=11, tokens=16701
+  tn36-ef4dde99: score=3.25, levels=0.8/7, actions=39, tokens=30454
+  tr87-cd924810: score=1.19, levels=0.2/6, actions=13, tokens=12589
+  tu93-0768757b: score=4.60, levels=1.2/9, actions=29, tokens=23870
+  vc33-5430563c: score=7.53, levels=1.2/7, actions=25, tokens=25297
+  wa30-ee6fef47: score=0.56, levels=0.2/9, actions=23, tokens=20387
+
+[sys] RAM 117.5/176.9 | swap none | proc 1.6 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.9/19.5
+[sys] RAM 118.9/176.9 | swap none | proc 1.6 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.0/19.5
+[sys] RAM 118.8/176.9 | swap none | proc 1.7 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.0/19.5
+[sys] RAM 117.3/176.9 | swap none | proc 1.7 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.0/19.5
+[sys] RAM 118.4/176.9 | swap none | proc 1.7 GB, 116 threads, 79 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.0/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.43s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 1)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    5.44
+median score:  0.00
+total actions: 3176
+total tokens:  2567148
+generated tokens/sec: 608.42 (job wallclock)
+total wallclock: 135018.6s
+
+per-game (mean across passes):
+  ar25-0c556536: score=9.03, levels=1.5/8, actions=82, tokens=20911
+  bp35-0a0ad940: score=0.50, levels=0.5/9, actions=19, tokens=30321
+  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=15, tokens=19126
+  cn04-2fe56bfb: score=2.38, levels=0.5/6, actions=21, tokens=33332
+  dc22-fdcac232: score=2.23, levels=0.5/6, actions=34, tokens=28691
+  ft09-0d8bbf25: score=28.57, levels=2.0/6, actions=23, tokens=18769
+  g50t-5849a774: score=0.89, levels=0.2/7, actions=17, tokens=16841
+  ka59-38d34dbb: score=3.57, levels=0.8/7, actions=38, tokens=32446
+  lf52-271a04aa: score=0.91, levels=0.5/10, actions=17, tokens=28822
+  lp85-305b61c3: score=14.58, levels=2.0/8, actions=33, tokens=31663
+  ls20-9607627b: score=0.27, levels=0.2/7, actions=33, tokens=22989
+  m0r0-492f87ba: score=4.23, levels=0.8/6, actions=33, tokens=33011
+  r11l-495a7899: score=10.71, levels=1.2/6, actions=20, tokens=33055
+  re86-8af5384d: score=7.50, levels=1.2/8, actions=71, tokens=18333
+  s5i5-18d95033: score=0.98, levels=0.5/8, actions=16, tokens=17919
+  sb26-7fbdac44: score=20.14, levels=2.0/8, actions=39, tokens=15134
+  sc25-635fd71a: score=2.37, levels=0.5/6, actions=41, tokens=25949
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=41, tokens=28303
+  sp80-589a99af: score=2.38, levels=0.5/6, actions=17, tokens=30350
+  su15-1944f8ab: score=2.22, levels=0.8/9, actions=14, tokens=19209
+  tn36-ef4dde99: score=3.25, levels=0.8/7, actions=39, tokens=30454
+  tr87-cd924810: score=1.19, levels=0.2/6, actions=14, tokens=14191
+  tu93-0768757b: score=6.51, levels=1.5/9, actions=35, tokens=28636
+  vc33-5430563c: score=10.61, levels=1.5/7, actions=33, tokens=32194
+  wa30-ee6fef47: score=0.99, levels=0.5/9, actions=37, tokens=31128
+
+[sys] RAM 118.9/176.9 | swap none | proc 1.8 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.1/19.5
+[sys] RAM 118.5/176.9 | swap none | proc 1.8 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.1/19.5
+[sys] RAM 118.5/176.9 | swap none | proc 1.9 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.1/19.5
+[sys] RAM 118.9/176.9 | swap none | proc 1.9 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.2/19.5
+[sys] RAM 118.7/176.9 | swap none | proc 2.0 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.2/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.34s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 1)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    6.53
+median score:  0.00
+total actions: 3711
+total tokens:  2951886
+generated tokens/sec: 612.19 (job wallclock)
+total wallclock: 154238.6s
+
+per-game (mean across passes):
+  ar25-0c556536: score=13.83, levels=2.0/8, actions=103, tokens=24754
+  bp35-0a0ad940: score=0.50, levels=0.5/9, actions=19, tokens=30321
+  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=20, tokens=27800
+  cn04-2fe56bfb: score=2.38, levels=0.5/6, actions=21, tokens=33332
+  dc22-fdcac232: score=2.23, levels=0.5/6, actions=34, tokens=28691
+  ft09-0d8bbf25: score=36.90, levels=2.5/6, actions=35, tokens=29584
+  g50t-5849a774: score=0.89, levels=0.2/7, actions=21, tokens=23296
+  ka59-38d34dbb: score=3.57, levels=0.8/7, actions=38, tokens=32446
+  lf52-271a04aa: score=0.91, levels=0.5/10, actions=17, tokens=28822
+  lp85-305b61c3: score=14.58, levels=2.0/8, actions=33, tokens=31663
+  ls20-9607627b: score=0.47, levels=0.5/7, actions=42, tokens=32537
+  m0r0-492f87ba: score=4.23, levels=0.8/6, actions=33, tokens=33011
+  r11l-495a7899: score=10.71, levels=1.2/6, actions=20, tokens=33055
+  re86-8af5384d: score=11.11, levels=1.8/8, actions=103, tokens=25610
+  s5i5-18d95033: score=2.44, levels=0.8/8, actions=28, tokens=26466
+  sb26-7fbdac44: score=24.86, levels=2.8/8, actions=53, tokens=20936
+  sc25-635fd71a: score=2.37, levels=0.5/6, actions=41, tokens=25949
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=43, tokens=34291
+  sp80-589a99af: score=2.38, levels=0.5/6, actions=17, tokens=35098
+  su15-1944f8ab: score=5.00, levels=1.2/9, actions=26, tokens=28707
+  tn36-ef4dde99: score=3.25, levels=0.8/7, actions=41, tokens=34108
+  tr87-cd924810: score=2.38, levels=0.5/6, actions=23, tokens=25526
+  tu93-0768757b: score=6.51, levels=1.5/9, actions=35, tokens=28636
+  vc33-5430563c: score=10.61, levels=1.5/7, actions=33, tokens=32194
+  wa30-ee6fef47: score=0.99, levels=0.5/9, actions=37, tokens=31128
+
+[sys] RAM 119.0/176.9 | swap none | proc 2.0 GB, 116 threads, 79 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.2/19.5
+[sys] RAM 117.9/176.9 | swap none | proc 2.1 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.3/19.5
+[sys] RAM 118.2/176.9 | swap none | proc 2.1 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.3/19.5
+[sys] RAM 118.3/176.9 | swap none | proc 2.1 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.3/19.5
+[sys] RAM 118.5/176.9 | swap none | proc 2.2 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.4/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.77s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 1)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    7.37
+median score:  0.79
+total actions: 4222
+total tokens:  3311806
+generated tokens/sec: 610.50 (job wallclock)
+total wallclock: 199889.2s
+
+per-game (mean across passes):
+  ar25-0c556536: score=13.83, levels=2.0/8, actions=103, tokens=24754
+  bp35-0a0ad940: score=0.50, levels=0.5/9, actions=21, tokens=34127
+  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=21, tokens=30938
+  cn04-2fe56bfb: score=3.57, levels=0.8/6, actions=25, tokens=37550
+  dc22-fdcac232: score=2.23, levels=0.5/6, actions=41, tokens=34780
+  ft09-0d8bbf25: score=36.90, levels=2.5/6, actions=46, tokens=32049
+  g50t-5849a774: score=3.57, levels=0.8/7, actions=43, tokens=33996
+  ka59-38d34dbb: score=4.46, levels=1.0/7, actions=46, tokens=37900
+  lf52-271a04aa: score=0.91, levels=0.5/10, actions=17, tokens=28822
+  lp85-305b61c3: score=15.28, levels=2.2/8, actions=36, tokens=37067
+  ls20-9607627b: score=0.47, levels=0.5/7, actions=47, tokens=36996
+  m0r0-492f87ba: score=7.81, levels=1.2/6, actions=47, tokens=42370
+  r11l-495a7899: score=10.71, levels=1.2/6, actions=20, tokens=33055
+  re86-8af5384d: score=11.11, levels=1.8/8, actions=107, tokens=29118
+  s5i5-18d95033: score=2.44, levels=0.8/8, actions=29, tokens=29391
+  sb26-7fbdac44: score=24.86, levels=2.8/8, actions=53, tokens=20936
+  sc25-635fd71a: score=2.37, levels=0.5/6, actions=41, tokens=25949
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=51, tokens=40343
+  sp80-589a99af: score=2.38, levels=0.5/6, actions=17, tokens=35098
+  su15-1944f8ab: score=5.00, levels=1.2/9, actions=28, tokens=30698
+  tn36-ef4dde99: score=4.14, levels=1.0/7, actions=51, tokens=44923
+  tr87-cd924810: score=13.10, levels=1.2/6, actions=44, tokens=28679
+  tu93-0768757b: score=7.07, levels=1.8/9, actions=42, tokens=34557
+  vc33-5430563c: score=10.61, levels=1.5/7, actions=33, tokens=32194
+  wa30-ee6fef47: score=0.99, levels=0.5/9, actions=38, tokens=31653
+
+[sys] RAM 118.0/176.9 | swap none | proc 2.2 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.4/19.5
+[sys] RAM 118.5/176.9 | swap none | proc 2.2 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.4/19.5
+[sys] RAM 119.5/176.9 | swap none | proc 2.3 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.5/19.5
+[sys] RAM 119.6/176.9 | swap none | proc 2.3 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.5/19.5
+[sys] RAM 120.1/176.9 | swap none | proc 2.3 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.5/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.81s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 1)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    8.32
+median score:  1.82
+total actions: 4610
+total tokens:  3721486
+generated tokens/sec: 617.41 (job wallclock)
+total wallclock: 246837.3s
+
+per-game (mean across passes):
+  ar25-0c556536: score=13.83, levels=2.0/8, actions=103, tokens=25286
+  bp35-0a0ad940: score=1.06, levels=0.8/9, actions=25, tokens=46309
+  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=21, tokens=30938
+  cn04-2fe56bfb: score=3.57, levels=0.8/6, actions=27, tokens=49185
+  dc22-fdcac232: score=3.43, levels=0.8/6, actions=52, tokens=42508
+  ft09-0d8bbf25: score=36.90, levels=2.5/6, actions=46, tokens=32049
+  g50t-5849a774: score=3.57, levels=0.8/7, actions=43, tokens=33996
+  ka59-38d34dbb: score=6.25, levels=1.2/7, actions=63, tokens=47271
+  lf52-271a04aa: score=1.36, levels=0.8/10, actions=24, tokens=35747
+  lp85-305b61c3: score=25.00, levels=3.2/8, actions=48, tokens=47960
+  ls20-9607627b: score=0.47, levels=0.5/7, actions=47, tokens=36996
+  m0r0-492f87ba: score=7.81, levels=1.2/6, actions=51, tokens=45713
+  r11l-495a7899: score=11.90, levels=1.5/6, actions=22, tokens=34973
+  re86-8af5384d: score=11.11, levels=1.8/8, actions=107, tokens=29118
+  s5i5-18d95033: score=2.44, levels=0.8/8, actions=29, tokens=29391
+  sb26-7fbdac44: score=24.86, levels=2.8/8, actions=55, tokens=21410
+  sc25-635fd71a: score=2.37, levels=0.5/6, actions=43, tokens=27249
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=51, tokens=46649
+  sp80-589a99af: score=2.38, levels=0.5/6, actions=19, tokens=36419
+  su15-1944f8ab: score=5.00, levels=1.2/9, actions=28, tokens=30698
+  tn36-ef4dde99: score=4.14, levels=1.0/7, actions=51, tokens=44923
+  tr87-cd924810: score=13.10, levels=1.2/6, actions=44, tokens=28679
+  tu93-0768757b: score=9.85, levels=2.2/9, actions=51, tokens=44382
+  vc33-5430563c: score=15.97, levels=2.2/7, actions=44, tokens=41621
+  wa30-ee6fef47: score=1.55, levels=0.8/9, actions=51, tokens=40893
+
+[sys] RAM 118.5/176.9 | swap none | proc 2.4 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.6/19.5
+[sys] RAM 119.1/176.9 | swap none | proc 2.4 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.6/19.5
+[sys] RAM 119.1/176.9 | swap none | proc 2.5 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.6/19.5
+[sys] RAM 119.4/176.9 | swap none | proc 2.5 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.7/19.5
+[sys] RAM 118.7/176.9 | swap none | proc 2.6 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.7/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 3.02s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 1)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    9.60
+median score:  2.80
+total actions: 5153
+total tokens:  4098027
+generated tokens/sec: 618.02 (job wallclock)
+total wallclock: 283914.2s
+
+per-game (mean across passes):
+  ar25-0c556536: score=20.78, levels=3.0/8, actions=130, tokens=33980
+  bp35-0a0ad940: score=1.06, levels=0.8/9, actions=25, tokens=46309
+  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=32, tokens=39723
+  cn04-2fe56bfb: score=3.57, levels=0.8/6, actions=27, tokens=49185
+  dc22-fdcac232: score=3.43, levels=0.8/6, actions=52, tokens=42508
+  ft09-0d8bbf25: score=38.10, levels=2.8/6, actions=47, tokens=33974
+  g50t-5849a774: score=3.57, levels=0.8/7, actions=43, tokens=33996
+  ka59-38d34dbb: score=6.25, levels=1.2/7, actions=63, tokens=47271
+  lf52-271a04aa: score=1.36, levels=0.8/10, actions=29, tokens=38943
+  lp85-305b61c3: score=25.00, levels=3.2/8, actions=50, tokens=50146
+  ls20-9607627b: score=0.47, levels=0.5/7, actions=50, tokens=39822
+  m0r0-492f87ba: score=7.81, levels=1.2/6, actions=51, tokens=45713
+  r11l-495a7899: score=11.90, levels=1.5/6, actions=23, tokens=44113
+  re86-8af5384d: score=15.28, levels=2.5/8, actions=134, tokens=37382
+  s5i5-18d95033: score=2.82, levels=1.0/8, actions=37, tokens=35522
+  sb26-7fbdac44: score=39.44, levels=4.2/8, actions=83, tokens=30797
+  sc25-635fd71a: score=5.94, levels=1.0/6, actions=55, tokens=37654
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=51, tokens=46649
+  sp80-589a99af: score=3.57, levels=0.8/6, actions=22, tokens=46282
+  su15-1944f8ab: score=5.00, levels=1.2/9, actions=28, tokens=30698
+  tn36-ef4dde99: score=4.14, levels=1.0/7, actions=51, tokens=44923
+  tr87-cd924810: score=13.10, levels=1.2/6, actions=44, tokens=28679
+  tu93-0768757b: score=9.85, levels=2.2/9, actions=52, tokens=45712
+  vc33-5430563c: score=15.97, levels=2.2/7, actions=49, tokens=48730
+  wa30-ee6fef47: score=1.55, levels=0.8/9, actions=53, tokens=45786
+
+[sys] RAM 119.7/176.9 | swap none | proc 2.6 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.7/19.5
+[sys] RAM 118.9/176.9 | swap none | proc 2.6 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.8/19.5
+[sys] RAM 119.9/176.9 | swap none | proc 2.7 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.8/19.5
+[sys] RAM 118.5/176.9 | swap none | proc 2.7 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.8/19.5
+[sys] RAM 118.6/176.9 | swap none | proc 2.8 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.8/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.62s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 1)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    10.42
+median score:  3.57
+total actions: 5551
+total tokens:  4463917
+generated tokens/sec: 617.11 (job wallclock)
+total wallclock: 344948.6s
+
+per-game (mean across passes):
+  ar25-0c556536: score=20.78, levels=3.0/8, actions=133, tokens=41135
+  bp35-0a0ad940: score=1.06, levels=0.8/9, actions=28, tokens=49038
+  cd82-fb555c5d: score=1.19, levels=0.2/6, actions=35, tokens=45137
+  cn04-2fe56bfb: score=3.57, levels=0.8/6, actions=28, tokens=49696
+  dc22-fdcac232: score=3.43, levels=0.8/6, actions=52, tokens=42508
+  ft09-0d8bbf25: score=48.81, levels=3.5/6, actions=58, tokens=42450
+  g50t-5849a774: score=3.57, levels=0.8/7, actions=44, tokens=39899
+  ka59-38d34dbb: score=6.25, levels=1.2/7, actions=63, tokens=47271
+  lf52-271a04aa: score=1.36, levels=0.8/10, actions=29, tokens=38943
+  lp85-305b61c3: score=25.00, levels=3.2/8, actions=50, tokens=50146
+  ls20-9607627b: score=0.47, levels=0.5/7, actions=55, tokens=48803
+  m0r0-492f87ba: score=7.81, levels=1.2/6, actions=54, tokens=48738
+  r11l-495a7899: score=11.90, levels=1.5/6, actions=26, tokens=47915
+  re86-8af5384d: score=18.06, levels=2.8/8, actions=150, tokens=43339
+  s5i5-18d95033: score=4.42, levels=1.2/8, actions=44, tokens=43155
+  sb26-7fbdac44: score=39.44, levels=4.2/8, actions=87, tokens=33039
+  sc25-635fd71a: score=8.45, levels=1.2/6, actions=61, tokens=40588
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=58, tokens=50510
+  sp80-589a99af: score=3.57, levels=0.8/6, actions=24, tokens=52661
+  su15-1944f8ab: score=5.56, levels=1.5/9, actions=34, tokens=38199
+  tn36-ef4dde99: score=4.14, levels=1.0/7, actions=58, tokens=47606
+  tr87-cd924810: score=14.29, levels=1.5/6, actions=55, tokens=34965
+  tu93-0768757b: score=9.85, levels=2.2/9, actions=52, tokens=45712
+  vc33-5430563c: score=15.97, levels=2.2/7, actions=49, tokens=48730
+  wa30-ee6fef47: score=1.55, levels=0.8/9, actions=53, tokens=45786
+
+[sys] RAM 118.9/176.9 | swap none | proc 2.8 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.9/19.5
+[sys] RAM 119.3/176.9 | swap none | proc 2.8 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.9/19.5
+[finished] ft09-0d8bbf25 state=won level=6/6 score=100.00 actions=87 tokens=66954 per-level=4/43,7/12,14/23,21/28,24/65,17/37 note="tokens=66954"
+[sys] RAM 119.0/176.9 | swap none | proc 2.8 GB, 115 threads, 78 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.9/19.5
+[sys] RAM 120.3/176.9 | swap none | proc 2.9 GB, 115 threads, 78 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.0/19.5
+[sys] RAM 119.2/176.9 | swap none | proc 2.9 GB, 115 threads, 78 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.0/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.51s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 2)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    11.60
+median score:  4.47
+total actions: 5972
+total tokens:  4847741
+generated tokens/sec: 618.63 (job wallclock)
+total wallclock: 381145.9s
+
+per-game (mean across passes):
+  ar25-0c556536: score=20.78, levels=3.0/8, actions=133, tokens=41135
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=37, tokens=58373
+  cd82-fb555c5d: score=1.19, levels=0.2/6, actions=35, tokens=45137
+  cn04-2fe56bfb: score=4.76, levels=1.0/6, actions=37, tokens=57270
+  dc22-fdcac232: score=3.43, levels=0.8/6, actions=59, tokens=48467
+  ft09-0d8bbf25: score=61.90, levels=4.0/6, actions=67, tokens=48788
+  g50t-5849a774: score=3.57, levels=0.8/7, actions=51, tokens=46688
+  ka59-38d34dbb: score=6.25, levels=1.2/7, actions=64, tokens=47943
+  lf52-271a04aa: score=1.36, levels=0.8/10, actions=29, tokens=38943
+  lp85-305b61c3: score=25.69, levels=3.5/8, actions=52, tokens=52856
+  ls20-9607627b: score=0.87, levels=0.8/7, actions=60, tokens=56153
+  m0r0-492f87ba: score=7.81, levels=1.2/6, actions=60, tokens=58499
+  r11l-495a7899: score=11.90, levels=1.5/6, actions=26, tokens=47915
+  re86-8af5384d: score=18.06, levels=2.8/8, actions=150, tokens=43339
+  s5i5-18d95033: score=4.42, levels=1.2/8, actions=44, tokens=43155
+  sb26-7fbdac44: score=39.44, levels=4.2/8, actions=87, tokens=33039
+  sc25-635fd71a: score=8.45, levels=1.2/6, actions=61, tokens=40588
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=65, tokens=58960
+  sp80-589a99af: score=3.57, levels=0.8/6, actions=24, tokens=52661
+  su15-1944f8ab: score=5.56, levels=1.5/9, actions=36, tokens=45124
+  tn36-ef4dde99: score=6.82, levels=1.5/7, actions=68, tokens=58966
+  tr87-cd924810: score=25.00, levels=2.2/6, actions=78, tokens=44204
+  tu93-0768757b: score=10.40, levels=2.5/9, actions=58, tokens=49207
+  vc33-5430563c: score=15.97, levels=2.2/7, actions=49, tokens=48730
+  wa30-ee6fef47: score=1.55, levels=0.8/9, actions=53, tokens=45786
+
+[sys] RAM 120.0/176.9 | swap none | proc 3.0 GB, 115 threads, 78 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.0/19.5
+[sys] RAM 120.7/176.9 | swap none | proc 3.0 GB, 115 threads, 78 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.0/19.5
+[sys] RAM 120.3/176.9 | swap none | proc 3.0 GB, 115 threads, 78 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.1/19.5
+[sys] RAM 119.3/176.9 | swap none | proc 3.0 GB, 115 threads, 78 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.1/19.5
+[sys] RAM 118.9/176.9 | swap none | proc 3.1 GB, 115 threads, 78 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.1/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 5.37s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 2)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    12.25
+median score:  4.76
+total actions: 6404
+total tokens:  5262201
+generated tokens/sec: 623.35 (job wallclock)
+total wallclock: 443926.4s
+
+per-game (mean across passes):
+  ar25-0c556536: score=21.47, levels=3.2/8, actions=138, tokens=43367
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=38, tokens=60477
+  cd82-fb555c5d: score=1.19, levels=0.2/6, actions=35, tokens=45137
+  cn04-2fe56bfb: score=7.14, levels=1.2/6, actions=45, tokens=63751
+  dc22-fdcac232: score=4.62, levels=1.0/6, actions=73, tokens=56170
+  ft09-0d8bbf25: score=61.90, levels=4.0/6, actions=67, tokens=48788
+  g50t-5849a774: score=3.57, levels=0.8/7, actions=55, tokens=55773
+  ka59-38d34dbb: score=6.71, levels=1.5/7, actions=73, tokens=58965
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=35, tokens=44577
+  lp85-305b61c3: score=29.17, levels=4.0/8, actions=60, tokens=63462
+  ls20-9607627b: score=0.87, levels=0.8/7, actions=60, tokens=56153
+  m0r0-492f87ba: score=7.81, levels=1.2/6, actions=62, tokens=60627
+  r11l-495a7899: score=13.10, levels=1.8/6, actions=29, tokens=53546
+  re86-8af5384d: score=18.06, levels=2.8/8, actions=150, tokens=43339
+  s5i5-18d95033: score=4.42, levels=1.2/8, actions=44, tokens=43155
+  sb26-7fbdac44: score=39.44, levels=4.2/8, actions=87, tokens=33039
+  sc25-635fd71a: score=8.45, levels=1.2/6, actions=66, tokens=44090
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=30, tokens=57298
+  su15-1944f8ab: score=5.56, levels=1.5/9, actions=36, tokens=45124
+  tn36-ef4dde99: score=6.82, levels=1.5/7, actions=73, tokens=61825
+  tr87-cd924810: score=25.00, levels=2.2/6, actions=78, tokens=44204
+  tu93-0768757b: score=10.40, levels=2.5/9, actions=65, tokens=59661
+  vc33-5430563c: score=21.27, levels=3.0/7, actions=62, tokens=56260
+  wa30-ee6fef47: score=1.55, levels=0.8/9, actions=64, tokens=52340
+
+[sys] RAM 120.9/176.9 | swap none | proc 3.1 GB, 116 threads, 80 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.1/19.5
+[sys] RAM 119.6/176.9 | swap none | proc 3.2 GB, 115 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.2/19.5
+[sys] RAM 119.8/176.9 | swap none | proc 3.2 GB, 116 threads, 81 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.2/19.5
+[sys] RAM 120.7/176.9 | swap none | proc 3.3 GB, 115 threads, 78 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.2/19.5
+[sys] RAM 120.9/176.9 | swap none | proc 3.3 GB, 115 threads, 78 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.3/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.97s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 2)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    13.36
+median score:  4.76
+total actions: 6938
+total tokens:  5645237
+generated tokens/sec: 624.13 (job wallclock)
+total wallclock: 502685.3s
+
+per-game (mean across passes):
+  ar25-0c556536: score=27.72, levels=4.0/8, actions=163, tokens=51895
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=38, tokens=60477
+  cd82-fb555c5d: score=1.19, levels=0.2/6, actions=46, tokens=50129
+  cn04-2fe56bfb: score=7.14, levels=1.2/6, actions=45, tokens=63751
+  dc22-fdcac232: score=4.62, levels=1.0/6, actions=73, tokens=56170
+  ft09-0d8bbf25: score=63.10, levels=4.2/6, actions=68, tokens=49917
+  g50t-5849a774: score=3.57, levels=0.8/7, actions=55, tokens=55773
+  ka59-38d34dbb: score=6.71, levels=1.5/7, actions=81, tokens=63776
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=40, tokens=53747
+  lp85-305b61c3: score=31.94, levels=4.2/8, actions=64, tokens=66747
+  ls20-9607627b: score=0.87, levels=0.8/7, actions=60, tokens=57617
+  m0r0-492f87ba: score=7.81, levels=1.2/6, actions=62, tokens=60627
+  r11l-495a7899: score=13.10, levels=1.8/6, actions=30, tokens=64189
+  re86-8af5384d: score=20.14, levels=3.2/8, actions=164, tokens=47076
+  s5i5-18d95033: score=4.42, levels=1.2/8, actions=45, tokens=45136
+  sb26-7fbdac44: score=54.02, levels=5.8/8, actions=116, tokens=40389
+  sc25-635fd71a: score=8.45, levels=1.2/6, actions=75, tokens=55256
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=33, tokens=65939
+  su15-1944f8ab: score=5.56, levels=1.5/9, actions=36, tokens=45124
+  tn36-ef4dde99: score=6.82, levels=1.5/7, actions=73, tokens=61825
+  tr87-cd924810: score=25.00, levels=2.2/6, actions=78, tokens=44204
+  tu93-0768757b: score=10.67, levels=2.8/9, actions=66, tokens=60623
+  vc33-5430563c: score=21.27, levels=3.0/7, actions=69, tokens=63901
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=76, tokens=62597
+
+[sys] RAM 121.9/176.9 | swap none | proc 3.4 GB, 116 threads, 80 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.3/19.5
+[sys] RAM 119.6/176.9 | swap none | proc 3.4 GB, 115 threads, 78 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.3/19.5
+[sys] RAM 120.8/176.9 | swap none | proc 3.5 GB, 115 threads, 78 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.4/19.5
+[sys] RAM 122.0/176.9 | swap none | proc 3.5 GB, 115 threads, 78 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.4/19.5
+[sys] RAM 120.6/176.9 | swap none | proc 3.5 GB, 115 threads, 78 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.4/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.26s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 2)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    14.60
+median score:  4.76
+total actions: 7390
+total tokens:  5964392
+generated tokens/sec: 618.24 (job wallclock)
+total wallclock: 547332.1s
+
+per-game (mean across passes):
+  ar25-0c556536: score=27.72, levels=4.0/8, actions=163, tokens=51895
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=38, tokens=60477
+  cd82-fb555c5d: score=2.65, levels=0.8/6, actions=56, tokens=59308
+  cn04-2fe56bfb: score=7.14, levels=1.2/6, actions=45, tokens=63751
+  dc22-fdcac232: score=4.62, levels=1.0/6, actions=73, tokens=56170
+  ft09-0d8bbf25: score=73.81, levels=5.0/6, actions=87, tokens=59534
+  g50t-5849a774: score=3.57, levels=0.8/7, actions=59, tokens=63260
+  ka59-38d34dbb: score=6.71, levels=1.5/7, actions=81, tokens=63776
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=40, tokens=53747
+  lp85-305b61c3: score=31.94, levels=4.2/8, actions=64, tokens=66747
+  ls20-9607627b: score=1.76, levels=1.0/7, actions=70, tokens=66900
+  m0r0-492f87ba: score=7.81, levels=1.2/6, actions=62, tokens=60627
+  r11l-495a7899: score=20.24, levels=2.2/6, actions=36, tokens=72063
+  re86-8af5384d: score=25.00, levels=3.8/8, actions=196, tokens=54740
+  s5i5-18d95033: score=4.99, levels=1.5/8, actions=50, tokens=52257
+  sb26-7fbdac44: score=58.88, levels=6.0/8, actions=121, tokens=43537
+  sc25-635fd71a: score=8.45, levels=1.2/6, actions=86, tokens=56445
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=33, tokens=65939
+  su15-1944f8ab: score=6.11, levels=1.8/9, actions=42, tokens=52809
+  tn36-ef4dde99: score=6.82, levels=1.5/7, actions=73, tokens=61825
+  tr87-cd924810: score=25.00, levels=2.2/6, actions=84, tokens=53745
+  tu93-0768757b: score=10.67, levels=2.8/9, actions=66, tokens=60623
+  vc33-5430563c: score=21.27, levels=3.0/7, actions=69, tokens=63901
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=76, tokens=62597
+
+[sys] RAM 120.3/176.9 | swap none | proc 3.6 GB, 115 threads, 78 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.5/19.5
+[sys] RAM 120.7/176.9 | swap none | proc 3.6 GB, 116 threads, 80 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.5/19.5
+[sys] RAM 122.7/176.9 | swap none | proc 3.6 GB, 117 threads, 82 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.5/19.5
+[sys] RAM 121.3/176.9 | swap none | proc 3.6 GB, 115 threads, 78 fds | GPU0 94.0/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.6/19.5
+[sys] RAM 121.0/176.9 | swap none | proc 3.7 GB, 115 threads, 78 fds | GPU0 94.0/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.6/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 3.01s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 2)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    15.82
+median score:  6.25
+total actions: 7828
+total tokens:  6301737
+generated tokens/sec: 614.77 (job wallclock)
+total wallclock: 566283.7s
+
+per-game (mean across passes):
+  ar25-0c556536: score=31.25, levels=4.2/8, actions=173, tokens=67926
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=38, tokens=60477
+  cd82-fb555c5d: score=2.65, levels=0.8/6, actions=56, tokens=59308
+  cn04-2fe56bfb: score=7.14, levels=1.2/6, actions=45, tokens=63751
+  dc22-fdcac232: score=4.62, levels=1.0/6, actions=73, tokens=56170
+  ft09-0d8bbf25: score=73.81, levels=5.0/6, actions=91, tokens=63885
+  g50t-5849a774: score=6.25, levels=1.2/7, actions=72, tokens=71683
+  ka59-38d34dbb: score=6.71, levels=1.5/7, actions=81, tokens=63776
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=40, tokens=53747
+  lp85-305b61c3: score=35.42, levels=4.5/8, actions=66, tokens=68319
+  ls20-9607627b: score=3.55, levels=1.2/7, actions=79, tokens=73946
+  m0r0-492f87ba: score=7.81, levels=1.2/6, actions=62, tokens=60627
+  r11l-495a7899: score=29.76, levels=2.8/6, actions=49, tokens=88069
+  re86-8af5384d: score=25.00, levels=3.8/8, actions=196, tokens=59211
+  s5i5-18d95033: score=4.99, levels=1.5/8, actions=52, tokens=55605
+  sb26-7fbdac44: score=58.88, levels=6.0/8, actions=129, tokens=43718
+  sc25-635fd71a: score=8.45, levels=1.2/6, actions=86, tokens=56445
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=33, tokens=65939
+  su15-1944f8ab: score=7.22, levels=2.0/9, actions=48, tokens=59195
+  tn36-ef4dde99: score=6.82, levels=1.5/7, actions=73, tokens=61825
+  tr87-cd924810: score=33.25, levels=3.0/6, actions=125, tokens=70264
+  tu93-0768757b: score=10.67, levels=2.8/9, actions=66, tokens=60623
+  vc33-5430563c: score=21.27, levels=3.0/7, actions=69, tokens=63901
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=76, tokens=62597
+
+[finished] r11l-495a7899 state=won level=6/6 score=100.00 actions=120 tokens=124675 per-level=8/22,30/33,14/51,14/26,24/52,30/49 note="tokens=124675"
+[sys] RAM 120.2/176.9 | swap none | proc 3.8 GB, 117 threads, 83 fds | GPU0 94.0/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.6/19.5
+[sys] RAM 121.2/176.9 | swap none | proc 3.8 GB, 115 threads, 79 fds | GPU0 94.0/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.7/19.5
+[sys] RAM 122.1/176.9 | swap none | proc 3.9 GB, 116 threads, 80 fds | GPU0 94.0/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.7/19.5
+[sys] RAM 121.6/176.9 | swap none | proc 3.9 GB, 115 threads, 79 fds | GPU0 94.0/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.8/19.5
+[sys] RAM 121.4/176.9 | swap none | proc 4.0 GB, 116 threads, 79 fds | GPU0 94.0/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.8/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.52s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 3)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    17.66
+median score:  6.25
+total actions: 8419
+total tokens:  6659097
+generated tokens/sec: 613.56 (job wallclock)
+total wallclock: 595839.3s
+
+per-game (mean across passes):
+  ar25-0c556536: score=38.19, levels=4.8/8, actions=195, tokens=89161
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=38, tokens=60477
+  cd82-fb555c5d: score=2.65, levels=0.8/6, actions=56, tokens=59308
+  cn04-2fe56bfb: score=10.71, levels=1.5/6, actions=56, tokens=69966
+  dc22-fdcac232: score=4.62, levels=1.0/6, actions=73, tokens=56170
+  ft09-0d8bbf25: score=73.81, levels=5.0/6, actions=91, tokens=63885
+  g50t-5849a774: score=6.25, levels=1.2/7, actions=94, tokens=79474
+  ka59-38d34dbb: score=6.71, levels=1.5/7, actions=81, tokens=63776
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=40, tokens=53747
+  lp85-305b61c3: score=35.42, levels=4.5/8, actions=69, tokens=80993
+  ls20-9607627b: score=3.55, levels=1.2/7, actions=79, tokens=73946
+  m0r0-492f87ba: score=7.81, levels=1.2/6, actions=62, tokens=60627
+  r11l-495a7899: score=41.67, levels=3.2/6, actions=60, tokens=99627
+  re86-8af5384d: score=28.47, levels=4.0/8, actions=217, tokens=64774
+  s5i5-18d95033: score=4.99, levels=1.5/8, actions=52, tokens=55605
+  sb26-7fbdac44: score=65.07, levels=6.5/8, actions=141, tokens=52171
+  sc25-635fd71a: score=8.45, levels=1.2/6, actions=97, tokens=65122
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=33, tokens=65939
+  su15-1944f8ab: score=7.22, levels=2.0/9, actions=48, tokens=59195
+  tn36-ef4dde99: score=6.82, levels=1.5/7, actions=73, tokens=61825
+  tr87-cd924810: score=47.19, levels=3.8/6, actions=161, tokens=77439
+  tu93-0768757b: score=10.67, levels=2.8/9, actions=66, tokens=60623
+  vc33-5430563c: score=21.27, levels=3.0/7, actions=69, tokens=63901
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=76, tokens=62597
+
+[sys] RAM 120.5/176.9 | swap none | proc 4.0 GB, 115 threads, 79 fds | GPU0 94.0/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.8/19.5
+[sys] RAM 121.8/176.9 | swap none | proc 4.0 GB, 116 threads, 81 fds | GPU0 94.0/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.9/19.5
+[sys] RAM 121.7/176.9 | swap none | proc 4.0 GB, 115 threads, 79 fds | GPU0 94.0/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.9/19.5
+[sys] RAM 121.8/176.9 | swap none | proc 4.0 GB, 117 threads, 83 fds | GPU0 94.0/95.6 | disk / 7102.4/8156.9, /kaggle/working 2.9/19.5
+[sys] RAM 121.9/176.9 | swap none | proc 4.1 GB, 116 threads, 81 fds | GPU0 94.0/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.0/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 1.67s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 3)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    19.89
+median score:  7.29
+total actions: 8811
+total tokens:  7013348
+generated tokens/sec: 612.25 (job wallclock)
+total wallclock: 632866.3s
+
+per-game (mean across passes):
+  ar25-0c556536: score=47.22, levels=5.2/8, actions=223, tokens=109587
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=38, tokens=60477
+  cd82-fb555c5d: score=16.15, levels=1.8/6, actions=78, tokens=77333
+  cn04-2fe56bfb: score=10.71, levels=1.5/6, actions=57, tokens=70078
+  dc22-fdcac232: score=4.62, levels=1.0/6, actions=73, tokens=56170
+  ft09-0d8bbf25: score=73.81, levels=5.0/6, actions=91, tokens=63885
+  g50t-5849a774: score=6.25, levels=1.2/7, actions=94, tokens=79474
+  ka59-38d34dbb: score=6.71, levels=1.5/7, actions=81, tokens=63776
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=40, tokens=53747
+  lp85-305b61c3: score=48.61, levels=5.2/8, actions=83, tokens=95731
+  ls20-9607627b: score=3.55, levels=1.2/7, actions=79, tokens=73946
+  m0r0-492f87ba: score=7.81, levels=1.2/6, actions=62, tokens=60627
+  r11l-495a7899: score=55.95, levels=4.0/6, actions=70, tokens=109795
+  re86-8af5384d: score=28.47, levels=4.0/8, actions=223, tokens=73911
+  s5i5-18d95033: score=4.99, levels=1.5/8, actions=52, tokens=55605
+  sb26-7fbdac44: score=65.07, levels=6.5/8, actions=141, tokens=52171
+  sc25-635fd71a: score=8.45, levels=1.2/6, actions=97, tokens=65122
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=33, tokens=65939
+  su15-1944f8ab: score=7.22, levels=2.0/9, actions=48, tokens=59195
+  tn36-ef4dde99: score=6.82, levels=1.5/7, actions=73, tokens=61825
+  tr87-cd924810: score=53.14, levels=4.0/6, actions=171, tokens=86000
+  tu93-0768757b: score=10.67, levels=2.8/9, actions=66, tokens=60623
+  vc33-5430563c: score=21.27, levels=3.0/7, actions=76, tokens=71297
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=76, tokens=62597
+
+[sys] RAM 121.2/176.9 | swap none | proc 4.1 GB, 115 threads, 78 fds | GPU0 94.0/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.0/19.5
+[finished] sb26-7fbdac44 state=won level=8/8 score=100.00 actions=146 tokens=49544 per-level=9/18,37/28,15/18,15/19,17/31,19/23,17/58,17/18 note="tokens=49544"
+[finished] r11l-495a7899 state=won level=6/6 score=100.00 actions=104 tokens=168671 per-level=8/22,14/33,14/51,22/26,24/52,22/49 note="tokens=168671"
+[sys] RAM 120.7/176.9 | swap none | proc 4.1 GB, 115 threads, 81 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.0/19.5
+[finished] cd82-fb555c5d state=won level=6/6 score=99.42 actions=157 tokens=115487 per-level=55/55,17/8,24/41,23/21,18/23,20/23 note="tokens=115487"
+[sys] RAM 121.3/176.9 | swap none | proc 4.2 GB, 118 threads, 87 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.0/19.5
+[finished] ar25-0c556536 state=won level=8/8 score=100.00 actions=345 tokens=158491 per-level=20/32,17/50,95/75,22/37,37/89,58/159,49/233,47/73 note="tokens=158491"
+[sys] RAM 120.8/176.9 | swap none | proc 4.2 GB, 118 threads, 90 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.1/19.5
+[sys] RAM 120.4/176.9 | swap none | proc 4.3 GB, 115 threads, 83 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.1/19.5
+[finished] r11l-495a7899 state=won level=6/6 score=100.00 actions=92 tokens=145541 per-level=11/22,14/33,12/51,13/26,21/52,21/49 note="tokens=145541"
+benchmark: regenerated diagnostics in /kaggle/working in 6.12s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 8)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    23.37
+median score:  8.12
+total actions: 9391
+total tokens:  7371038
+generated tokens/sec: 611.13 (job wallclock)
+total wallclock: 696360.8s
+
+per-game (mean across passes):
+  ar25-0c556536: score=56.94, levels=5.8/8, actions=248, tokens=119479
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=38, tokens=60477
+  cd82-fb555c5d: score=35.18, levels=2.5/6, actions=92, tokens=83016
+  cn04-2fe56bfb: score=10.71, levels=1.5/6, actions=57, tokens=70078
+  dc22-fdcac232: score=4.62, levels=1.0/6, actions=73, tokens=56170
+  ft09-0d8bbf25: score=73.81, levels=5.0/6, actions=91, tokens=63885
+  g50t-5849a774: score=8.04, levels=1.5/7, actions=102, tokens=85510
+  ka59-38d34dbb: score=9.39, levels=1.8/7, actions=100, tokens=71206
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=40, tokens=53747
+  lp85-305b61c3: score=59.72, levels=6.0/8, actions=108, tokens=108694
+  ls20-9607627b: score=3.55, levels=1.2/7, actions=79, tokens=73946
+  m0r0-492f87ba: score=7.81, levels=1.2/6, actions=62, tokens=60627
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=28.47, levels=4.0/8, actions=223, tokens=73911
+  s5i5-18d95033: score=4.99, levels=1.5/8, actions=55, tokens=65159
+  sb26-7fbdac44: score=70.62, levels=6.8/8, actions=145, tokens=53303
+  sc25-635fd71a: score=8.45, levels=1.2/6, actions=97, tokens=65122
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=33, tokens=65939
+  su15-1944f8ab: score=7.22, levels=2.0/9, actions=48, tokens=59195
+  tn36-ef4dde99: score=13.07, levels=2.0/7, actions=83, tokens=68262
+  tr87-cd924810: score=53.14, levels=4.0/6, actions=171, tokens=86000
+  tu93-0768757b: score=13.05, levels=3.0/9, actions=71, tokens=67191
+  vc33-5430563c: score=29.41, levels=3.5/7, actions=95, tokens=80241
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=76, tokens=62597
+
+[finished] lp85-305b61c3 state=won level=8/8 score=100.00 actions=183 tokens=130419 per-level=12/17,11/38,17/31,13/16,11/41,31/60,17/26,71/159 note="tokens=130419"
+[sys] RAM 120.6/176.9 | swap none | proc 4.3 GB, 116 threads, 87 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.1/19.5
+[sys] RAM 120.6/176.9 | swap none | proc 4.3 GB, 115 threads, 85 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.1/19.5
+[sys] RAM 121.7/176.9 | swap none | proc 4.4 GB, 115 threads, 85 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.2/19.5
+[sys] RAM 121.1/176.9 | swap none | proc 4.4 GB, 115 threads, 85 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.2/19.5
+[finished] vc33-5430563c state=won level=7/7 score=100.00 actions=231 tokens=157257 per-level=19/7,10/18,26/44,39/61,56/131,20/34,61/152 note="tokens=157257"
+[sys] RAM 121.9/176.9 | swap none | proc 4.4 GB, 115 threads, 86 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.2/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 3.55s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 10)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    25.17
+median score:  9.52
+total actions: 9851
+total tokens:  7740087
+generated tokens/sec: 611.14 (job wallclock)
+total wallclock: 737803.2s
+
+per-game (mean across passes):
+  ar25-0c556536: score=60.42, levels=6.0/8, actions=267, tokens=124427
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=38, tokens=60477
+  cd82-fb555c5d: score=37.15, levels=2.8/6, actions=100, tokens=87690
+  cn04-2fe56bfb: score=10.71, levels=1.5/6, actions=57, tokens=70078
+  dc22-fdcac232: score=4.62, levels=1.0/6, actions=73, tokens=56170
+  ft09-0d8bbf25: score=73.81, levels=5.0/6, actions=91, tokens=63885
+  g50t-5849a774: score=8.04, levels=1.5/7, actions=105, tokens=94670
+  ka59-38d34dbb: score=14.23, levels=2.2/7, actions=126, tokens=85257
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=40, tokens=53747
+  lp85-305b61c3: score=74.31, levels=6.8/8, actions=119, tokens=120886
+  ls20-9607627b: score=3.55, levels=1.2/7, actions=79, tokens=73946
+  m0r0-492f87ba: score=7.81, levels=1.2/6, actions=70, tokens=70594
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=28.47, levels=4.0/8, actions=223, tokens=73911
+  s5i5-18d95033: score=4.99, levels=1.5/8, actions=56, tokens=67630
+  sb26-7fbdac44: score=70.62, levels=6.8/8, actions=145, tokens=53303
+  sc25-635fd71a: score=12.26, levels=1.5/6, actions=100, tokens=66058
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=33, tokens=65939
+  su15-1944f8ab: score=7.22, levels=2.0/9, actions=48, tokens=59195
+  tn36-ef4dde99: score=13.07, levels=2.0/7, actions=86, tokens=71896
+  tr87-cd924810: score=53.14, levels=4.0/6, actions=171, tokens=86000
+  tu93-0768757b: score=17.74, levels=3.5/9, actions=87, tokens=90064
+  vc33-5430563c: score=41.02, levels=4.0/7, actions=111, tokens=87595
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=76, tokens=62597
+
+[sys] RAM 121.7/176.9 | swap none | proc 4.4 GB, 115 threads, 86 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.3/19.5
+[sys] RAM 121.5/176.9 | swap none | proc 4.5 GB, 115 threads, 86 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.3/19.5
+[sys] RAM 121.7/176.9 | swap none | proc 4.5 GB, 117 threads, 90 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.3/19.5
+[finished] cd82-fb555c5d state=won level=6/6 score=58.62 actions=197 tokens=135573 per-level=59/55,19/8,18/41,21/21,40/23,40/23 note="tokens=135573"
+[sys] RAM 122.8/176.9 | swap none | proc 4.5 GB, 115 threads, 87 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.3/19.5
+[sys] RAM 121.6/176.9 | swap none | proc 4.5 GB, 115 threads, 87 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.4/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 4.40s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 11)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    26.20
+median score:  9.52
+total actions: 10349
+total tokens:  8103824
+generated tokens/sec: 610.71 (job wallclock)
+total wallclock: 799077.0s
+
+per-game (mean across passes):
+  ar25-0c556536: score=60.42, levels=6.0/8, actions=269, tokens=135413
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=42, tokens=68804
+  cd82-fb555c5d: score=39.51, levels=3.0/6, actions=110, tokens=93703
+  cn04-2fe56bfb: score=15.48, levels=1.8/6, actions=69, tokens=74344
+  dc22-fdcac232: score=4.62, levels=1.0/6, actions=77, tokens=59904
+  ft09-0d8bbf25: score=73.81, levels=5.0/6, actions=91, tokens=63885
+  g50t-5849a774: score=8.04, levels=1.5/7, actions=114, tokens=105983
+  ka59-38d34dbb: score=16.74, levels=2.5/7, actions=146, tokens=95485
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=40, tokens=53747
+  lp85-305b61c3: score=83.33, levels=7.2/8, actions=126, tokens=125852
+  ls20-9607627b: score=3.55, levels=1.2/7, actions=97, tokens=82685
+  m0r0-492f87ba: score=7.81, levels=1.2/6, actions=71, tokens=76206
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=28.47, levels=4.0/8, actions=223, tokens=73911
+  s5i5-18d95033: score=4.99, levels=1.5/8, actions=56, tokens=67630
+  sb26-7fbdac44: score=70.62, levels=6.8/8, actions=145, tokens=53303
+  sc25-635fd71a: score=12.26, levels=1.5/6, actions=121, tokens=70904
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=33, tokens=65939
+  su15-1944f8ab: score=7.22, levels=2.0/9, actions=48, tokens=59195
+  tn36-ef4dde99: score=13.07, levels=2.0/7, actions=86, tokens=71896
+  tr87-cd924810: score=53.14, levels=4.0/6, actions=171, tokens=86000
+  tu93-0768757b: score=24.97, levels=4.0/9, actions=100, tokens=100927
+  vc33-5430563c: score=41.02, levels=4.0/7, actions=115, tokens=88637
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=76, tokens=62597
+
+[sys] RAM 121.5/176.9 | swap none | proc 4.6 GB, 116 threads, 89 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.4/19.5
+[sys] RAM 121.3/176.9 | swap none | proc 4.6 GB, 116 threads, 89 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.4/19.5
+[sys] RAM 122.4/176.9 | swap none | proc 4.6 GB, 115 threads, 87 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.5/19.5
+[finished] tr87-cd924810 state=won level=6/6 score=100.00 actions=232 tokens=111701 per-level=33/54,32/58,28/40,28/45,64/71,47/146 note="tokens=111701"
+[sys] RAM 121.1/176.9 | swap none | proc 4.6 GB, 115 threads, 88 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.5/19.5
+[sys] RAM 121.1/176.9 | swap none | proc 4.6 GB, 115 threads, 88 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.5/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.21s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 12)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    26.91
+median score:  9.52
+total actions: 10709
+total tokens:  8440878
+generated tokens/sec: 608.49 (job wallclock)
+total wallclock: 871078.0s
+
+per-game (mean across passes):
+  ar25-0c556536: score=60.42, levels=6.0/8, actions=269, tokens=135413
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=57, tokens=88894
+  cd82-fb555c5d: score=39.51, levels=3.0/6, actions=110, tokens=93703
+  cn04-2fe56bfb: score=15.48, levels=1.8/6, actions=69, tokens=74344
+  dc22-fdcac232: score=4.62, levels=1.0/6, actions=80, tokens=65911
+  ft09-0d8bbf25: score=73.81, levels=5.0/6, actions=91, tokens=63885
+  g50t-5849a774: score=8.04, levels=1.5/7, actions=116, tokens=112891
+  ka59-38d34dbb: score=16.74, levels=2.5/7, actions=146, tokens=95485
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=40, tokens=53747
+  lp85-305b61c3: score=83.33, levels=7.2/8, actions=127, tokens=129768
+  ls20-9607627b: score=3.55, levels=1.2/7, actions=98, tokens=83841
+  m0r0-492f87ba: score=16.14, levels=1.8/6, actions=91, tokens=84402
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=28.47, levels=4.0/8, actions=225, tokens=76162
+  s5i5-18d95033: score=4.99, levels=1.5/8, actions=60, tokens=73710
+  sb26-7fbdac44: score=70.62, levels=6.8/8, actions=145, tokens=53303
+  sc25-635fd71a: score=12.26, levels=1.5/6, actions=121, tokens=70904
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=33, tokens=65939
+  su15-1944f8ab: score=7.22, levels=2.0/9, actions=52, tokens=63996
+  tn36-ef4dde99: score=13.07, levels=2.0/7, actions=86, tokens=71896
+  tr87-cd924810: score=60.28, levels=4.2/6, actions=194, tokens=90597
+  tu93-0768757b: score=27.19, levels=4.2/9, actions=109, tokens=106770
+  vc33-5430563c: score=41.02, levels=4.0/7, actions=120, tokens=103057
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=76, tokens=62597
+
+[sys] RAM 121.7/176.9 | swap none | proc 4.6 GB, 115 threads, 88 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.5/19.5
+[sys] RAM 122.2/176.9 | swap none | proc 4.7 GB, 115 threads, 88 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.6/19.5
+[sys] RAM 121.9/176.9 | swap none | proc 4.7 GB, 116 threads, 90 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.6/19.5
+[sys] RAM 121.2/176.9 | swap none | proc 4.7 GB, 115 threads, 88 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.6/19.5
+[sys] RAM 121.4/176.9 | swap none | proc 4.8 GB, 115 threads, 88 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.6/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.24s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 12)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    27.64
+median score:  10.71
+total actions: 11162
+total tokens:  8734406
+generated tokens/sec: 603.44 (job wallclock)
+total wallclock: 907183.7s
+
+per-game (mean across passes):
+  ar25-0c556536: score=64.58, levels=6.2/8, actions=281, tokens=136980
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=61, tokens=92275
+  cd82-fb555c5d: score=39.51, levels=3.0/6, actions=110, tokens=93703
+  cn04-2fe56bfb: score=15.48, levels=1.8/6, actions=69, tokens=74344
+  dc22-fdcac232: score=4.62, levels=1.0/6, actions=80, tokens=65911
+  ft09-0d8bbf25: score=73.81, levels=5.0/6, actions=91, tokens=63885
+  g50t-5849a774: score=8.04, levels=1.5/7, actions=116, tokens=112891
+  ka59-38d34dbb: score=16.74, levels=2.5/7, actions=149, tokens=102058
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=40, tokens=53747
+  lp85-305b61c3: score=83.33, levels=7.2/8, actions=127, tokens=129768
+  ls20-9607627b: score=3.55, levels=1.2/7, actions=98, tokens=83841
+  m0r0-492f87ba: score=22.09, levels=2.0/6, actions=108, tokens=92323
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=28.47, levels=4.0/8, actions=226, tokens=79658
+  s5i5-18d95033: score=7.07, levels=1.8/8, actions=72, tokens=81603
+  sb26-7fbdac44: score=70.62, levels=6.8/8, actions=146, tokens=53967
+  sc25-635fd71a: score=12.26, levels=1.5/6, actions=121, tokens=70904
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=33, tokens=65939
+  su15-1944f8ab: score=10.56, levels=2.5/9, actions=74, tokens=78698
+  tn36-ef4dde99: score=13.07, levels=2.0/7, actions=86, tokens=71896
+  tr87-cd924810: score=60.28, levels=4.2/6, actions=204, tokens=97812
+  tu93-0768757b: score=29.97, levels=4.5/9, actions=121, tokens=112851
+  vc33-5430563c: score=41.02, levels=4.0/7, actions=131, tokens=110764
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=86, tokens=68779
+
+[sys] RAM 121.7/176.9 | swap none | proc 4.8 GB, 115 threads, 88 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.7/19.5
+[finished] m0r0-492f87ba state=won level=6/6 score=100.00 actions=262 tokens=148605 per-level=17/30,39/111,71/203,24/26,45/500,66/237 note="tokens=148605"
+[sys] RAM 121.5/176.9 | swap none | proc 4.8 GB, 115 threads, 89 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.7/19.5
+[finished] lp85-305b61c3 state=won level=8/8 score=100.00 actions=100 tokens=155801 per-level=9/17,13/38,17/31,14/16,11/41,21/60,10/26,5/159 note="tokens=155801"
+[sys] RAM 122.0/176.9 | swap none | proc 4.8 GB, 115 threads, 90 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.7/19.5
+[sys] RAM 122.2/176.9 | swap none | proc 4.8 GB, 117 threads, 94 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.8/19.5
+[finished] sb26-7fbdac44 state=won level=8/8 score=79.39 actions=215 tokens=99149 per-level=11/18,26/28,23/18,24/19,49/31,19/23,37/58,26/18 note="tokens=99149"
+[sys] RAM 121.0/176.9 | swap none | proc 4.9 GB, 116 threads, 93 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.8/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 12.82s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 15)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    29.38
+median score:  10.71
+total actions: 11677
+total tokens:  9134279
+generated tokens/sec: 605.43 (job wallclock)
+total wallclock: 973449.3s
+
+per-game (mean across passes):
+  ar25-0c556536: score=69.44, levels=6.5/8, actions=297, tokens=156937
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=61, tokens=92275
+  cd82-fb555c5d: score=39.51, levels=3.0/6, actions=110, tokens=93703
+  cn04-2fe56bfb: score=15.48, levels=1.8/6, actions=69, tokens=74344
+  dc22-fdcac232: score=4.62, levels=1.0/6, actions=84, tokens=66565
+  ft09-0d8bbf25: score=73.81, levels=5.0/6, actions=91, tokens=63885
+  g50t-5849a774: score=8.04, levels=1.5/7, actions=116, tokens=112891
+  ka59-38d34dbb: score=16.74, levels=2.5/7, actions=152, tokens=109268
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=40, tokens=53747
+  lp85-305b61c3: score=88.89, levels=7.5/8, actions=127, tokens=132767
+  ls20-9607627b: score=7.66, levels=1.8/7, actions=121, tokens=96742
+  m0r0-492f87ba: score=31.97, levels=2.5/6, actions=123, tokens=96404
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=31.94, levels=4.2/8, actions=253, tokens=90899
+  s5i5-18d95033: score=7.07, levels=1.8/8, actions=74, tokens=93979
+  sb26-7fbdac44: score=78.87, levels=7.2/8, actions=157, tokens=59774
+  sc25-635fd71a: score=12.26, levels=1.5/6, actions=121, tokens=70904
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=33, tokens=65939
+  su15-1944f8ab: score=10.56, levels=2.5/9, actions=76, tokens=84693
+  tn36-ef4dde99: score=13.07, levels=2.0/7, actions=86, tokens=71896
+  tr87-cd924810: score=60.28, levels=4.2/6, actions=204, tokens=97812
+  tu93-0768757b: score=37.19, levels=5.0/9, actions=135, tokens=126041
+  vc33-5430563c: score=41.02, levels=4.0/7, actions=131, tokens=110764
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=97, tokens=72336
+
+[sys] RAM 121.5/176.9 | swap none | proc 4.9 GB, 115 threads, 91 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.8/19.5
+[finished] ar25-0c556536 state=won level=8/8 score=100.00 actions=292 tokens=158600 per-level=19/32,21/50,41/75,29/37,28/89,57/159,46/233,51/73 note="tokens=158600"
+[sys] RAM 122.3/176.9 | swap none | proc 4.9 GB, 115 threads, 92 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.8/19.5
+[sys] RAM 122.3/176.9 | swap none | proc 5.0 GB, 115 threads, 92 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.9/19.5
+[sys] RAM 121.6/176.9 | swap none | proc 5.0 GB, 115 threads, 92 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.9/19.5
+[sys] RAM 121.9/176.9 | swap none | proc 5.0 GB, 116 threads, 94 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.9/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.98s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 16)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    30.35
+median score:  12.15
+total actions: 12085
+total tokens:  9513065
+generated tokens/sec: 606.30 (job wallclock)
+total wallclock: 1029140.0s
+
+per-game (mean across passes):
+  ar25-0c556536: score=75.00, levels=6.8/8, actions=309, tokens=159616
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=61, tokens=92275
+  cd82-fb555c5d: score=39.51, levels=3.0/6, actions=110, tokens=93703
+  cn04-2fe56bfb: score=15.48, levels=1.8/6, actions=69, tokens=74344
+  dc22-fdcac232: score=9.38, levels=1.5/6, actions=108, tokens=76334
+  ft09-0d8bbf25: score=73.81, levels=5.0/6, actions=91, tokens=63885
+  g50t-5849a774: score=8.04, levels=1.5/7, actions=116, tokens=112891
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=156, tokens=109949
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=40, tokens=53747
+  lp85-305b61c3: score=88.89, levels=7.5/8, actions=127, tokens=132767
+  ls20-9607627b: score=7.66, levels=1.8/7, actions=122, tokens=105343
+  m0r0-492f87ba: score=31.97, levels=2.5/6, actions=130, tokens=108226
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=31.94, levels=4.2/8, actions=256, tokens=97191
+  s5i5-18d95033: score=7.07, levels=1.8/8, actions=74, tokens=93979
+  sb26-7fbdac44: score=78.87, levels=7.2/8, actions=157, tokens=59774
+  sc25-635fd71a: score=12.26, levels=1.5/6, actions=121, tokens=70904
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=33, tokens=65939
+  su15-1944f8ab: score=10.56, levels=2.5/9, actions=77, tokens=91418
+  tn36-ef4dde99: score=17.35, levels=2.2/7, actions=96, tokens=86726
+  tr87-cd924810: score=60.28, levels=4.2/6, actions=204, tokens=97812
+  tu93-0768757b: score=42.19, levels=5.5/9, actions=151, tokens=145570
+  vc33-5430563c: score=43.58, levels=4.2/7, actions=142, tokens=117092
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=110, tokens=79774
+
+[sys] RAM 122.2/176.9 | swap none | proc 5.0 GB, 115 threads, 92 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 3.9/19.5
+[sys] RAM 122.1/176.9 | swap none | proc 5.1 GB, 115 threads, 92 fds | GPU0 94.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.0/19.5
+[sys] RAM 122.8/176.9 | swap none | proc 5.1 GB, 115 threads, 92 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.0/19.5
+[sys] RAM 122.7/176.9 | swap none | proc 5.1 GB, 115 threads, 92 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.0/19.5
+[sys] RAM 122.8/176.9 | swap none | proc 5.2 GB, 116 threads, 94 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.1/19.5
+[finished] sb26-7fbdac44 state=won level=8/8 score=100.00 actions=153 tokens=54107 per-level=9/18,34/28,15/18,15/19,21/31,19/23,23/58,17/18 note="tokens=54107"
+benchmark: regenerated diagnostics in /kaggle/working in 4.44s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 17)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    31.60
+median score:  13.33
+total actions: 12537
+total tokens:  9914236
+generated tokens/sec: 608.42 (job wallclock)
+total wallclock: 1082539.1s
+
+per-game (mean across passes):
+  ar25-0c556536: score=75.00, levels=6.8/8, actions=309, tokens=159616
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=61, tokens=92275
+  cd82-fb555c5d: score=39.51, levels=3.0/6, actions=110, tokens=93703
+  cn04-2fe56bfb: score=15.48, levels=1.8/6, actions=73, tokens=85551
+  dc22-fdcac232: score=18.90, levels=2.2/6, actions=143, tokens=96435
+  ft09-0d8bbf25: score=73.81, levels=5.0/6, actions=91, tokens=63885
+  g50t-5849a774: score=8.04, levels=1.5/7, actions=116, tokens=112891
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=164, tokens=118946
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=40, tokens=53747
+  lp85-305b61c3: score=88.89, levels=7.5/8, actions=127, tokens=132767
+  ls20-9607627b: score=7.66, levels=1.8/7, actions=131, tokens=114133
+  m0r0-492f87ba: score=31.97, levels=2.5/6, actions=134, tokens=111412
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=31.94, levels=4.2/8, actions=256, tokens=97191
+  s5i5-18d95033: score=7.07, levels=1.8/8, actions=74, tokens=93979
+  sb26-7fbdac44: score=89.29, levels=7.8/8, actions=162, tokens=61198
+  sc25-635fd71a: score=12.26, levels=1.5/6, actions=121, tokens=70904
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=33, tokens=65939
+  su15-1944f8ab: score=10.56, levels=2.5/9, actions=79, tokens=98146
+  tn36-ef4dde99: score=22.89, levels=2.5/7, actions=115, tokens=102370
+  tr87-cd924810: score=60.28, levels=4.2/6, actions=204, tokens=97812
+  tu93-0768757b: score=48.08, levels=6.0/9, actions=166, tokens=161167
+  vc33-5430563c: score=43.58, levels=4.2/7, actions=153, tokens=125711
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=110, tokens=79774
+
+[sys] RAM 121.6/176.9 | swap none | proc 5.2 GB, 115 threads, 93 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.1/19.5
+[sys] RAM 122.5/176.9 | swap none | proc 5.2 GB, 115 threads, 93 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.1/19.5
+[sys] RAM 122.6/176.9 | swap none | proc 5.2 GB, 115 threads, 93 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.2/19.5
+[sys] RAM 122.6/176.9 | swap none | proc 5.2 GB, 115 threads, 93 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.2/19.5
+[sys] RAM 123.7/176.9 | swap none | proc 5.2 GB, 115 threads, 93 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.2/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 3.78s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 17)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    31.80
+median score:  13.48
+total actions: 12847
+total tokens:  10222033
+generated tokens/sec: 604.88 (job wallclock)
+total wallclock: 1104952.2s
+
+per-game (mean across passes):
+  ar25-0c556536: score=75.00, levels=6.8/8, actions=309, tokens=159616
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=61, tokens=92275
+  cd82-fb555c5d: score=39.51, levels=3.0/6, actions=110, tokens=93703
+  cn04-2fe56bfb: score=15.48, levels=1.8/6, actions=73, tokens=85551
+  dc22-fdcac232: score=21.42, levels=2.5/6, actions=180, tokens=122983
+  ft09-0d8bbf25: score=73.81, levels=5.0/6, actions=91, tokens=63885
+  g50t-5849a774: score=8.04, levels=1.5/7, actions=116, tokens=112891
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=174, tokens=134172
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=42, tokens=58279
+  lp85-305b61c3: score=88.89, levels=7.5/8, actions=127, tokens=132767
+  ls20-9607627b: score=10.00, levels=2.0/7, actions=146, tokens=122995
+  m0r0-492f87ba: score=31.97, levels=2.5/6, actions=134, tokens=111412
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=31.94, levels=4.2/8, actions=256, tokens=97191
+  s5i5-18d95033: score=7.07, levels=1.8/8, actions=74, tokens=93979
+  sb26-7fbdac44: score=89.29, levels=7.8/8, actions=162, tokens=61198
+  sc25-635fd71a: score=12.26, levels=1.5/6, actions=121, tokens=70904
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=33, tokens=65939
+  su15-1944f8ab: score=10.56, levels=2.5/9, actions=80, tokens=100631
+  tn36-ef4dde99: score=22.89, levels=2.5/7, actions=115, tokens=102370
+  tr87-cd924810: score=60.28, levels=4.2/6, actions=208, tokens=100560
+  tu93-0768757b: score=48.08, levels=6.0/9, actions=172, tokens=174815
+  vc33-5430563c: score=43.58, levels=4.2/7, actions=157, tokens=128612
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=110, tokens=79774
+
+[sys] RAM 122.9/176.9 | swap none | proc 5.2 GB, 115 threads, 93 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.2/19.5
+[sys] RAM 123.2/176.9 | swap none | proc 5.3 GB, 115 threads, 93 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.3/19.5
+[sys] RAM 121.8/176.9 | swap none | proc 5.3 GB, 115 threads, 93 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.3/19.5
+[finished] lp85-305b61c3 state=won level=8/8 score=100.00 actions=144 tokens=152492 per-level=23/17,14/38,24/31,17/16,11/41,22/60,9/26,24/159 note="tokens=152492"
+[sys] RAM 121.8/176.9 | swap none | proc 5.2 GB, 117 threads, 98 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.3/19.5
+[sys] RAM 123.2/176.9 | swap none | proc 5.3 GB, 116 threads, 97 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.3/19.5
+[finished] tr87-cd924810 state=won level=6/6 score=97.79 actions=342 tokens=138598 per-level=28/54,93/58,22/40,25/45,83/71,91/146 note="tokens=138598"
+benchmark: regenerated diagnostics in /kaggle/working in 8.77s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 19)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    32.61
+median score:  13.48
+total actions: 13292
+total tokens:  10608107
+generated tokens/sec: 605.89 (job wallclock)
+total wallclock: 1170330.1s
+
+per-game (mean across passes):
+  ar25-0c556536: score=75.00, levels=6.8/8, actions=309, tokens=159616
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=61, tokens=92275
+  cd82-fb555c5d: score=39.51, levels=3.0/6, actions=110, tokens=93703
+  cn04-2fe56bfb: score=15.48, levels=1.8/6, actions=73, tokens=85551
+  dc22-fdcac232: score=21.42, levels=2.5/6, actions=196, tokens=141487
+  ft09-0d8bbf25: score=73.81, levels=5.0/6, actions=91, tokens=63885
+  g50t-5849a774: score=8.04, levels=1.5/7, actions=116, tokens=112891
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=174, tokens=134172
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=43, tokens=64037
+  lp85-305b61c3: score=94.44, levels=7.8/8, actions=133, tokens=141923
+  ls20-9607627b: score=10.00, levels=2.0/7, actions=155, tokens=131319
+  m0r0-492f87ba: score=31.97, levels=2.5/6, actions=134, tokens=111412
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=33.30, levels=4.5/8, actions=284, tokens=102126
+  s5i5-18d95033: score=7.07, levels=1.8/8, actions=75, tokens=102475
+  sb26-7fbdac44: score=89.29, levels=7.8/8, actions=162, tokens=61198
+  sc25-635fd71a: score=12.26, levels=1.5/6, actions=121, tokens=70904
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=33, tokens=65939
+  su15-1944f8ab: score=10.56, levels=2.5/9, actions=89, tokens=104534
+  tn36-ef4dde99: score=22.89, levels=2.5/7, actions=116, tokens=107711
+  tr87-cd924810: score=68.50, levels=4.5/6, actions=224, tokens=108866
+  tu93-0768757b: score=53.22, levels=6.5/9, actions=195, tokens=198610
+  vc33-5430563c: score=43.58, levels=4.2/7, actions=157, tokens=128612
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=110, tokens=79774
+
+[sys] RAM 123.5/176.9 | swap none | proc 5.3 GB, 115 threads, 95 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.4/19.5
+[finished] lp85-305b61c3 state=won level=8/8 score=100.00 actions=116 tokens=141298 per-level=9/17,12/38,16/31,15/16,11/41,20/60,9/26,24/159 note="tokens=141298"
+[sys] RAM 123.2/176.9 | swap none | proc 5.3 GB, 116 threads, 99 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.4/19.5
+[sys] RAM 122.6/176.9 | swap none | proc 5.4 GB, 116 threads, 99 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.4/19.5
+[sys] RAM 122.2/176.9 | swap none | proc 5.4 GB, 115 threads, 96 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.4/19.5
+[sys] RAM 123.7/176.9 | swap none | proc 5.5 GB, 116 threads, 98 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.5/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 16.10s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 20)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    33.33
+median score:  13.48
+total actions: 13822
+total tokens:  10983319
+generated tokens/sec: 605.98 (job wallclock)
+total wallclock: 1258414.1s
+
+per-game (mean across passes):
+  ar25-0c556536: score=75.00, levels=6.8/8, actions=309, tokens=159616
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=61, tokens=92275
+  cd82-fb555c5d: score=39.51, levels=3.0/6, actions=110, tokens=93703
+  cn04-2fe56bfb: score=15.48, levels=1.8/6, actions=78, tokens=92392
+  dc22-fdcac232: score=21.42, levels=2.5/6, actions=204, tokens=143777
+  ft09-0d8bbf25: score=73.81, levels=5.0/6, actions=91, tokens=63885
+  g50t-5849a774: score=8.04, levels=1.5/7, actions=116, tokens=112891
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=174, tokens=134172
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=60, tokens=71610
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=12.06, levels=2.2/7, actions=166, tokens=137033
+  m0r0-492f87ba: score=31.97, levels=2.5/6, actions=134, tokens=111412
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=37.29, levels=4.8/8, actions=326, tokens=117447
+  s5i5-18d95033: score=8.58, levels=2.0/8, actions=87, tokens=123240
+  sb26-7fbdac44: score=89.29, levels=7.8/8, actions=162, tokens=61198
+  sc25-635fd71a: score=12.26, levels=1.5/6, actions=121, tokens=70904
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=33, tokens=65939
+  su15-1944f8ab: score=10.56, levels=2.5/9, actions=105, tokens=111584
+  tn36-ef4dde99: score=22.89, levels=2.5/7, actions=117, tokens=115604
+  tr87-cd924810: score=68.50, levels=4.5/6, actions=224, tokens=108866
+  tu93-0768757b: score=58.19, levels=7.0/9, actions=212, tokens=210208
+  vc33-5430563c: score=43.58, levels=4.2/7, actions=157, tokens=128612
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=110, tokens=85455
+
+[sys] RAM 121.9/176.9 | swap none | proc 5.5 GB, 115 threads, 96 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.5/19.5
+[sys] RAM 122.4/176.9 | swap none | proc 5.5 GB, 117 threads, 100 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.5/19.5
+[sys] RAM 123.0/176.9 | swap none | proc 5.6 GB, 116 threads, 99 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.6/19.5
+[sys] RAM 122.4/176.9 | swap none | proc 5.6 GB, 116 threads, 97 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.6/19.5
+[sys] RAM 123.2/176.9 | swap none | proc 5.6 GB, 115 threads, 96 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.6/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 1.98s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 20)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    33.93
+median score:  15.30
+total actions: 14311
+total tokens:  11366503
+generated tokens/sec: 606.93 (job wallclock)
+total wallclock: 1298120.7s
+
+per-game (mean across passes):
+  ar25-0c556536: score=75.00, levels=6.8/8, actions=309, tokens=159616
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=62, tokens=94637
+  cd82-fb555c5d: score=39.51, levels=3.0/6, actions=110, tokens=93703
+  cn04-2fe56bfb: score=15.48, levels=1.8/6, actions=79, tokens=94370
+  dc22-fdcac232: score=21.42, levels=2.5/6, actions=204, tokens=143777
+  ft09-0d8bbf25: score=73.81, levels=5.0/6, actions=91, tokens=63885
+  g50t-5849a774: score=8.04, levels=1.5/7, actions=116, tokens=112891
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=174, tokens=134172
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=65, tokens=79431
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=13.82, levels=2.5/7, actions=190, tokens=147998
+  m0r0-492f87ba: score=31.97, levels=2.5/6, actions=134, tokens=111412
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=44.93, levels=5.2/8, actions=361, tokens=139920
+  s5i5-18d95033: score=10.67, levels=2.2/8, actions=99, tokens=133391
+  sb26-7fbdac44: score=89.29, levels=7.8/8, actions=162, tokens=61198
+  sc25-635fd71a: score=12.26, levels=1.5/6, actions=136, tokens=77661
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=33, tokens=65939
+  su15-1944f8ab: score=10.56, levels=2.5/9, actions=105, tokens=111584
+  tn36-ef4dde99: score=24.95, levels=2.8/7, actions=121, tokens=119038
+  tr87-cd924810: score=68.50, levels=4.5/6, actions=224, tokens=108866
+  tu93-0768757b: score=59.55, levels=7.2/9, actions=224, tokens=232609
+  vc33-5430563c: score=43.58, levels=4.2/7, actions=157, tokens=128612
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=123, tokens=92907
+
+[sys] RAM 122.4/176.9 | swap none | proc 5.7 GB, 115 threads, 96 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.7/19.5
+[sys] RAM 122.5/176.9 | swap none | proc 5.7 GB, 117 threads, 99 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.7/19.5
+[sys] RAM 122.5/176.9 | swap none | proc 5.7 GB, 115 threads, 96 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.7/19.5
+[sys] RAM 122.3/176.9 | swap none | proc 5.7 GB, 116 threads, 98 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.8/19.5
+[sys] RAM 122.2/176.9 | swap none | proc 5.7 GB, 116 threads, 98 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.8/19.5
+[sys] RAM 123.2/176.9 | swap none | proc 5.7 GB, 115 threads, 96 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.8/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.09s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 20)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    33.96
+median score:  15.30
+total actions: 14614
+total tokens:  11741957
+generated tokens/sec: 607.44 (job wallclock)
+total wallclock: 1328535.8s
+
+per-game (mean across passes):
+  ar25-0c556536: score=75.00, levels=6.8/8, actions=309, tokens=159616
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=67, tokens=118396
+  cd82-fb555c5d: score=39.51, levels=3.0/6, actions=110, tokens=93703
+  cn04-2fe56bfb: score=15.48, levels=1.8/6, actions=79, tokens=94370
+  dc22-fdcac232: score=21.42, levels=2.5/6, actions=204, tokens=143777
+  ft09-0d8bbf25: score=73.81, levels=5.0/6, actions=91, tokens=63885
+  g50t-5849a774: score=8.04, levels=1.5/7, actions=116, tokens=112891
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=174, tokens=134172
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=65, tokens=79431
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=13.82, levels=2.5/7, actions=203, tokens=154998
+  m0r0-492f87ba: score=31.97, levels=2.5/6, actions=134, tokens=111412
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=44.93, levels=5.2/8, actions=368, tokens=153432
+  s5i5-18d95033: score=10.67, levels=2.2/8, actions=105, tokens=143834
+  sb26-7fbdac44: score=89.29, levels=7.8/8, actions=162, tokens=61198
+  sc25-635fd71a: score=13.06, levels=1.8/6, actions=169, tokens=94888
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=4.76, levels=1.0/6, actions=34, tokens=68625
+  su15-1944f8ab: score=10.56, levels=2.5/9, actions=105, tokens=111584
+  tn36-ef4dde99: score=24.95, levels=2.8/7, actions=131, tokens=128533
+  tr87-cd924810: score=68.50, levels=4.5/6, actions=224, tokens=108866
+  tu93-0768757b: score=59.55, levels=7.2/9, actions=225, tokens=242351
+  vc33-5430563c: score=43.58, levels=4.2/7, actions=157, tokens=128612
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=123, tokens=92907
+
+[sys] RAM 123.8/176.9 | swap none | proc 5.8 GB, 115 threads, 96 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.8/19.5
+[sys] RAM 122.5/176.9 | swap none | proc 5.8 GB, 116 threads, 98 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.9/19.5
+[sys] RAM 122.3/176.9 | swap none | proc 5.9 GB, 117 threads, 100 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.9/19.5
+[sys] RAM 123.9/176.9 | swap none | proc 5.9 GB, 115 threads, 96 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 4.9/19.5
+[sys] RAM 122.6/176.9 | swap none | proc 5.9 GB, 116 threads, 98 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.0/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 3.61s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 20)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    34.61
+median score:  16.51
+total actions: 14952
+total tokens:  12094349
+generated tokens/sec: 606.71 (job wallclock)
+total wallclock: 1380508.9s
+
+per-game (mean across passes):
+  ar25-0c556536: score=75.00, levels=6.8/8, actions=309, tokens=159616
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=68, tokens=125457
+  cd82-fb555c5d: score=39.51, levels=3.0/6, actions=110, tokens=93703
+  cn04-2fe56bfb: score=15.48, levels=1.8/6, actions=86, tokens=103498
+  dc22-fdcac232: score=21.42, levels=2.5/6, actions=204, tokens=143777
+  ft09-0d8bbf25: score=73.81, levels=5.0/6, actions=91, tokens=63885
+  g50t-5849a774: score=8.04, levels=1.5/7, actions=116, tokens=112891
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=174, tokens=134172
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=72, tokens=86325
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=13.82, levels=2.5/7, actions=219, tokens=159420
+  m0r0-492f87ba: score=39.91, levels=3.0/6, actions=153, tokens=119277
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=44.93, levels=5.2/8, actions=368, tokens=153432
+  s5i5-18d95033: score=13.44, levels=2.5/8, actions=114, tokens=150601
+  sb26-7fbdac44: score=89.29, levels=7.8/8, actions=162, tokens=61198
+  sc25-635fd71a: score=13.06, levels=1.8/6, actions=181, tokens=102184
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=7.14, levels=1.2/6, actions=39, tokens=81469
+  su15-1944f8ab: score=10.56, levels=2.5/9, actions=105, tokens=111584
+  tn36-ef4dde99: score=24.95, levels=2.8/7, actions=133, tokens=133891
+  tr87-cd924810: score=68.50, levels=4.5/6, actions=224, tokens=108866
+  tu93-0768757b: score=62.77, levels=7.5/9, actions=234, tokens=262813
+  vc33-5430563c: score=43.58, levels=4.2/7, actions=157, tokens=128612
+  wa30-ee6fef47: score=2.10, levels=1.0/9, actions=123, tokens=92907
+
+[sys] RAM 123.0/176.9 | swap none | proc 6.0 GB, 115 threads, 96 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.0/19.5
+[sys] RAM 123.2/176.9 | swap none | proc 6.0 GB, 116 threads, 98 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.0/19.5
+[finished] ft09-0d8bbf25 state=won level=6/6 score=100.00 actions=146 tokens=86411 per-level=4/43,11/12,14/23,22/28,61/65,34/37 note="tokens=86411"
+[sys] RAM 122.8/176.9 | swap none | proc 6.0 GB, 115 threads, 97 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.0/19.5
+[sys] RAM 122.6/176.9 | swap none | proc 6.0 GB, 118 threads, 101 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.1/19.5
+[sys] RAM 123.4/176.9 | swap none | proc 6.1 GB, 116 threads, 99 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.1/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 3.45s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 21)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    35.41
+median score:  19.92
+total actions: 15461
+total tokens:  12431804
+generated tokens/sec: 605.31 (job wallclock)
+total wallclock: 1437124.6s
+
+per-game (mean across passes):
+  ar25-0c556536: score=75.00, levels=6.8/8, actions=309, tokens=159616
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=69, tokens=130221
+  cd82-fb555c5d: score=39.51, levels=3.0/6, actions=110, tokens=93703
+  cn04-2fe56bfb: score=15.48, levels=1.8/6, actions=86, tokens=103498
+  dc22-fdcac232: score=21.42, levels=2.5/6, actions=204, tokens=143777
+  ft09-0d8bbf25: score=86.90, levels=5.5/6, actions=104, tokens=70390
+  g50t-5849a774: score=8.04, levels=1.5/7, actions=168, tokens=121379
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=174, tokens=134172
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=77, tokens=89089
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=13.82, levels=2.5/7, actions=219, tokens=159420
+  m0r0-492f87ba: score=39.91, levels=3.0/6, actions=157, tokens=122369
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=44.93, levels=5.2/8, actions=374, tokens=161454
+  s5i5-18d95033: score=13.44, levels=2.5/8, actions=118, tokens=158759
+  sb26-7fbdac44: score=89.29, levels=7.8/8, actions=162, tokens=61198
+  sc25-635fd71a: score=13.06, levels=1.8/6, actions=188, tokens=104915
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=10.71, levels=1.5/6, actions=51, tokens=100577
+  su15-1944f8ab: score=12.78, levels=2.8/9, actions=112, tokens=118691
+  tn36-ef4dde99: score=24.95, levels=2.8/7, actions=133, tokens=133891
+  tr87-cd924810: score=68.50, levels=4.5/6, actions=224, tokens=108866
+  tu93-0768757b: score=62.77, levels=7.5/9, actions=236, tokens=268626
+  vc33-5430563c: score=43.58, levels=4.2/7, actions=157, tokens=128612
+  wa30-ee6fef47: score=3.22, levels=1.2/9, actions=136, tokens=100718
+
+[sys] RAM 123.9/176.9 | swap none | proc 6.1 GB, 115 threads, 99 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.1/19.5
+[sys] RAM 122.8/176.9 | swap none | proc 6.2 GB, 115 threads, 97 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.2/19.5
+[sys] RAM 122.7/176.9 | swap none | proc 6.2 GB, 115 threads, 97 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.2/19.5
+[sys] RAM 123.3/176.9 | swap none | proc 6.2 GB, 115 threads, 97 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.2/19.5
+[sys] RAM 123.6/176.9 | swap none | proc 6.2 GB, 116 threads, 99 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.2/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.89s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 21)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    35.82
+median score:  19.92
+total actions: 15877
+total tokens:  12864047
+generated tokens/sec: 608.45 (job wallclock)
+total wallclock: 1502844.7s
+
+per-game (mean across passes):
+  ar25-0c556536: score=75.00, levels=6.8/8, actions=309, tokens=159616
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=69, tokens=130221
+  cd82-fb555c5d: score=39.51, levels=3.0/6, actions=110, tokens=93703
+  cn04-2fe56bfb: score=17.86, levels=2.0/6, actions=89, tokens=105406
+  dc22-fdcac232: score=21.42, levels=2.5/6, actions=204, tokens=143777
+  ft09-0d8bbf25: score=86.90, levels=5.5/6, actions=104, tokens=70390
+  g50t-5849a774: score=9.25, levels=1.8/7, actions=189, tokens=136686
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=174, tokens=134172
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=77, tokens=89089
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=13.82, levels=2.5/7, actions=219, tokens=159420
+  m0r0-492f87ba: score=46.42, levels=3.2/6, actions=175, tokens=142163
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=44.93, levels=5.2/8, actions=379, tokens=164581
+  s5i5-18d95033: score=13.44, levels=2.5/8, actions=127, tokens=183204
+  sb26-7fbdac44: score=89.29, levels=7.8/8, actions=162, tokens=61198
+  sc25-635fd71a: score=13.06, levels=1.8/6, actions=188, tokens=104915
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=10.71, levels=1.5/6, actions=63, tokens=119378
+  su15-1944f8ab: score=12.78, levels=2.8/9, actions=116, tokens=127942
+  tn36-ef4dde99: score=24.95, levels=2.8/7, actions=133, tokens=133891
+  tr87-cd924810: score=68.50, levels=4.5/6, actions=224, tokens=108866
+  tu93-0768757b: score=62.77, levels=7.5/9, actions=239, tokens=275314
+  vc33-5430563c: score=43.58, levels=4.2/7, actions=157, tokens=128612
+  wa30-ee6fef47: score=3.22, levels=1.2/9, actions=164, tokens=109458
+
+[sys] RAM 123.9/176.9 | swap none | proc 6.3 GB, 115 threads, 95 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.3/19.5
+[sys] RAM 124.3/176.9 | swap none | proc 6.3 GB, 116 threads, 99 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.3/19.5
+[sys] RAM 122.6/176.9 | swap none | proc 6.3 GB, 115 threads, 97 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.3/19.5
+[sys] RAM 123.8/176.9 | swap none | proc 6.3 GB, 116 threads, 97 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.4/19.5
+[finished] ar25-0c556536 state=won level=8/8 score=100.00 actions=453 tokens=156820 per-level=172/32,15/50,49/75,22/37,28/89,60/159,60/233,47/73 note="tokens=156820"
+[sys] RAM 123.9/176.9 | swap none | proc 6.4 GB, 118 threads, 104 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.4/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 14.99s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 22)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    36.54
+median score:  19.92
+total actions: 16296
+total tokens:  13236776
+generated tokens/sec: 608.37 (job wallclock)
+total wallclock: 1588958.7s
+
+per-game (mean across passes):
+  ar25-0c556536: score=85.42, levels=7.2/8, actions=322, tokens=165010
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=71, tokens=143382
+  cd82-fb555c5d: score=39.51, levels=3.0/6, actions=111, tokens=94476
+  cn04-2fe56bfb: score=17.86, levels=2.0/6, actions=92, tokens=113653
+  dc22-fdcac232: score=21.42, levels=2.5/6, actions=208, tokens=149410
+  ft09-0d8bbf25: score=86.90, levels=5.5/6, actions=104, tokens=70390
+  g50t-5849a774: score=9.25, levels=1.8/7, actions=223, tokens=151988
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=174, tokens=134172
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=77, tokens=89089
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=13.82, levels=2.5/7, actions=219, tokens=159420
+  m0r0-492f87ba: score=46.42, levels=3.2/6, actions=184, tokens=153202
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=44.93, levels=5.2/8, actions=379, tokens=164581
+  s5i5-18d95033: score=13.44, levels=2.5/8, actions=127, tokens=183204
+  sb26-7fbdac44: score=89.29, levels=7.8/8, actions=162, tokens=61198
+  sc25-635fd71a: score=15.97, levels=2.2/6, actions=190, tokens=105958
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=13.10, levels=1.8/6, actions=73, tokens=134162
+  su15-1944f8ab: score=12.78, levels=2.8/9, actions=120, tokens=130903
+  tn36-ef4dde99: score=24.95, levels=2.8/7, actions=133, tokens=133891
+  tr87-cd924810: score=70.88, levels=4.8/6, actions=237, tokens=120661
+  tu93-0768757b: score=62.77, levels=7.5/9, actions=239, tokens=275314
+  vc33-5430563c: score=43.58, levels=4.2/7, actions=157, tokens=128612
+  wa30-ee6fef47: score=3.22, levels=1.2/9, actions=175, tokens=112508
+
+[sys] RAM 124.9/176.9 | swap none | proc 6.4 GB, 115 threads, 98 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.4/19.5
+[sys] RAM 123.9/176.9 | swap none | proc 6.4 GB, 116 threads, 100 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.4/19.5
+[sys] RAM 124.1/176.9 | swap none | proc 6.5 GB, 118 threads, 104 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.5/19.5
+[sys] RAM 123.9/176.9 | swap none | proc 6.5 GB, 115 threads, 98 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.5/19.5
+[sys] RAM 123.8/176.9 | swap none | proc 6.5 GB, 115 threads, 98 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.5/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 3.61s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 22)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    37.52
+median score:  21.43
+total actions: 16844
+total tokens:  13585295
+generated tokens/sec: 607.52 (job wallclock)
+total wallclock: 1643557.5s
+
+per-game (mean across passes):
+  ar25-0c556536: score=85.42, levels=7.2/8, actions=322, tokens=165010
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=71, tokens=143382
+  cd82-fb555c5d: score=42.14, levels=3.5/6, actions=120, tokens=103221
+  cn04-2fe56bfb: score=21.43, levels=2.2/6, actions=97, tokens=123847
+  dc22-fdcac232: score=23.94, levels=2.8/6, actions=234, tokens=160612
+  ft09-0d8bbf25: score=86.90, levels=5.5/6, actions=104, tokens=78336
+  g50t-5849a774: score=9.25, levels=1.8/7, actions=239, tokens=156061
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=181, tokens=141444
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=77, tokens=89089
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=13.82, levels=2.5/7, actions=219, tokens=159420
+  m0r0-492f87ba: score=46.42, levels=3.2/6, actions=184, tokens=153202
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=44.93, levels=5.2/8, actions=379, tokens=164581
+  s5i5-18d95033: score=13.44, levels=2.5/8, actions=127, tokens=183204
+  sb26-7fbdac44: score=89.29, levels=7.8/8, actions=162, tokens=61198
+  sc25-635fd71a: score=17.95, levels=2.5/6, actions=210, tokens=112929
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=13.10, levels=1.8/6, actions=77, tokens=146494
+  su15-1944f8ab: score=12.78, levels=2.8/9, actions=120, tokens=130903
+  tn36-ef4dde99: score=24.95, levels=2.8/7, actions=133, tokens=133891
+  tr87-cd924810: score=84.77, levels=5.5/6, actions=269, tokens=128976
+  tu93-0768757b: score=62.77, levels=7.5/9, actions=239, tokens=275314
+  vc33-5430563c: score=43.58, levels=4.2/7, actions=157, tokens=128612
+  wa30-ee6fef47: score=3.22, levels=1.2/9, actions=193, tokens=122588
+
+[sys] RAM 122.6/176.9 | swap none | proc 6.5 GB, 116 threads, 99 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.6/19.5
+[sys] RAM 124.1/176.9 | swap none | proc 6.5 GB, 117 threads, 101 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.6/19.5
+[finished] tr87-cd924810 state=won level=6/6 score=100.00 actions=273 tokens=145299 per-level=23/54,57/58,66/40,29/45,36/71,62/146 note="tokens=145299"
+[sys] RAM 124.1/176.9 | swap none | proc 6.6 GB, 115 threads, 99 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.6/19.5
+[sys] RAM 123.7/176.9 | swap none | proc 6.6 GB, 115 threads, 99 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.6/19.5
+[sys] RAM 123.0/176.9 | swap none | proc 6.6 GB, 117 threads, 103 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.7/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.26s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 23)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    38.63
+median score:  23.28
+total actions: 17292
+total tokens:  13907016
+generated tokens/sec: 605.60 (job wallclock)
+total wallclock: 1685400.6s
+
+per-game (mean across passes):
+  ar25-0c556536: score=85.42, levels=7.2/8, actions=322, tokens=165010
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=71, tokens=143382
+  cd82-fb555c5d: score=48.58, levels=4.0/6, actions=137, tokens=115479
+  cn04-2fe56bfb: score=21.43, levels=2.2/6, actions=110, tokens=133734
+  dc22-fdcac232: score=37.75, levels=3.5/6, actions=264, tokens=181055
+  ft09-0d8bbf25: score=86.90, levels=5.5/6, actions=111, tokens=80293
+  g50t-5849a774: score=9.25, levels=1.8/7, actions=239, tokens=156061
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=182, tokens=147531
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=77, tokens=89089
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=13.82, levels=2.5/7, actions=223, tokens=159999
+  m0r0-492f87ba: score=46.42, levels=3.2/6, actions=184, tokens=153202
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=44.93, levels=5.2/8, actions=379, tokens=164581
+  s5i5-18d95033: score=13.44, levels=2.5/8, actions=129, tokens=188803
+  sb26-7fbdac44: score=89.29, levels=7.8/8, actions=162, tokens=61198
+  sc25-635fd71a: score=17.95, levels=2.5/6, actions=224, tokens=120792
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=13.10, levels=1.8/6, actions=77, tokens=146494
+  su15-1944f8ab: score=12.78, levels=2.8/9, actions=120, tokens=130903
+  tn36-ef4dde99: score=24.95, levels=2.8/7, actions=133, tokens=133891
+  tr87-cd924810: score=92.31, levels=5.8/6, actions=279, tokens=132601
+  tu93-0768757b: score=62.77, levels=7.5/9, actions=239, tokens=275314
+  vc33-5430563c: score=43.58, levels=4.2/7, actions=157, tokens=128612
+  wa30-ee6fef47: score=3.22, levels=1.2/9, actions=207, tokens=134721
+
+[sys] RAM 124.3/176.9 | swap none | proc 6.6 GB, 116 threads, 100 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.7/19.5
+[sys] RAM 123.7/176.9 | swap none | proc 6.6 GB, 115 threads, 99 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.7/19.5
+
+tail fade phase after 387.5 minutes: 96.1 minutes remaining; fading tail B to zero over the final 96.7 minutes, retaining hazard C
+
+[sys] RAM 124.2/176.9 | swap none | proc 6.6 GB, 116 threads, 103 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.8/19.5
+[sys] RAM 124.3/176.9 | swap none | proc 6.6 GB, 117 threads, 104 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.8/19.5
+[sys] RAM 123.4/176.9 | swap none | proc 6.6 GB, 115 threads, 99 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.8/19.5
+[finished] cd82-fb555c5d state=won level=6/6 score=78.35 actions=185 tokens=173317 per-level=57/55,10/8,35/41,30/21,37/23,16/23 note="tokens=173317"
+benchmark: regenerated diagnostics in /kaggle/working in 3.82s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 24)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    39.79
+median score:  26.96
+total actions: 17717
+total tokens:  14248109
+generated tokens/sec: 604.54 (job wallclock)
+total wallclock: 1708985.9s
+
+per-game (mean across passes):
+  ar25-0c556536: score=85.42, levels=7.2/8, actions=322, tokens=165010
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=71, tokens=143382
+  cd82-fb555c5d: score=59.79, levels=4.8/6, actions=155, tokens=136983
+  cn04-2fe56bfb: score=26.19, levels=2.5/6, actions=115, tokens=140680
+  dc22-fdcac232: score=42.51, levels=3.8/6, actions=293, tokens=205751
+  ft09-0d8bbf25: score=86.90, levels=5.5/6, actions=111, tokens=80293
+  g50t-5849a774: score=9.25, levels=1.8/7, actions=239, tokens=156061
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=187, tokens=149144
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=77, tokens=89089
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=16.19, levels=2.8/7, actions=234, tokens=167818
+  m0r0-492f87ba: score=46.42, levels=3.2/6, actions=184, tokens=153202
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=49.10, levels=5.5/8, actions=382, tokens=165126
+  s5i5-18d95033: score=13.44, levels=2.5/8, actions=131, tokens=196402
+  sb26-7fbdac44: score=89.29, levels=7.8/8, actions=162, tokens=61198
+  sc25-635fd71a: score=19.60, levels=2.8/6, actions=247, tokens=128450
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=13.10, levels=1.8/6, actions=77, tokens=146494
+  su15-1944f8ab: score=12.78, levels=2.8/9, actions=120, tokens=130903
+  tn36-ef4dde99: score=24.95, levels=2.8/7, actions=133, tokens=133891
+  tr87-cd924810: score=92.31, levels=5.8/6, actions=279, tokens=132601
+  tu93-0768757b: score=62.77, levels=7.5/9, actions=239, tokens=275314
+  vc33-5430563c: score=43.58, levels=4.2/7, actions=157, tokens=128612
+  wa30-ee6fef47: score=3.22, levels=1.2/9, actions=216, tokens=141615
+
+[sys] RAM 123.5/176.9 | swap none | proc 6.7 GB, 117 threads, 104 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.9/19.5
+[sys] RAM 124.7/176.9 | swap none | proc 6.9 GB, 119 threads, 109 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.9/19.5
+[sys] RAM 125.0/176.9 | swap none | proc 6.8 GB, 115 threads, 101 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.9/19.5
+[sys] RAM 123.2/176.9 | swap none | proc 6.9 GB, 118 threads, 107 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 5.9/19.5
+[sys] RAM 123.9/176.9 | swap none | proc 6.9 GB, 117 threads, 106 fds | GPU0 94.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.0/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 9.88s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 24)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    40.03
+median score:  26.96
+total actions: 18254
+total tokens:  14595644
+generated tokens/sec: 603.63 (job wallclock)
+total wallclock: 1744287.6s
+
+per-game (mean across passes):
+  ar25-0c556536: score=85.42, levels=7.2/8, actions=322, tokens=165010
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=71, tokens=143382
+  cd82-fb555c5d: score=59.79, levels=4.8/6, actions=166, tokens=145577
+  cn04-2fe56bfb: score=26.19, levels=2.5/6, actions=126, tokens=151337
+  dc22-fdcac232: score=42.51, levels=3.8/6, actions=302, tokens=226692
+  ft09-0d8bbf25: score=86.90, levels=5.5/6, actions=111, tokens=80293
+  g50t-5849a774: score=9.25, levels=1.8/7, actions=239, tokens=156061
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=214, tokens=155273
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=82, tokens=91697
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=17.11, levels=3.0/7, actions=272, tokens=183774
+  m0r0-492f87ba: score=46.42, levels=3.2/6, actions=184, tokens=153202
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=49.10, levels=5.5/8, actions=400, tokens=177957
+  s5i5-18d95033: score=13.44, levels=2.5/8, actions=131, tokens=196402
+  sb26-7fbdac44: score=89.29, levels=7.8/8, actions=162, tokens=61198
+  sc25-635fd71a: score=19.60, levels=2.8/6, actions=258, tokens=132455
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=13.10, levels=1.8/6, actions=77, tokens=146494
+  su15-1944f8ab: score=12.78, levels=2.8/9, actions=120, tokens=130903
+  tn36-ef4dde99: score=24.95, levels=2.8/7, actions=133, tokens=133891
+  tr87-cd924810: score=92.31, levels=5.8/6, actions=279, tokens=132601
+  tu93-0768757b: score=62.77, levels=7.5/9, actions=239, tokens=275314
+  vc33-5430563c: score=48.72, levels=4.5/7, actions=162, tokens=133774
+  wa30-ee6fef47: score=3.22, levels=1.2/9, actions=216, tokens=141615
+
+[sys] RAM 124.6/176.9 | swap none | proc 6.9 GB, 117 threads, 105 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.0/19.5
+[sys] RAM 125.0/176.9 | swap none | proc 7.0 GB, 117 threads, 105 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.0/19.5
+[sys] RAM 124.9/176.9 | swap none | proc 7.0 GB, 116 threads, 103 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.1/19.5
+[sys] RAM 124.7/176.9 | swap none | proc 7.0 GB, 115 threads, 100 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.1/19.5
+[sys] RAM 124.3/176.9 | swap none | proc 7.1 GB, 119 threads, 109 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.1/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 2.32s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 24)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    41.02
+median score:  27.91
+total actions: 18708
+total tokens:  14929499
+generated tokens/sec: 602.41 (job wallclock)
+total wallclock: 1787746.2s
+
+per-game (mean across passes):
+  ar25-0c556536: score=85.42, levels=7.2/8, actions=322, tokens=165010
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=71, tokens=143382
+  cd82-fb555c5d: score=59.82, levels=5.0/6, actions=172, tokens=154762
+  cn04-2fe56bfb: score=26.19, levels=2.5/6, actions=127, tokens=152599
+  dc22-fdcac232: score=42.51, levels=3.8/6, actions=309, tokens=233744
+  ft09-0d8bbf25: score=86.90, levels=5.5/6, actions=111, tokens=80293
+  g50t-5849a774: score=9.25, levels=1.8/7, actions=239, tokens=156061
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=214, tokens=155273
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=85, tokens=96480
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=21.21, levels=3.2/7, actions=291, tokens=193348
+  m0r0-492f87ba: score=46.42, levels=3.2/6, actions=184, tokens=153202
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=53.26, levels=5.8/8, actions=424, tokens=189440
+  s5i5-18d95033: score=16.22, levels=2.8/8, actions=134, tokens=205593
+  sb26-7fbdac44: score=89.29, levels=7.8/8, actions=166, tokens=68363
+  sc25-635fd71a: score=19.60, levels=2.8/6, actions=270, tokens=138108
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=13.10, levels=1.8/6, actions=77, tokens=146494
+  su15-1944f8ab: score=12.78, levels=2.8/9, actions=120, tokens=130903
+  tn36-ef4dde99: score=24.95, levels=2.8/7, actions=133, tokens=133891
+  tr87-cd924810: score=92.31, levels=5.8/6, actions=279, tokens=132601
+  tu93-0768757b: score=62.77, levels=7.5/9, actions=239, tokens=275314
+  vc33-5430563c: score=62.24, levels=5.2/7, actions=196, tokens=151891
+  wa30-ee6fef47: score=3.22, levels=1.2/9, actions=216, tokens=141615
+
+[sys] RAM 124.5/176.9 | swap none | proc 7.0 GB, 115 threads, 101 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.2/19.5
+[finished] sb26-7fbdac44 state=won level=8/8 score=93.53 actions=158 tokens=79296 per-level=12/18,15/28,15/18,15/19,23/31,19/23,17/58,42/18 note="tokens=79296"
+[finished] vc33-5430563c state=won level=7/7 score=100.00 actions=288 tokens=203375 per-level=16/7,10/18,25/44,72/61,86/131,24/34,55/152 note="tokens=203375"
+[sys] RAM 124.3/176.9 | swap none | proc 7.0 GB, 116 threads, 105 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.2/19.5
+[sys] RAM 125.5/176.9 | swap none | proc 7.1 GB, 115 threads, 105 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.2/19.5
+[sys] RAM 124.4/176.9 | swap none | proc 7.2 GB, 116 threads, 106 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.2/19.5
+[sys] RAM 125.5/176.9 | swap none | proc 7.2 GB, 115 threads, 103 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.3/19.5
+[finished] cd82-fb555c5d state=won level=6/6 score=88.43 actions=237 tokens=221241 per-level=72/55,76/8,22/41,20/21,20/23,27/23 note="tokens=221241"
+benchmark: regenerated diagnostics in /kaggle/working in 9.44s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 27)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    42.94
+median score:  28.57
+total actions: 19175
+total tokens:  15280917
+generated tokens/sec: 601.79 (job wallclock)
+total wallclock: 1829080.0s
+
+per-game (mean across passes):
+  ar25-0c556536: score=85.42, levels=7.2/8, actions=322, tokens=165010
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=71, tokens=143382
+  cd82-fb555c5d: score=81.20, levels=6.0/6, actions=194, tokens=161404
+  cn04-2fe56bfb: score=26.19, levels=2.5/6, actions=127, tokens=152599
+  dc22-fdcac232: score=42.51, levels=3.8/6, actions=317, tokens=240738
+  ft09-0d8bbf25: score=86.90, levels=5.5/6, actions=111, tokens=80293
+  g50t-5849a774: score=9.25, levels=1.8/7, actions=239, tokens=156061
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=214, tokens=155273
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=85, tokens=96480
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=21.21, levels=3.2/7, actions=310, tokens=201064
+  m0r0-492f87ba: score=46.42, levels=3.2/6, actions=193, tokens=162242
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=58.12, levels=6.0/8, actions=442, tokens=209997
+  s5i5-18d95033: score=19.69, levels=3.0/8, actions=142, tokens=214556
+  sb26-7fbdac44: score=93.23, levels=8.0/8, actions=168, tokens=70524
+  sc25-635fd71a: score=19.60, levels=2.8/6, actions=272, tokens=143224
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=13.10, levels=1.8/6, actions=77, tokens=146494
+  su15-1944f8ab: score=12.78, levels=2.8/9, actions=120, tokens=130903
+  tn36-ef4dde99: score=25.36, levels=3.0/7, actions=138, tokens=138403
+  tr87-cd924810: score=92.31, levels=5.8/6, actions=279, tokens=132601
+  tu93-0768757b: score=64.86, levels=7.8/9, actions=245, tokens=281103
+  vc33-5430563c: score=74.11, levels=5.8/7, actions=215, tokens=162256
+  wa30-ee6fef47: score=3.22, levels=1.2/9, actions=216, tokens=141615
+
+[sys] RAM 125.5/176.9 | swap none | proc 7.2 GB, 116 threads, 106 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.3/19.5
+[sys] RAM 124.0/176.9 | swap none | proc 7.3 GB, 115 threads, 103 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.3/19.5
+[sys] RAM 124.1/176.9 | swap none | proc 7.3 GB, 116 threads, 106 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.3/19.5
+[sys] RAM 124.2/176.9 | swap none | proc 7.3 GB, 115 threads, 104 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.4/19.5
+[sys] RAM 123.9/176.9 | swap none | proc 7.3 GB, 118 threads, 110 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.4/19.5
+[finished] vc33-5430563c state=won level=7/7 score=100.00 actions=302 tokens=204663 per-level=8/7,12/18,23/44,78/61,86/131,20/34,75/152 note="tokens=204663"
+benchmark: regenerated diagnostics in /kaggle/working in 14.74s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 28)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    43.63
+median score:  29.68
+total actions: 19604
+total tokens:  15623288
+generated tokens/sec: 600.71 (job wallclock)
+total wallclock: 1854405.9s
+
+per-game (mean across passes):
+  ar25-0c556536: score=85.42, levels=7.2/8, actions=322, tokens=165010
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=71, tokens=143382
+  cd82-fb555c5d: score=81.20, levels=6.0/6, actions=194, tokens=161404
+  cn04-2fe56bfb: score=26.19, levels=2.5/6, actions=129, tokens=157327
+  dc22-fdcac232: score=42.51, levels=3.8/6, actions=321, tokens=248022
+  ft09-0d8bbf25: score=86.90, levels=5.5/6, actions=111, tokens=80293
+  g50t-5849a774: score=9.25, levels=1.8/7, actions=239, tokens=156061
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=214, tokens=155273
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=85, tokens=96480
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=23.06, levels=3.5/7, actions=340, tokens=219645
+  m0r0-492f87ba: score=46.42, levels=3.2/6, actions=205, tokens=166892
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=58.12, levels=6.0/8, actions=469, tokens=223001
+  s5i5-18d95033: score=19.69, levels=3.0/8, actions=143, tokens=223382
+  sb26-7fbdac44: score=93.23, levels=8.0/8, actions=168, tokens=70524
+  sc25-635fd71a: score=19.60, levels=2.8/6, actions=272, tokens=143224
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=13.10, levels=1.8/6, actions=77, tokens=146494
+  su15-1944f8ab: score=12.78, levels=2.8/9, actions=120, tokens=130903
+  tn36-ef4dde99: score=34.60, levels=3.5/7, actions=153, tokens=147542
+  tr87-cd924810: score=92.31, levels=5.8/6, actions=279, tokens=132601
+  tu93-0768757b: score=64.86, levels=7.8/9, actions=248, tokens=290915
+  vc33-5430563c: score=80.36, levels=6.0/7, actions=230, tokens=171824
+  wa30-ee6fef47: score=3.22, levels=1.2/9, actions=216, tokens=141615
+
+[sys] RAM 124.7/176.9 | swap none | proc 7.3 GB, 116 threads, 107 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.4/19.5
+[sys] RAM 124.4/176.9 | swap none | proc 7.3 GB, 115 threads, 105 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.4/19.5
+[sys] RAM 123.4/176.9 | swap none | proc 7.3 GB, 117 threads, 109 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.5/19.5
+[sys] RAM 124.9/176.9 | swap none | proc 7.3 GB, 115 threads, 105 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.5/19.5
+[finished] tu93-0768757b state=won level=9/9 score=84.63 actions=274 tokens=310306 per-level=19/19,15/16,19/34,42/42,29/123,30/80,31/14,38/23,51/111 note="tokens=310306"
+[finished] tn36-ef4dde99 state=won level=7/7 score=100.00 actions=222 tokens=181043 per-level=17/32,42/72,16/26,13/40,37/30,42/55,55/62 note="tokens=181043"
+[sys] RAM 124.0/176.9 | swap none | proc 7.3 GB, 116 threads, 108 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.5/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 27.19s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 30)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    44.60
+median score:  33.24
+total actions: 19980
+total tokens:  16031818
+generated tokens/sec: 601.89 (job wallclock)
+total wallclock: 1934243.6s
+
+per-game (mean across passes):
+  ar25-0c556536: score=85.42, levels=7.2/8, actions=324, tokens=169729
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=71, tokens=143382
+  cd82-fb555c5d: score=81.20, levels=6.0/6, actions=194, tokens=161404
+  cn04-2fe56bfb: score=26.19, levels=2.5/6, actions=132, tokens=165195
+  dc22-fdcac232: score=42.51, levels=3.8/6, actions=321, tokens=248022
+  ft09-0d8bbf25: score=86.90, levels=5.5/6, actions=111, tokens=80293
+  g50t-5849a774: score=9.25, levels=1.8/7, actions=239, tokens=156061
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=214, tokens=155273
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=85, tokens=96480
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=24.84, levels=3.8/7, actions=357, tokens=233614
+  m0r0-492f87ba: score=46.42, levels=3.2/6, actions=206, tokens=169140
+  r11l-495a7899: score=76.19, levels=4.8/6, actions=85, tokens=124582
+  re86-8af5384d: score=58.12, levels=6.0/8, actions=483, tokens=231591
+  s5i5-18d95033: score=23.86, levels=3.2/8, actions=149, tokens=232816
+  sb26-7fbdac44: score=93.23, levels=8.0/8, actions=168, tokens=70524
+  sc25-635fd71a: score=19.60, levels=2.8/6, actions=272, tokens=143224
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=13.10, levels=1.8/6, actions=77, tokens=146494
+  su15-1944f8ab: score=12.78, levels=2.8/9, actions=132, tokens=155342
+  tn36-ef4dde99: score=47.01, levels=4.0/7, actions=173, tokens=159937
+  tr87-cd924810: score=92.31, levels=5.8/6, actions=279, tokens=132601
+  tu93-0768757b: score=70.61, levels=8.0/9, actions=258, tokens=304062
+  vc33-5430563c: score=80.36, levels=6.0/7, actions=239, tokens=177148
+  wa30-ee6fef47: score=3.22, levels=1.2/9, actions=216, tokens=141615
+
+[sys] RAM 123.8/176.9 | swap none | proc 7.3 GB, 115 threads, 106 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.5/19.5
+[finished] tn36-ef4dde99 state=won level=7/7 score=100.00 actions=280 tokens=215764 per-level=34/32,22/72,85/26,19/40,19/30,44/55,57/62 note="tokens=215764"
+[sys] RAM 124.7/176.9 | swap none | proc 7.3 GB, 117 threads, 111 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.5/19.5
+[sys] RAM 122.9/176.9 | swap none | proc 7.4 GB, 117 threads, 111 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.6/19.5
+[sys] RAM 124.4/176.9 | swap none | proc 7.3 GB, 116 threads, 109 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.6/19.5
+[sys] RAM 124.6/176.9 | swap none | proc 7.4 GB, 115 threads, 107 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.6/19.5
+[sys] RAM 123.8/176.9 | swap none | proc 7.4 GB, 117 threads, 110 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.7/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 46.14s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 31)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    45.42
+median score:  33.24
+total actions: 20332
+total tokens:  16408011
+generated tokens/sec: 601.41 (job wallclock)
+total wallclock: 1971759.8s
+
+per-game (mean across passes):
+  ar25-0c556536: score=85.42, levels=7.2/8, actions=324, tokens=169729
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=71, tokens=143382
+  cd82-fb555c5d: score=81.20, levels=6.0/6, actions=194, tokens=161404
+  cn04-2fe56bfb: score=26.19, levels=2.5/6, actions=135, tokens=170742
+  dc22-fdcac232: score=42.51, levels=3.8/6, actions=322, tokens=251522
+  ft09-0d8bbf25: score=86.90, levels=5.5/6, actions=111, tokens=80293
+  g50t-5849a774: score=9.25, levels=1.8/7, actions=239, tokens=156061
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=214, tokens=155273
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=85, tokens=96480
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=26.88, levels=4.0/7, actions=393, tokens=253779
+  m0r0-492f87ba: score=46.42, levels=3.2/6, actions=210, tokens=177509
+  r11l-495a7899: score=78.57, levels=5.0/6, actions=89, tokens=139064
+  re86-8af5384d: score=62.91, levels=6.2/8, actions=494, tokens=234820
+  s5i5-18d95033: score=23.86, levels=3.2/8, actions=150, tokens=240511
+  sb26-7fbdac44: score=93.23, levels=8.0/8, actions=168, tokens=70524
+  sc25-635fd71a: score=19.60, levels=2.8/6, actions=272, tokens=143224
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=13.10, levels=1.8/6, actions=77, tokens=146494
+  su15-1944f8ab: score=17.78, levels=3.5/9, actions=144, tokens=170615
+  tn36-ef4dde99: score=53.52, levels=4.2/7, actions=178, tokens=161684
+  tr87-cd924810: score=92.31, levels=5.8/6, actions=279, tokens=132601
+  tu93-0768757b: score=70.61, levels=8.0/9, actions=267, tokens=312142
+  vc33-5430563c: score=80.36, levels=6.0/7, actions=242, tokens=183110
+  wa30-ee6fef47: score=3.22, levels=1.2/9, actions=216, tokens=141615
+
+[finished] tu93-0768757b state=won level=9/9 score=88.01 actions=355 tokens=437087 per-level=18/19,37/16,19/34,32/42,48/123,68/80,33/14,27/23,73/111 note="tokens=437087"
+[sys] RAM 124.7/176.9 | swap none | proc 7.4 GB, 116 threads, 110 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.7/19.5
+[sys] RAM 123.8/176.9 | swap none | proc 7.4 GB, 116 threads, 110 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.7/19.5
+[sys] RAM 124.5/176.9 | swap none | proc 7.5 GB, 115 threads, 108 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.7/19.5
+[sys] RAM 125.0/176.9 | swap none | proc 7.5 GB, 115 threads, 108 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.8/19.5
+[sys] RAM 124.7/176.9 | swap none | proc 7.5 GB, 117 threads, 112 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.8/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 19.89s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 32)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    45.72
+median score:  33.24
+total actions: 20673
+total tokens:  16874161
+generated tokens/sec: 604.72 (job wallclock)
+total wallclock: 2014312.2s
+
+per-game (mean across passes):
+  ar25-0c556536: score=85.42, levels=7.2/8, actions=324, tokens=169729
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=71, tokens=143382
+  cd82-fb555c5d: score=81.20, levels=6.0/6, actions=194, tokens=161404
+  cn04-2fe56bfb: score=26.19, levels=2.5/6, actions=136, tokens=175127
+  dc22-fdcac232: score=42.51, levels=3.8/6, actions=324, tokens=258767
+  ft09-0d8bbf25: score=86.90, levels=5.5/6, actions=111, tokens=80293
+  g50t-5849a774: score=9.25, levels=1.8/7, actions=239, tokens=156061
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=220, tokens=177126
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=85, tokens=96480
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=26.88, levels=4.0/7, actions=418, tokens=268485
+  m0r0-492f87ba: score=46.42, levels=3.2/6, actions=210, tokens=177509
+  r11l-495a7899: score=78.57, levels=5.0/6, actions=95, tokens=148132
+  re86-8af5384d: score=62.91, levels=6.2/8, actions=512, tokens=249582
+  s5i5-18d95033: score=23.86, levels=3.2/8, actions=151, tokens=249573
+  sb26-7fbdac44: score=93.23, levels=8.0/8, actions=168, tokens=70524
+  sc25-635fd71a: score=19.60, levels=2.8/6, actions=272, tokens=143224
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=13.10, levels=1.8/6, actions=83, tokens=162571
+  su15-1944f8ab: score=17.78, levels=3.5/9, actions=149, tokens=180941
+  tn36-ef4dde99: score=53.52, levels=4.2/7, actions=178, tokens=161684
+  tr87-cd924810: score=92.31, levels=5.8/6, actions=279, tokens=132601
+  tu93-0768757b: score=77.99, levels=8.5/9, actions=281, tokens=321196
+  vc33-5430563c: score=80.36, levels=6.0/7, actions=242, tokens=183110
+  wa30-ee6fef47: score=3.22, levels=1.2/9, actions=216, tokens=141615
+
+[finished] tu93-0768757b state=won level=9/9 score=93.56 actions=272 tokens=291495 per-level=18/19,15/16,19/34,33/42,43/123,42/80,15/14,52/23,35/111 note="tokens=291495"
+[sys] RAM 124.5/176.9 | swap none | proc 7.5 GB, 116 threads, 111 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.8/19.5
+[sys] RAM 123.2/176.9 | swap none | proc 7.5 GB, 115 threads, 109 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.8/19.5
+[sys] RAM 124.3/176.9 | swap none | proc 7.5 GB, 116 threads, 110 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.8/19.5
+[sys] RAM 124.3/176.9 | swap none | proc 7.5 GB, 117 threads, 112 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.9/19.5
+[sys] RAM 124.2/176.9 | swap none | proc 7.6 GB, 116 threads, 111 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.9/19.5
+benchmark: regenerated diagnostics in /kaggle/working in 29.37s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 33)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    46.06
+median score:  35.62
+total actions: 21041
+total tokens:  17261849
+generated tokens/sec: 604.92 (job wallclock)
+total wallclock: 2064679.6s
+
+per-game (mean across passes):
+  ar25-0c556536: score=85.42, levels=7.2/8, actions=324, tokens=169729
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=71, tokens=143382
+  cd82-fb555c5d: score=81.20, levels=6.0/6, actions=194, tokens=161404
+  cn04-2fe56bfb: score=26.19, levels=2.5/6, actions=141, tokens=186463
+  dc22-fdcac232: score=42.51, levels=3.8/6, actions=327, tokens=267348
+  ft09-0d8bbf25: score=86.90, levels=5.5/6, actions=111, tokens=80293
+  g50t-5849a774: score=9.25, levels=1.8/7, actions=243, tokens=162835
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=225, tokens=187305
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=85, tokens=96480
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=26.88, levels=4.0/7, actions=426, tokens=270905
+  m0r0-492f87ba: score=46.42, levels=3.2/6, actions=210, tokens=177509
+  r11l-495a7899: score=78.57, levels=5.0/6, actions=99, tokens=157549
+  re86-8af5384d: score=62.91, levels=6.2/8, actions=527, tokens=257823
+  s5i5-18d95033: score=23.86, levels=3.2/8, actions=182, tokens=262323
+  sb26-7fbdac44: score=93.23, levels=8.0/8, actions=168, tokens=70524
+  sc25-635fd71a: score=19.60, levels=2.8/6, actions=272, tokens=143224
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=13.10, levels=1.8/6, actions=83, tokens=162674
+  su15-1944f8ab: score=20.56, levels=3.8/9, actions=164, tokens=193465
+  tn36-ef4dde99: score=53.52, levels=4.2/7, actions=178, tokens=161684
+  tr87-cd924810: score=92.31, levels=5.8/6, actions=279, tokens=132601
+  tu93-0768757b: score=83.74, levels=8.8/9, actions=283, tokens=335791
+  vc33-5430563c: score=80.36, levels=6.0/7, actions=242, tokens=183110
+  wa30-ee6fef47: score=3.22, levels=1.2/9, actions=216, tokens=141615
+
+[sys] RAM 124.4/176.9 | swap none | proc 7.7 GB, 115 threads, 109 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.9/19.5
+[sys] RAM 124.4/176.9 | swap none | proc 7.7 GB, 115 threads, 109 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 7.0/19.5
+[sys] RAM 124.6/176.9 | swap none | proc 7.7 GB, 115 threads, 109 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 7.0/19.5
+[sys] RAM 124.8/176.9 | swap none | proc 7.7 GB, 116 threads, 111 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 7.0/19.5
+
+analyzer request timed out at action 151; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=54.30330096100079)
+analyzer request timed out at action 93; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=5.08044438199795)
+
+[finished] su15-1944f8ab state=gave_up level=7/9 score=62.22 actions=150 tokens=286190 per-level=16/22,33/42,18/26,14/115,40/36,15/31,6/8,8/40,0/41 note="tokens=286190"
+[finished] r11l-495a7899 state=gave_up level=3/6 score=28.57 actions=92 tokens=233043 per-level=6/22,34/33,48/51,4/26,0/52,0/49 note="tokens=233043"
+[finished] sc25-635fd71a state=gave_up level=4/6 score=27.90 actions=423 tokens=178561 per-level=50/36,7/6,31/32,202/83,133/143,0/50 note="tokens=178561"
+
+analyzer request timed out at action 208; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=6.93531940399771)
+
+[finished] ar25-0c556536 state=gave_up level=5/8 score=41.67 actions=207 tokens=238607 per-level=15/32,32/50,40/75,33/37,53/89,34/159,0/233,0/73 note="tokens=253346"
+
+analyzer request timed out at action 234; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=7.168810529998154)
+
+[finished] tu93-0768757b state=gave_up level=8/9 score=68.77 actions=233 tokens=314370 per-level=18/19,21/16,21/34,21/42,29/123,36/80,14/14,66/23,7/111 note="tokens=341008"
+
+analyzer request timed out at action 368; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=84.50211247200059)
+
+[finished] dc22-fdcac232 state=gave_up level=4/6 score=47.62 actions=367 tokens=293569 per-level=63/59,92/102,66/67,91/98,55/324,0/578 note="tokens=317948"
+
+analyzer request timed out at action 583; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=7.625615929999185)
+analyzer request timed out at action 319; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=12.360136808001698)
+
+[finished] re86-8af5384d state=gave_up level=6/8 score=57.21 actions=582 tokens=281114 per-level=29/26,37/42,47/86,183/108,80/189,128/139,78/424,0/241 note="tokens=281114"
+[finished] m0r0-492f87ba state=gave_up level=5/6 score=71.43 actions=318 tokens=302510 per-level=40/30,23/111,86/203,29/26,70/500,70/237 note="tokens=305088"
+
+analyzer request timed out at action 132; yielding with 1 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=54.173999115002516)
+
+[finished] ft09-0d8bbf25 state=gave_up level=4/6 score=47.62 actions=131 tokens=118009 per-level=4/43,7/12,14/23,24/28,82/65,0/37 note="tokens=118968"
+
+analyzer request timed out at action 62; yielding with 1 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=37.67500288700103)
+
+[finished] sp80-589a99af state=gave_up level=1/6 score=4.76 actions=61 tokens=160078 per-level=9/39,52/58,0/25,0/148,0/96,0/152 note="tokens=165458"
+[finished] s5i5-18d95033 state=gave_up level=4/8 score=27.78 actions=224 tokens=316827 per-level=21/20,44/89,66/106,51/54,42/162,0/38,0/86,0/83 note="tokens=329363"
+[finished] dc22-fdcac232 state=gave_up level=4/6 score=46.25 actions=334 tokens=280351 per-level=41/59,54/102,90/67,87/98,62/324,0/578 note="tokens=281144"
+[sys] RAM 123.3/176.9 | swap none | proc 7.7 GB, 115 threads, 120 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.9/19.5
+[finished] sp80-589a99af state=gave_up level=3/6 score=28.57 actions=118 tokens=167052 per-level=10/39,29/58,11/25,68/148,0/96,0/152 note="tokens=207298"
+[finished] tn36-ef4dde99 state=gave_up level=1/7 score=3.57 actions=56 tokens=110807 per-level=19/32,37/72,0/26,0/40,0/30,0/55,0/62 note="tokens=112886"
+[finished] tn36-ef4dde99 state=gave_up level=2/7 score=10.50 actions=155 tokens=139124 per-level=40/32,53/72,62/26,0/40,0/30,0/55,0/62 note="tokens=146239"
+[finished] dc22-fdcac232 state=gave_up level=4/6 score=47.62 actions=334 tokens=304858 per-level=41/59,68/102,58/67,107/98,60/324,0/578 note="tokens=319528"
+[finished] cn04-2fe56bfb state=gave_up level=1/6 score=4.76 actions=52 tokens=98690 per-level=14/29,38/54,0/85,0/300,0/208,0/113 note="tokens=107021"
+[finished] cn04-2fe56bfb state=gave_up level=4/6 score=47.62 actions=211 tokens=182492 per-level=14/29,52/54,32/85,35/300,78/208,0/113 note="tokens=191604"
+[finished] re86-8af5384d state=gave_up level=6/8 score=58.33 actions=478 tokens=179448 per-level=23/26,39/42,47/86,101/108,99/189,84/139,85/424,0/241 note="tokens=181895"
+[finished] s5i5-18d95033 state=gave_up level=1/8 score=1.42 actions=56 tokens=114835 per-level=28/20,28/89,0/106,0/54,0/162,0/38,0/86,0/83 note="tokens=117692"
+[finished] cn04-2fe56bfb state=gave_up level=4/6 score=47.62 actions=231 tokens=303424 per-level=14/29,48/54,30/85,69/300,70/208,0/113 note="tokens=310803"
+benchmark: regenerated diagnostics in /kaggle/working in 7.61s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 33)
+started:   2026-10-03 14:09:04
+ended:     in progress
+mean score:    46.49
+median score:  39.02
+total actions: 21245
+total tokens:  17504777
+generated tokens/sec: 600.65 (job wallclock)
+total wallclock: 2160607.9s
+
+per-game (mean across passes):
+  ar25-0c556536: score=85.42, levels=7.2/8, actions=324, tokens=178129
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=71, tokens=143382
+  cd82-fb555c5d: score=81.20, levels=6.0/6, actions=194, tokens=161404
+  cn04-2fe56bfb: score=26.19, levels=2.5/6, actions=141, tokens=186463
+  dc22-fdcac232: score=42.51, levels=3.8/6, actions=328, tokens=269557
+  ft09-0d8bbf25: score=86.90, levels=5.5/6, actions=111, tokens=83347
+  g50t-5849a774: score=9.25, levels=1.8/7, actions=243, tokens=162835
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=225, tokens=187305
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=85, tokens=96480
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=26.88, levels=4.0/7, actions=426, tokens=270905
+  m0r0-492f87ba: score=46.42, levels=3.2/6, actions=213, tokens=182632
+  r11l-495a7899: score=82.14, levels=5.2/6, actions=102, tokens=167982
+  re86-8af5384d: score=62.91, levels=6.2/8, actions=528, tokens=264362
+  s5i5-18d95033: score=23.86, levels=3.2/8, actions=199, tokens=262539
+  sb26-7fbdac44: score=93.23, levels=8.0/8, actions=168, tokens=70524
+  sc25-635fd71a: score=19.60, levels=2.8/6, actions=283, tokens=144991
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=13.10, levels=1.8/6, actions=89, tokens=170548
+  su15-1944f8ab: score=27.78, levels=4.2/9, actions=173, tokens=206060
+  tn36-ef4dde99: score=53.52, levels=4.2/7, actions=178, tokens=161684
+  tr87-cd924810: score=92.31, levels=5.8/6, actions=279, tokens=132601
+  tu93-0768757b: score=83.74, levels=8.8/9, actions=283, tokens=338314
+  vc33-5430563c: score=80.36, levels=6.0/7, actions=242, tokens=183110
+  wa30-ee6fef47: score=3.22, levels=1.2/9, actions=216, tokens=141615
+
+[finished] ka59-38d34dbb state=gave_up level=5/7 score=40.12 actions=324 tokens=236252 per-level=19/28,61/109,50/51,75/51,44/33,75/132,0/326 note="tokens=237719"
+[finished] m0r0-492f87ba state=gave_up level=2/6 score=14.26 actions=150 tokens=164999 per-level=36/30,49/111,65/203,0/26,0/500,0/237 note="tokens=175801"
+[finished] ls20-9607627b state=gave_up level=4/7 score=27.92 actions=383 tokens=261451 per-level=46/22,45/123,78/73,103/84,111/96,0/192,0/186 note="tokens=263094"
+[finished] ls20-9607627b state=gave_up level=5/7 score=37.92 actions=543 tokens=331719 per-level=21/22,45/123,160/73,66/84,152/96,99/192,0/186 note="tokens=332105"
+[finished] sp80-589a99af state=gave_up level=1/6 score=4.76 actions=75 tokens=128906 per-level=21/39,54/58,0/25,0/148,0/96,0/152 note="tokens=129078"
+[finished] s5i5-18d95033 state=gave_up level=2/8 score=7.91 actions=99 tokens=155572 per-level=27/20,30/89,42/106,0/54,0/162,0/38,0/86,0/83 note="tokens=157826"
+[finished] lf52-271a04aa state=gave_up level=1/10 score=1.82 actions=54 tokens=90875 per-level=13/32,41/81,0/60,0/71,0/205,0/148,0/244,0/109,0/164,0/225 note="tokens=91221"
+[sys] RAM 123.7/176.9 | swap none | proc 7.7 GB, 117 threads, 140 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.7/19.5
+[finished] tr87-cd924810 state=gave_up level=5/6 score=71.43 actions=270 tokens=134808 per-level=31/54,38/58,32/40,28/45,40/71,101/146 note="tokens=147747"
+[finished] re86-8af5384d state=gave_up level=7/8 score=77.78 actions=579 tokens=290741 per-level=20/26,36/42,47/86,78/108,63/189,71/139,163/424,101/241 note="tokens=304034"
+[finished] sk48-d8078629 state=gave_up level=0/8 score=0.00 actions=39 tokens=73385 per-level=39/61,0/177,0/101,0/103,0/230,0/181,0/125,0/92 note="tokens=73958"
+[finished] sk48-d8078629 state=gave_up level=0/8 score=0.00 actions=37 tokens=52113 per-level=37/61,0/177,0/101,0/103,0/230,0/181,0/125,0/92 note="tokens=75504"
+[finished] bp35-0a0ad940 state=gave_up level=1/9 score=0.76 actions=72 tokens=151545 per-level=36/21,36/48,0/44,0/38,0/33,0/87,0/86,0/131,0/163 note="tokens=153949"
+[finished] ls20-9607627b state=gave_up level=3/7 score=16.34 actions=367 tokens=177669 per-level=40/22,107/123,90/73,130/84,0/96,0/192,0/186 note="tokens=178119"
+[finished] g50t-5849a774 state=gave_up level=2/7 score=10.71 actions=151 tokens=164060 per-level=50/78,32/175,69/179,0/230,0/96,0/54,0/67 note="tokens=176876"
+[finished] bp35-0a0ad940 state=gave_up level=1/9 score=1.25 actions=66 tokens=136448 per-level=28/21,38/48,0/44,0/38,0/33,0/87,0/86,0/131,0/163 note="tokens=149749"
+[finished] bp35-0a0ad940 state=gave_up level=1/9 score=0.48 actions=92 tokens=137646 per-level=45/21,47/48,0/44,0/38,0/33,0/87,0/86,0/131,0/163 note="tokens=139852"
+[finished] sc25-635fd71a state=gave_up level=3/6 score=24.34 actions=183 tokens=134036 per-level=26/36,5/6,43/32,109/83,0/143,0/50 note="tokens=138892"
+[finished] dc22-fdcac232 state=gave_up level=3/6 score=28.57 actions=279 tokens=199450 per-level=52/59,63/102,65/67,99/98,0/324,0/578 note="tokens=201742"
+[finished] ka59-38d34dbb state=gave_up level=2/7 score=10.06 actions=158 tokens=202094 per-level=39/28,51/109,68/51,0/51,0/33,0/132,0/326 note="tokens=205430"
+[finished] sc25-635fd71a state=gave_up level=4/6 score=26.15 actions=430 tokens=203940 per-level=95/36,5/6,43/32,141/83,146/143,0/50 note="tokens=205106"
+[finished] ls20-9607627b state=gave_up level=4/7 score=25.36 actions=412 tokens=312783 per-level=33/22,45/123,88/73,111/84,135/96,0/192,0/186 note="tokens=315433"
+[finished] g50t-5849a774 state=gave_up level=0/7 score=0.00 actions=51 tokens=87107 per-level=51/78,0/175,0/179,0/230,0/96,0/54,0/67 note="tokens=87752"
+[finished] su15-1944f8ab state=gave_up level=3/9 score=13.33 actions=129 tokens=205887 per-level=11/22,19/42,24/26,75/115,0/36,0/31,0/8,0/40,0/41 note="tokens=206509"
+[finished] cn04-2fe56bfb state=gave_up level=1/6 score=4.76 actions=71 tokens=161247 per-level=24/29,47/54,0/85,0/300,0/208,0/113 note="tokens=167887"
+[finished] lf52-271a04aa state=gave_up level=1/10 score=1.82 actions=101 tokens=85991 per-level=16/32,85/81,0/60,0/71,0/205,0/148,0/244,0/109,0/164,0/225 note="tokens=86487"
+[finished] sk48-d8078629 state=gave_up level=0/8 score=0.00 actions=70 tokens=71061 per-level=70/61,0/177,0/101,0/103,0/230,0/181,0/125,0/92 note="tokens=71822"
+[sys] RAM 123.5/176.9 | swap none | proc 7.7 GB, 115 threads, 155 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.5/19.5
+[finished] bp35-0a0ad940 state=gave_up level=1/9 score=2.22 actions=54 tokens=147891 per-level=19/21,35/48,0/44,0/38,0/33,0/87,0/86,0/131,0/163 note="tokens=168356"
+[finished] g50t-5849a774 state=gave_up level=2/7 score=10.71 actions=164 tokens=200495 per-level=69/78,31/175,64/179,0/230,0/96,0/54,0/67 note="tokens=228170"
+[finished] lf52-271a04aa state=gave_up level=1/10 score=1.82 actions=95 tokens=97848 per-level=14/32,81/81,0/60,0/71,0/205,0/148,0/244,0/109,0/164,0/225 note="tokens=98251"
+[finished] lf52-271a04aa state=gave_up level=1/10 score=1.82 actions=90 tokens=111206 per-level=17/32,73/81,0/60,0/71,0/205,0/148,0/244,0/109,0/164,0/225 note="tokens=111536"
+[finished] re86-8af5384d state=gave_up level=6/8 score=58.33 actions=473 tokens=306145 per-level=21/26,39/42,51/86,58/108,86/189,83/139,135/424,0/241 note="tokens=319108"
+[finished] su15-1944f8ab state=gave_up level=3/9 score=13.33 actions=202 tokens=132824 per-level=12/22,21/42,20/26,149/115,0/36,0/31,0/8,0/40,0/41 note="tokens=133118"
+[finished] sc25-635fd71a state=gave_up level=0/6 score=0.00 actions=99 tokens=63427 per-level=99/36,0/6,0/32,0/83,0/143,0/50 note="tokens=64830"
+[finished] wa30-ee6fef47 state=gave_up level=1/9 score=2.22 actions=110 tokens=106300 per-level=41/71,69/119,0/183,0/98,0/368,0/68,0/79,0/442,0/415 note="tokens=108283"
+[finished] g50t-5849a774 state=gave_up level=3/7 score=15.55 actions=607 tokens=199681 per-level=35/78,32/175,326/179,214/230,0/96,0/54,0/67 note="tokens=199749"
+[finished] ka59-38d34dbb state=gave_up level=1/7 score=3.57 actions=99 tokens=129180 per-level=20/28,79/109,0/51,0/51,0/33,0/132,0/326 note="tokens=130751"
+[finished] vc33-5430563c state=gave_up level=3/7 score=21.43 actions=147 tokens=167145 per-level=14/7,13/18,30/44,90/61,0/131,0/34,0/152 note="tokens=169592"
+[finished] wa30-ee6fef47 state=gave_up level=1/9 score=2.22 actions=232 tokens=152816 per-level=70/71,162/119,0/183,0/98,0/368,0/68,0/79,0/442,0/415 note="tokens=153751"
+[finished] sp80-589a99af state=gave_up level=2/6 score=14.29 actions=105 tokens=226157 per-level=15/39,46/58,44/25,0/148,0/96,0/152 note="tokens=260253"
+[finished] wa30-ee6fef47 state=gave_up level=1/9 score=1.75 actions=250 tokens=170308 per-level=80/71,170/119,0/183,0/98,0/368,0/68,0/79,0/442,0/415 note="tokens=172086"
+[finished] ka59-38d34dbb state=gave_up level=3/7 score=21.43 actions=319 tokens=181697 per-level=28/28,61/109,47/51,183/51,0/33,0/132,0/326 note="tokens=183676"
+[finished] m0r0-492f87ba state=gave_up level=0/6 score=0.00 actions=123 tokens=114417 per-level=123/30,0/111,0/203,0/26,0/500,0/237 note="tokens=117899"
+[finished] wa30-ee6fef47 state=gave_up level=2/9 score=6.67 actions=275 tokens=137037 per-level=28/71,70/119,177/183,0/98,0/368,0/68,0/79,0/442,0/415 note="tokens=142560"
+[sys] RAM 122.8/176.9 | swap none | proc 7.7 GB, 115 threads, 164 fds | GPU0 94.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 6.4/19.5
+[finished] sk48-d8078629 state=gave_up level=0/8 score=0.00 actions=129 tokens=61101 per-level=129/61,0/177,0/101,0/103,0/230,0/181,0/125,0/92 note="tokens=68104"
+[finished] s5i5-18d95033 state=gave_up level=6/8 score=58.33 actions=417 tokens=462922 per-level=22/20,43/89,47/106,43/54,33/162,28/38,201/86,0/83 note="tokens=470373"
+[finished] su15-1944f8ab state=gave_up level=4/9 score=22.22 actions=212 tokens=199339 per-level=14/22,22/42,16/26,53/115,107/36,0/31,0/8,0/40,0/41 note="tokens=213408"
+benchmark: regenerated diagnostics in /kaggle/working in 14.88s
+benchmark: duck-harness-kaggle
+solver:    duck-harness
+games:     25
+passes:    4
+runs:      100 (won: 33)
+started:   2026-10-03 14:09:04
+ended:     2026-10-03 22:20:01
+duration:  8h 10m 56s
+mean score:    46.49
+median score:  39.02
+total actions: 21245
+total tokens:  17504777
+generated tokens/sec: 594.25 (job wallclock)
+total wallclock: 2540924.1s
+
+per-game (mean across passes):
+  ar25-0c556536: score=85.42, levels=7.2/8, actions=324, tokens=178129
+  bp35-0a0ad940: score=1.18, levels=1.0/9, actions=71, tokens=143382
+  cd82-fb555c5d: score=81.20, levels=6.0/6, actions=194, tokens=161404
+  cn04-2fe56bfb: score=26.19, levels=2.5/6, actions=141, tokens=186463
+  dc22-fdcac232: score=42.51, levels=3.8/6, actions=328, tokens=269557
+  ft09-0d8bbf25: score=86.90, levels=5.5/6, actions=111, tokens=83347
+  g50t-5849a774: score=9.25, levels=1.8/7, actions=243, tokens=162835
+  ka59-38d34dbb: score=18.79, levels=2.8/7, actions=225, tokens=187305
+  lf52-271a04aa: score=1.82, levels=1.0/10, actions=85, tokens=96480
+  lp85-305b61c3: score=100.00, levels=8.0/8, actions=135, tokens=145002
+  ls20-9607627b: score=26.88, levels=4.0/7, actions=426, tokens=270905
+  m0r0-492f87ba: score=46.42, levels=3.2/6, actions=213, tokens=182632
+  r11l-495a7899: score=82.14, levels=5.2/6, actions=102, tokens=167982
+  re86-8af5384d: score=62.91, levels=6.2/8, actions=528, tokens=264362
+  s5i5-18d95033: score=23.86, levels=3.2/8, actions=199, tokens=262539
+  sb26-7fbdac44: score=93.23, levels=8.0/8, actions=168, tokens=70524
+  sc25-635fd71a: score=19.60, levels=2.8/6, actions=283, tokens=144991
+  sk48-d8078629: score=0.00, levels=0.0/8, actions=68, tokens=64415
+  sp80-589a99af: score=13.10, levels=1.8/6, actions=89, tokens=170548
+  su15-1944f8ab: score=27.78, levels=4.2/9, actions=173, tokens=206060
+  tn36-ef4dde99: score=53.52, levels=4.2/7, actions=178, tokens=161684
+  tr87-cd924810: score=92.31, levels=5.8/6, actions=279, tokens=132601
+  tu93-0768757b: score=83.74, levels=8.8/9, actions=283, tokens=338314
+  vc33-5430563c: score=80.36, levels=6.0/7, actions=242, tokens=183110
+  wa30-ee6fef47: score=3.22, levels=1.2/9, actions=216, tokens=141615
+
+diagnostics: /kaggle/working/diagnostics.html
