@@ -39,3 +39,20 @@ B0's public-game loss splits into 50.9 points from levels not completed and 2.6 
 | `fit_guarded` | 15 | One guard, 1-D, held at a constant beyond it | Slope from points that cannot be capped; wall location reported as an interval |
 | `distinguish` | 13 | Deterministic model simulators with known current states | Shortest separating sequence within depth and time. Crashes are reported, not counted. `exhausted` proves only within the model space |
 | `bfs_plan` | — (BFS) | Deterministic simulator, hashable states | Shortest plan in the model. "Unreachable" holds only within the model |
+
+## Real-game evidence (public games, level 1; `docs/algebra_on_games.md`)
+This evidence comes from engine access the agent does not have. It shows whether a class occurs and whether a tool is correct when given correct inputs, **not** agent performance.
+- **Row 6/7 (`gf2_solve`):**
+  - The class holds exactly in 2 of 15 click games (ft09, cn04), where plans were 35/35 exact.
+  - In an order-dependent game (r11l) one confident plan failed on the engine.
+  - The prerequisite check is therefore load-bearing. It has been stated in `TOOL_DOC` since commit 1ec396b.
+- **Rows 1–4 (`fit_boolean`, degree ≤ 2):**
+  - Predicts held-out 3-button combinations exactly where XOR superposition fails: bp35 99% vs 75% of pixels; s5i5 85% vs 37%.
+  - Correctly reports "no fit" for 3-way parity (cn04), which needs degree 3 over the reals.
+- **Row 15 (`fit_guarded`):**
+  - Exact on all 25 steady-motion tracks, with all 22 wall intervals containing the observed stop.
+  - Correctly refuses the 3 wrap-around tracks.
+- **Row 8 (`zm_solve`):** tr87's movement keys form Z₇ and Z₅; 20/20 cheapest-press plans matched on the engine.
+- **Row 13 (`bfs_plan` "exhausted"):**
+  - 7 of 25 games returned "exhausted" for goals humans reach. The cause is an incomplete action set (component-centre clicks only) or state key.
+  - "Unreachable in the model" is not "unreachable".
