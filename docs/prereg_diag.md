@@ -1,6 +1,6 @@
 # Pre-registration: algebraic world-model diagnostics (candidate "DIAG")
 
-Registered 2026-10-12, about 22:00 UTC. This was written **before** any code for the module existed and before any shadow-mode run. Changes after this point are allowed only as dated amendments at the bottom, each with a reason. Criteria are never relaxed after results are seen.
+Registered 2026-10-12 at 23:00 UTC (commit bb47368; that timestamp is authoritative). This was written **before** any code for the module existed and before any shadow-mode run. Changes after this point are allowed only as dated amendments at the bottom, each with a reason. Criteria are never relaxed after results are seen.
 
 ## Purpose and status
 DIAG is a separate experimental candidate. It is **not** part of any submission notebook. It checks and diagnoses an agent's world model using the algebraic structure of each model component.
