@@ -108,6 +108,12 @@ def _install_prompt_fixes(T) -> None:
 # --------------------------------------------------------------------------- stuck nudge
 STUCK_TOKENS = int(os.environ.get("B2_STUCK_TOKENS", "45000"))
 STUCK_MAX_ACTIONS = int(os.environ.get("B2_STUCK_MAX_ACTIONS", "40"))
+# Trigger: "abs" = tokens >= STUCK_TOKENS and actions <= STUCK_MAX_ACTIONS (first arm);
+# "tpa" = tokens >= STUCK_TPA_MIN_TOKENS and tokens/(actions+1) >= STUCK_TPA (calibrated on B0's
+# log: completed levels median ~695 tokens/action, failed final levels ~1384).
+STUCK_TRIGGER = os.environ.get("B2_STUCK_TRIGGER", "abs").strip().lower()
+STUCK_TPA = float(os.environ.get("B2_STUCK_TPA", "1200"))
+STUCK_TPA_MIN_TOKENS = int(os.environ.get("B2_STUCK_TPA_MIN_TOKENS", "30000"))
 STUCK_TEXT = ("\n\nProgress check: about {k}K generated tokens and {m} actions spent on this level "
               "without clearing it. Experiments are cheap compared with extended reasoning: if your "
               "current idea has not worked, test an untried mechanic or goal hypothesis directly with "
@@ -134,8 +140,12 @@ def _install_stuck_nudge(T) -> None:
             start = int(getattr(self, "_tokens_at_level_start", 0))
             if getattr(self, "_b2_stuck_level_start", None) != start:
                 self._b2_stuck_level_start = start
-                self._b2_stuck_next = STUCK_TOKENS
-            if tok >= self._b2_stuck_next and acts <= STUCK_MAX_ACTIONS:
+                self._b2_stuck_next = STUCK_TOKENS if STUCK_TRIGGER != "tpa" else STUCK_TPA_MIN_TOKENS
+            if STUCK_TRIGGER == "tpa":
+                fire = tok >= max(self._b2_stuck_next, STUCK_TPA_MIN_TOKENS) and tok / (acts + 1) >= STUCK_TPA
+            else:
+                fire = tok >= self._b2_stuck_next and acts <= STUCK_MAX_ACTIONS
+            if fire:
                 out += STUCK_TEXT.format(k=tok // 1000, m=acts)
                 self._b2_stuck_next = tok + STUCK_TOKENS
                 with _LOCK:
