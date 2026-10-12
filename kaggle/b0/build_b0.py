@@ -21,6 +21,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 SRC = HERE / "franzen_m2_v3_original.ipynb"
 SRC_SHA256 = "589eaf393f416effe925c6830fc00fcdc0d6da91193b29ff0029282cbd6ee96e"
+DOCKER_IMAGE = "gcr.io/kaggle-private-byod/python@sha256:57e612b484cf3df5026ee4dcc3cb176974b22b2bc0937fb1e16132a8be4cb13c"
 
 SMOKE_HOOK = '''
 # --- B0 commit-mode smoke test (not used in the competition rerun) ---------
@@ -85,12 +86,15 @@ def main(username: str) -> None:
         "enable_tpu": False,
         "enable_internet": False,
         "machine_shape": "NvidiaRtxPro6000",
+        # Pinned image from the live Franzen v3 metadata (kaggle kernels pull -m, 2026-10-12): the
+        # offline SGLang wheelhouse was built against it.
+        "docker_image": DOCKER_IMAGE,
         "dataset_sources": ["dfranzen/pennyroyal-v253", "dfranzen/taaf-kaggle-source-bundle-copy"],
         "competition_sources": ["arc-prize-2026-arc-agi-3"],
         "kernel_sources": [],
         "model_sources": [
-            "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1",
-            "dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1",
+            "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+            "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1",
         ],
     }
     (pdir / "kernel-metadata.json").write_text(json.dumps(meta, indent=1))
