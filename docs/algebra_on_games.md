@@ -71,7 +71,45 @@ Each direction key is pressed k = 1..12 times on fresh instances. The rigid move
 ## 4. Planning ceiling (`bfs_plan` with the engine as the simulator)
 Actions are the available keys plus effective component-centre clicks (≤ 30). The key is the interior frame, as a model-written simulator would use. Limits: 120 s or 20,000 nodes. Each plan is replayed on a fresh instance.
 
-<!-- BFS_TABLE -->
+| Game | Actions | BFS plan length / L1 baseline | Hidden-state conflicts / duplicate histories checked |
+|---|---|---|---|
+| ar25 | 5 | 15 / 32 (0.47), replay completes level | 0/150 |
+| bp35 | 32 | budget hit, no plan (8,864 nodes, 121 s) | 0/121 |
+| cd82 | 7 | 5 / 55 (0.09), replay completes level | 0/150 |
+| cn04 | 11 | budget hit, no plan (20,009 nodes) | 0/150 |
+| dc22 | 6 | 20 / 59 (0.34), replay completes level | 0/150 |
+| ft09 | 8 | 4 / 43 (0.09), replay completes level | 0/150 |
+| g50t | 5 | **exhausted, no plan** (baseline 78) | **7/101** |
+| ka59 | 4 | **exhausted, no plan** (baseline 28) | 0/150 |
+| lf52 | 14 | **exhausted, no plan** (baseline 32) | 0/40 |
+| lp85 | 2 | 5 / 17 (0.29), replay completes level | 1/15 |
+| ls20 | 4 | 13 / 22 (0.59), replay completes level | 0/150 |
+| m0r0 | 5 | 15 / 30 (0.50), replay completes level | 0/150 |
+| r11l | 30 | 3 / 22 (0.14), replay completes level | 0/150 |
+| re86 | 5 | budget hit, no plan (20,000 nodes) | 0/150 |
+| s5i5 | 8 | 13 / 20 (0.65), replay completes level | 0/150 |
+| sb26 | 5 | **exhausted, no plan** (baseline 18) | 0/21 |
+| sc25 | 4 | **exhausted, no plan** (baseline 36) | **4/4** |
+| sk48 | 4 | 14 / 61 (0.23), replay completes level | 0/150 |
+| sp80 | 5 | 4 / 39 (0.10), replay completes level | 0/150 |
+| su15 | 3 | **exhausted, no plan** (baseline 22) | 0/9 |
+| tn36 | 0 | **exhausted, no plan** (no effective action found) | 0/0 |
+| tr87 | 4 | budget hit, no plan (14,996 nodes, 122 s) | 0/150 |
+| tu93 | 4 | 18 / 19 (0.95), replay completes level | 0/150 |
+| vc33 | 2 | 3 / 7 (0.43), replay completes level | 0/6 |
+| wa30 | 5 | budget hit, no plan (20,000 nodes, 114 s) | 0/150 |
+
+The BFS results are identical across two independent runs.
+
+**Plans found: 13 games.** All 13 plans complete level 1 when replayed on a fresh instance. They use 0.09–0.95 of the human baseline's actions (median 0.34).
+
+**"Exhausted" without a plan: 7 games.** Humans complete all of these levels, so each claim is wrong about the real game, though correct about the model it was given. The visible-Markov check (§F of the script) separates the two causes:
+- **Hidden state, proven: g50t and sc25.** Two histories reach the same frame, and the same action then gives different frames. In sc25 the keys change nothing visible at the start, yet they change what later actions do. A frame-keyed BFS merges these states and prunes reachable ones.
+- **Action set incomplete: ka59, lf52, sb26, su15, tn36.** No conflict was found in the histories checked, which is not a proof that there is no hidden state. The action set used only component-centre clicks. These games evidently need clicks elsewhere, such as destination cells, and tn36 has no effective component-centre click at all.
+
+**Budget hit without a plan: 5 games.** The engine simulator runs at about 130 nodes/s, so this says nothing about the games. A model-written simulator is typically far faster.
+
+lp85 shows one hidden-state conflict, yet BFS still found a valid plan: aliasing does not always block. The consequence for `bfs_plan`, `distinguish` and any model-written simulator is that an "exhausted" result should be treated as "my action set or state key is incomplete" before it is treated as "the goal is unreachable". The tool's documentation says this (`unreachable in your model`), and it is now measured on 7 of 25 real games.
 
 ## 5. What this means for the competition
 - **What the tools do once the model is right.** When the right model is supplied, every returned plan completes the level. The plans are far shorter than the human baselines (median 0.34 of the level-1 baseline). This confirms the measured loss decomposition (50.9 points lost to levels not completed vs 2.6 to inefficiency). The binding step is **identifying the mechanic and encoding it**, which no tool here does for the model.
