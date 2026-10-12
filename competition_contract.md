@@ -71,6 +71,8 @@ M2 prizes appear to have gone to Qwen3.8-Flash-Next solutions (P: thread 744792)
   - After GAME_OVER, non-RESET actions return an empty frame and are not counted. A RESET is required.
 - **Idle scorecards:** the `arc_agi` server auto-closes a scorecard idle for `STALE_MINUTES` (default 15) when a close hook is registered (O). Whether the Kaggle gateway does this is U. Policy: never let the whole run go 15 min without an action. Franzen issues a warm-up RESET before the model server is ready (O).
 
+**B0 rerun timing (O: notebook cell 16 + solver).** In the rerun, B0 sets a per-game cap of 532 min starting from game start, with no soft deadline. Game start is about 9–10 min after notebook start (server boot), so the harness can run up to about 9.0 h, right at the limit. Thousands of copies have scored successfully, so the path is left unchanged. Any change that adds start-up time (larger model, extra install) must cut this cap by the same amount.
+
 ## Scoring (O: `arc_agi/scorecard.py` 0.9.9; V: [methodology](https://docs.arcprize.org/methodology))
 - Completed level: `s_l = min(115, 100·(b_l/a_l)^2)`. Here `b_l` is the human baseline (upper-median first-time human) and `a_l` is the agent's actions on that level, **including level resets**. An uncompleted level scores 0.
 - Game: `S = Σ l·s_l / Σ l` over all levels l = 1..N, then capped at `100·Σ_{l: s_l>0} l / Σ l`.
