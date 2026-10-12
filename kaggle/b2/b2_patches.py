@@ -326,32 +326,29 @@ def _install_solved_memory(T) -> None:
 
 
 # --------------------------------------------------------------------------- sandbox tools
-TOOLS_DOC = (
-    "- Preloaded compute-only helpers (they never act; no action cost): "
-    "`bfs_plan(start, step, is_goal, actions)` returns the shortest action list in YOUR simulator "
-    "`step(state, action) -> next_state` (None = blocked). "
-    "`distinguish(sims, starts, actions)` returns the shortest action sequence whose predicted "
-    "observations differ between your candidate simulators `sim(state, action) -> (next_state, obs)` "
-    "- use it to choose one probe that separates competing hypotheses. "
-    "`gf2_solve(A, b, cost=None)` gives the cheapest press set for toggle/XOR systems "
-    "(A[i][j]=1 if press j flips cell i); `zm_solve(A, b, m)` the same for cyclic counters mod m. "
-    "`fit_boolean(rows, values)` gives the sparsest exact polynomial rule over 0/1 switch states and lists "
-    "terms the data cannot yet pin down (test the configuration that would); `fit_guarded(xs, ys)` finds "
-    "a linear rule with a wall/threshold cut-off.\n"
-)
+def _load_tools_module():
+    """sandbox_tools.py next to this file is the single source of truth for the tool
+    code, the tool names and the prompt text (TOOL_DOC)."""
+    import importlib.util
+    here = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(here, "sandbox_tools.py")
+    spec = importlib.util.spec_from_file_location("b2_sandbox_tools", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod, open(path).read()
 _TOOLS_REG_ANCHOR = '        runtime_globals["last_action_call_result"] = action_result'
 _TOOLS_SRC_ANCHOR = "HOST_STDOUT = sys.stdout"
 
 
 def _install_tools(T) -> None:
     import inference.agent.python_tool_sandbox as S
-    here = os.path.dirname(os.path.abspath(__file__))
-    src = open(os.path.join(here, "sandbox_tools.py")).read()
+    tools_mod, src = _load_tools_module()
+    tools_doc = tools_mod.TOOL_DOC
     b = S._SANDBOX_BOOTSTRAP
     if "B2_TOOL_NAMES" in b:
         return
     assert b.count(_TOOLS_SRC_ANCHOR) == 1 and b.count(_TOOLS_REG_ANCHOR) == 1, "sandbox bootstrap changed"
-    names = ("bfs_plan", "distinguish", "gf2_solve", "zm_solve", "fit_boolean", "fit_guarded")
+    names = tools_mod.B2_TOOL_NAMES
     reg = "".join(f'\n        runtime_globals["{n}"] = {n}' for n in names)
     b = b.replace(_TOOLS_SRC_ANCHOR, src + "\n\n" + _TOOLS_SRC_ANCHOR, 1)
     b = b.replace(_TOOLS_REG_ANCHOR, _TOOLS_REG_ANCHOR + reg, 1)
@@ -361,8 +358,8 @@ def _install_tools(T) -> None:
     def _build_system_prompt(*args, **kwargs):
         p = inner(*args, **kwargs)
         anchor = "\n\nTool session rules:\n"
-        if TOOLS_DOC not in p:
-            p = p.replace(anchor, "\n" + TOOLS_DOC + anchor, 1) if anchor in p else p + "\n" + TOOLS_DOC
+        if tools_doc not in p:
+            p = p.replace(anchor, "\n" + tools_doc + anchor, 1) if anchor in p else p + "\n" + tools_doc
         return p
 
     T._build_system_prompt = _build_system_prompt
@@ -370,7 +367,7 @@ def _install_tools(T) -> None:
 
 def tool_usage_from_requests(path: str) -> dict:
     """Count how often generated code called each helper (for 'does it control behaviour?')."""
-    counts = {n: 0 for n in ("bfs_plan", "distinguish", "gf2_solve", "zm_solve", "fit_boolean", "fit_guarded")}
+    counts = {n: 0 for n in _load_tools_module()[0].B2_TOOL_NAMES}
     calls = 0
     with open(path) as f:
         for line in f:
