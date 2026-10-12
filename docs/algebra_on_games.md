@@ -104,13 +104,32 @@ The BFS results are identical across two independent runs.
 
 **Plans found: 13 games.** All 13 plans complete level 1 when replayed on a fresh instance. They use 0.09–0.95 of the human baseline's actions (median 0.34).
 
-**"Exhausted" without a plan: 7 games.** Humans complete all of these levels, so each claim is wrong about the real game, though correct about the model it was given. The visible-Markov check (§F of the script) separates the two causes:
-- **State not determined by the MASKED frame: g50t and sc25** (whether the raw observation determines it is being checked by `scripts/exhausted_witness.py`). Two histories reach the same frame, and the same action then gives different frames. In sc25 the keys change nothing visible at the start, yet they change what later actions do. A frame-keyed BFS merges these states and prunes reachable ones.
-- **Hypothesis, not yet witnessed — action set incomplete: ka59, lf52, sb26, su15, tn36.** No conflict found is not a diagnosis; inadequate goal test, state merging or context-dependent action availability are also possible. 'exhausted' means only: no plan in the supplied graph (start-state action set, interior-frame key, engine goal test). No conflict was found in the histories checked, which is not a proof that there is no hidden state. The action set used only component-centre clicks. These games evidently need clicks elsewhere, such as destination cells, and tn36 has no effective component-centre click at all.
+**"Exhausted" without a plan: 7 games.** Humans complete all of these levels. "Exhausted" means only that no plan exists in the **supplied search graph**, defined by:
+- the start-state action set (keys plus component-centre clicks);
+- the interior-frame key;
+- the engine's level-completion test.
+
+Causes were established by witness, not by the absence of conflicts (`scripts/exhausted_witness.py`, output in `runs/algebra_on_games/exhausted_witness.json`):
+1. B0's own winning level-1 segments were extracted from its transcripts. Every one replays to completion on a fresh instance (25 of 25 segments across the 7 games).
+2. BFS was rerun with the original actions plus the segment's actions, under the masked key and under the raw key (every frame the engine returned for the step, unmasked).
+
+| Game | Segment actions missing from the graph | Masked key, enlarged graph | Raw key, enlarged graph | Raw-key conflicts (original actions) | Witnessed cause |
+|---|---|---|---|---|---|
+| ka59 | 2 of 6 | plan 11, replay completes | plan 11, replay completes | 66/150 | missing actions |
+| lf52 | 9 of 11 | plan 8, replay completes | plan 8, replay completes | 0/150 | missing actions |
+| su15 | 10 of 11 | plan 7, replay completes | plan 7, replay completes | 0/150 | missing actions |
+| g50t | 0 of 5 | **exhausted** | budget hit | 124/150 | state merging under the masked key; state not determined by the raw last-step observation either |
+| sc25 | 7 of 11 | **exhausted** | budget hit | 96/142 | state merging under the masked key; state not determined by the raw last-step observation either |
+| tn36 | 11 of 11 | **exhausted** | budget hit | not run (no original actions) | state merging under the masked key; missing actions also present |
+| sb26 | 4 of 9 | budget hit | budget hit | 0/150 | not established |
+
+**Reading.** "Exhausted while a known winning path made only of graph actions exists" is a witness that the key merged a state on that path with a different state. The raw key removes the premature exhaustion in g50t, sc25 and tn36, so the mask contributes. In g50t and sc25, however, two histories with the same raw observation still diverge under the same action, so their state is not a function of the current observation at all; the history matters.
+
+ka59's 66 raw-key conflicts, against 0 under the masked key, lie in the masked-out band. Their content (step counter or otherwise) was not examined. "Budget hit" proves nothing either way.
 
 **Budget hit without a plan: 5 games.** The engine simulator runs at about 130 nodes/s, so this says nothing about the games. A model-written simulator is typically far faster.
 
-lp85 shows one hidden-state conflict, yet BFS still found a valid plan: aliasing does not always block. The consequence for `bfs_plan`, `distinguish` and any model-written simulator is that an "exhausted" result should be treated as "my action set or state key is incomplete" before it is treated as "the goal is unreachable". The tool's documentation says this (`unreachable in your model`), and it is now measured on 7 of 25 real games.
+lp85 shows one masked-key conflict, yet BFS still found a valid plan: merging does not always block a search. The consequence for `bfs_plan`, `distinguish` and any model-written simulator is that an "exhausted" result should be treated as "my action set or state key is incomplete" before it is treated as "the goal is unreachable". The tool's documentation says this (`unreachable in your model`), and it is now measured on 7 of 25 real games.
 
 ## 5. What this means for the competition
 - **What the tools do once the model is right.** With the engine itself as the simulator, all 13 BFS plans completed level 1 on replay. The GF(2) and Z_m results are target reconstructions, not level completions; the triple tests are held-out predictions. These are three different kinds of success. The plans are far shorter than the human baselines (median 0.34 of the level-1 baseline). This shows short solutions exist in the tested cases. It does **not** compare agent efficiency with humans: these paths come after privileged exploration, and human baselines include first-time learning. It is consistent with the separately measured loss decomposition but does not confirm it. The binding step is **identifying the mechanic and encoding it**, which no tool here does for the model.
