@@ -30,6 +30,7 @@ def main(user: str, variant: str, submit_arm: str, passes: int, switches: dict) 
     nb = json.loads((pdir / "notebook.ipynb").read_text())
     meta = json.loads((pdir / "kernel-metadata.json").read_text())
     b2_src = (ROOT / "kaggle" / "b2" / "b2_patches.py").read_text()
+    tools_src = (ROOT / "kaggle" / "b2" / "sandbox_tools.py").read_text()
     arm_src = (HERE / "run_arm.py").read_text()
     env_lines = "\n".join(f"os.environ[{k!r}] = {v!r}" for k, v in sorted(switches.items()))
 
@@ -46,6 +47,7 @@ def main(user: str, variant: str, submit_arm: str, passes: int, switches: dict) 
         f"PAIRED_PASSES = {passes}\n"
         f"ARM_SECONDS = {ARM_SECONDS_PER_PASS} * PAIRED_PASSES\n"
         "open('/tmp/b2_patches.py', 'w').write(" + repr(b2_src) + ")\n"
+        "open('/tmp/sandbox_tools.py', 'w').write(" + repr(tools_src) + ")\n"
         "open('/tmp/run_arm.py', 'w').write(" + repr(arm_src) + ")\n"
         "sys.path.insert(0, '/tmp')\n"
         "import b2_patches\n"

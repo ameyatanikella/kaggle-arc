@@ -1,0 +1,24 @@
+{
+ "id": "USERNAME/arc3-b2b",
+ "title": "arc3-b2b",
+ "code_file": "notebook.ipynb",
+ "language": "python",
+ "kernel_type": "notebook",
+ "is_private": true,
+ "enable_gpu": true,
+ "enable_tpu": false,
+ "enable_internet": false,
+ "machine_shape": "NvidiaRtxPro6000",
+ "dataset_sources": [
+  "dfranzen/pennyroyal-v253",
+  "dfranzen/taaf-kaggle-source-bundle-copy"
+ ],
+ "competition_sources": [
+  "arc-prize-2026-arc-agi-3"
+ ],
+ "kernel_sources": [],
+ "model_sources": [
+  "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1",
+  "dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1"
+ ]
+}

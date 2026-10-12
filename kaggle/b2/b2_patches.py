@@ -230,6 +230,65 @@ def _install_solved_memory(T) -> None:
     A._build_user_prompt = _build_user_prompt
 
 
+# --------------------------------------------------------------------------- sandbox tools
+TOOLS_DOC = (
+    "- Preloaded compute-only helpers (they never act; no action cost): "
+    "`bfs_plan(start, step, is_goal, actions)` returns the shortest action list in YOUR simulator "
+    "`step(state, action) -> next_state` (None = blocked). "
+    "`distinguish(sims, starts, actions)` returns the shortest action sequence whose predicted "
+    "observations differ between your candidate simulators `sim(state, action) -> (next_state, obs)` "
+    "- use it to choose one probe that separates competing hypotheses. "
+    "`gf2_solve(A, b, cost=None)` gives the cheapest press set for toggle/XOR systems "
+    "(A[i][j]=1 if press j flips cell i); `zm_solve(A, b, m)` the same for cyclic counters mod m.\n"
+)
+_TOOLS_REG_ANCHOR = '        runtime_globals["last_action_call_result"] = action_result'
+_TOOLS_SRC_ANCHOR = "HOST_STDOUT = sys.stdout"
+
+
+def _install_tools(T) -> None:
+    import inference.agent.python_tool_sandbox as S
+    here = os.path.dirname(os.path.abspath(__file__))
+    src = open(os.path.join(here, "sandbox_tools.py")).read()
+    b = S._SANDBOX_BOOTSTRAP
+    if "B2_TOOL_NAMES" in b:
+        return
+    assert b.count(_TOOLS_SRC_ANCHOR) == 1 and b.count(_TOOLS_REG_ANCHOR) == 1, "sandbox bootstrap changed"
+    names = ("bfs_plan", "distinguish", "gf2_solve", "zm_solve")
+    reg = "".join(f'\n        runtime_globals["{n}"] = {n}' for n in names)
+    b = b.replace(_TOOLS_SRC_ANCHOR, src + "\n\n" + _TOOLS_SRC_ANCHOR, 1)
+    b = b.replace(_TOOLS_REG_ANCHOR, _TOOLS_REG_ANCHOR + reg, 1)
+    S._SANDBOX_BOOTSTRAP = b
+    inner = T._build_system_prompt
+
+    def _build_system_prompt(*args, **kwargs):
+        p = inner(*args, **kwargs)
+        anchor = "\n\nTool session rules:\n"
+        if TOOLS_DOC not in p:
+            p = p.replace(anchor, "\n" + TOOLS_DOC + anchor, 1) if anchor in p else p + "\n" + TOOLS_DOC
+        return p
+
+    T._build_system_prompt = _build_system_prompt
+
+
+def tool_usage_from_requests(path: str) -> dict:
+    """Count how often generated code called each helper (for 'does it control behaviour?')."""
+    counts = {n: 0 for n in ("bfs_plan", "distinguish", "gf2_solve", "zm_solve")}
+    calls = 0
+    with open(path) as f:
+        for line in f:
+            try:
+                r = json.loads(line)
+            except Exception:
+                continue
+            for m in r.get("messages", [])[-1:]:
+                for tc in (m.get("tool_calls") or []):
+                    calls += 1
+                    code = json.loads(tc.get("function", {}).get("arguments", "{}")).get("code", "")
+                    for n in counts:
+                        counts[n] += code.count(n + "(")
+    return {"tool_calls_seen": calls, **counts}
+
+
 # --------------------------------------------------------------------------- install
 def install() -> dict:
     import inference.agent.tool_agent as T
@@ -239,6 +298,9 @@ def install() -> dict:
     if _on("B2_SOLVED_MEMORY"):
         _install_solved_memory(T)
         STATS["installed"].append("solved_memory")
+    if _on("B2_TOOLS"):
+        _install_tools(T)
+        STATS["installed"].append("tools")
     print("B2 patches installed:", json.dumps(STATS["installed"]), flush=True)
     return dict(STATS)
 

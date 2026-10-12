@@ -35,6 +35,12 @@ On 2026-10-12 the overview page showed "22 days to go".
 - No private sharing outside the team. Public sharing must happen on Kaggle forums or notebooks (Rules 3.5.d, 3.6.a/b).
 - Using game-test-data labels or human predictions is forbidden (Rules 3.4.b). Game source code is obfuscated on the hidden set (P: 705405 comments).
 
+**Model-license risk (open item).** B0 and every M2 winner use Qwen3.8-Flash-Next, licensed under the "Qwen Community License 1.0" (V: [HF LICENSE](https://huggingface.co/Qwen/Qwen3.8-Flash-Next/blob/main/LICENSE), read 2026-10-12). It is permissive, but it has conditions: attribution above 100M MAU or $20M/month revenue, and a separate license for Model-as-a-Service and "AI Work Assistant" businesses. It is not an OSI-approved license. The two relevant rules pull in different directions:
+- Rules 2.5.a require an "open source model ... weights" (OSI OSAID).
+- Rules 2.5.b say "pretrained models with an incompatible license" need not be relicensed.
+
+M2 prizes appear to have gone to Qwen3.8-Flash-Next solutions (P: thread 744792), which suggests the host accepts the model. This is an inference, not a ruling. The user should confirm, or ask the host, before relying on it for prize eligibility.
+
 ## Hardware and runtime
 | Item | Value | Status |
 |---|---|---|
