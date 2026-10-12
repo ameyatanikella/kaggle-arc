@@ -41,6 +41,16 @@ The entry and team-merger deadline is 2026-10-26 23:59 UTC.
 - **Promotion rule:** promote a change only if its paired public-game delta in levels completed is ≥ 0, with no new error class, no runtime overrun, and RHAE not worse than −1 point. Single LB draws (SD ≈ 4) are never used to accept or reject a change.
 - **Immutable fallback:** B0 stays submit-ready throughout.
 
+## Frozen readiness gate for any Kaggle-pushed B2 (commit smoke run, real model, 2 games, 20 min)
+A B2 variant may be submitted only if its commit run shows **all** of the following, judged against B0's own smoke run where one exists:
+1. The model server reached ready, and the notebook finished with `submission.parquet` written.
+2. Zero harness exceptions, and `b2_summary.errors == 0`.
+3. Every enabled switch fired at least once where its trigger occurred. `bar_fix_applied ≥ 1` and the prompt fixes must appear in saved prompts. `levels_recorded` must equal the level-ups observed.
+4. ≥95% of model turns produced a parseable tool call.
+5. The levels cleared in 20 min on ls20+vc33 must not be fewer than B0's smoke run by more than 1. This is a gross-regression check only, not evidence of improvement.
+
+These criteria are fixed now and are not to be relaxed after seeing results.
+
 ## Schedule (compressed)
 - **Oct 12–14:** contract verified ✔. Local evaluator ✔. B1 ✔. Math library and fixtures ✔. B0 push and smoke submission (**needs Kaggle token**). Harness local integration (mock LLM).
 - **Oct 15–18:** B2 switches 1–3 implemented and integration-tested. First GPU A/B on public games (Kaggle or rented RTX PRO 6000; needs user decision).
