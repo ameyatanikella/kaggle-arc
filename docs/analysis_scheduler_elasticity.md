@@ -26,3 +26,15 @@ Simulation SD of the mean is about 3.5–4.0.
 3. Saturation comes from games stuck in every pass (bp35, lf52, sk48, wa30 and others). Matching each game's best pass would score 61.5. The large remaining headroom is in **breaking stuck levels** (reasoning quality per token), not in allocation.
 
 **Implication for B2.** Prefer changes that alter how a stuck agent spends tokens, for example probing on token-heavy, action-light levels and keeping evidence across trims. Inference speed-ups are worth pursuing only if cheap and low-risk.
+
+## Per-level token calibration (same data)
+| | Completed levels (n=417) | Failed final levels (n=67) |
+|---|---|---|
+| Tokens on level | median 20K, p75 37K, p90 60K | median 99K (p25 76K, p75 115K) |
+| Actions on level | median 28 | median 70 (p25 47) |
+| Tokens per action | median about 695 | median about 1,384 |
+
+- 20% of completed levels take more than 45K tokens, and 10% more than 60K.
+- Failing levels spend about **2× more generation per action**. This is consistent with the "deliberates instead of experimenting when stuck" hypothesis, but it does not prove the nudge will help.
+- With its first-round thresholds (≥45K tokens, ≤40 actions), `B2_STUCK_NUDGE` would fire on many failed levels, judging by action counts at the 45K-token point.
+- It would also fire on a minority of levels that do eventually clear. A tokens-per-action trigger (for example >1,200 after 30K tokens) is a better-targeted candidate for a later arm.
