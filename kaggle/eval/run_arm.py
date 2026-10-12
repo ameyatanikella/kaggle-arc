@@ -4,7 +4,8 @@ Executed as a subprocess by the paired-eval notebook so arms cannot share
 in-process scheduler state. Inherits the notebook's environment (all ARC3_*
 switches, server URL) and the bundle paths (.pth written by the notebook).
 
-usage: python run_arm.py <arm: b0|b2> <seconds> <passes> <out_dir>
+usage: python run_arm.py <arm_label> <seconds> <passes> <out_dir> [switches_json]
+switches_json: {"B2_BAR_FIX": "1", ...}; empty/absent = plain B0.
 """
 import asyncio
 import json
@@ -16,11 +17,16 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 arm, T, passes, out = sys.argv[1], float(sys.argv[2]), int(sys.argv[3]), Path(sys.argv[4])
+switches = json.loads(sys.argv[5]) if len(sys.argv) > 5 and sys.argv[5] else {}
 out.mkdir(parents=True, exist_ok=True)
-if arm == "b2":
+for k in [k for k in os.environ if k.startswith("B2_")]:
+    del os.environ[k]                       # arms never inherit each other's switches
+os.environ.update({k: str(v) for k, v in switches.items()})
+b2 = None
+if switches:
     sys.path.insert(0, "/tmp")
-    import b2_patches
-    b2_patches.install()
+    import b2_patches as b2
+    b2.install()
 
 import arc_agi  # noqa: E402
 import taaf.game_api  # noqa: E402
@@ -47,15 +53,12 @@ spec = taaf.game_api.ArcadeSpec(operation_mode=arc_agi.OperationMode.OFFLINE, en
 arcade = arc_agi.Arcade(operation_mode=arc_agi.OperationMode.OFFLINE, environments_dir=env_dir)
 ids = [e.game_id for e in arcade.available_environments]
 bm.games = [taaf.game_api.GameAPI(env_name=g, arcade_spec=spec) for g in ids]
-print(f"[arm {arm}] {len(ids)} games x {passes} passes, {T:.0f}s", flush=True)
+print(f"[arm {arm}] switches={switches} {len(ids)} games x {passes} passes, {T:.0f}s", flush=True)
 t0 = time.time()
 asyncio.run(bm.run(soft_end_time=datetime.now() + timedelta(seconds=T + 120),
                    runtime_environment=target, minimal_diagnostics=False))
-res = {"arm": arm, "seconds": time.time() - t0, "passes": passes, "games": ids}
-try:
-    import b2_patches  # noqa
-    res["b2_summary"] = b2_patches.b2_summary()
-except Exception:
-    pass
+res = {"arm": arm, "switches": switches, "seconds": time.time() - t0, "passes": passes, "games": ids}
+if b2 is not None:
+    res["b2_summary"] = b2.b2_summary()
 (out / "arm_meta.json").write_text(json.dumps(res, indent=1, default=str))
 print(f"[arm {arm}] done in {time.time() - t0:.0f}s", flush=True)
