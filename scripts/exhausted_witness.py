@@ -34,8 +34,13 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from bfs_on_games import (ENV_DIR, Game, Node, T, arc_agi, effective_clicks,  # noqa: E402
-                          engine_step, interior, list_games, quiet)
+from bfs_on_games import (ENV_DIR, Game, T, arc_agi, effective_clicks,  # noqa: E402
+                          interior, list_games, quiet)
+from bfs_on_games import Node as _SlotNode  # noqa: E402
+
+
+class Node(_SlotNode):
+    __slots__ = ("raw",)                    # the full, unmasked observation of the last step
 from arcengine import ActionInput, GameAction  # noqa: E402
 
 TR = ROOT / "data" / "franzen_v3_output" / "transcripts"
