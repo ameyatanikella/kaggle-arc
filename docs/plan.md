@@ -41,6 +41,17 @@ The entry and team-merger deadline is 2026-10-26 23:59 UTC.
 - **Promotion rule:** promote a change only if its paired public-game delta in levels completed is ≥ 0, with no new error class, no runtime overrun, and RHAE not worse than −1 point. Single LB draws (SD ≈ 4) are never used to accept or reject a change.
 - **Immutable fallback:** B0 stays submit-ready throughout.
 
+## Submission schedule (1/day; final score = better of the 2 selected submissions' private scores)
+- **Day 0 (token arrives):**
+  - Run `kaggle_ready.sh`.
+  - Push B0 (20-min smoke commit).
+  - Submit B0 (LB draw #1).
+  - If quota allows, also push the paired A/B commit `pair-b2c` (B0 vs B2c = BAR_FIX+PROMPT_FIXES+SOLVED_MEMORY; about 8 h of quota).
+- **Following days:**
+  - Submit B2c once it passes the readiness gate and its paired delta is not negative. Otherwise submit B0 again; each B0 submission is another independent draw.
+  - Test STUCK_NUDGE and TOOLS only in their own paired arms.
+- **Final selection:** the two selected submissions should be different systems where possible (e.g. best B2 + best B0). The private score uses the better of the two, so diversity is worth more than two copies of the same system. Never choose by public score alone when its difference is within noise (SD ≈ 4).
+
 ## Frozen readiness gate for any Kaggle-pushed B2 (commit smoke run, real model, 2 games, 20 min)
 A B2 variant may be submitted only if its commit run shows **all** of the following, judged against B0's own smoke run where one exists:
 1. The model server reached ready, and the notebook finished with `submission.parquet` written.
