@@ -54,5 +54,5 @@ This evidence comes from engine access the agent does not have. It shows whether
   - Correctly refuses the 3 wrap-around tracks.
 - **Row 8 (`zm_solve`):** tr87's movement keys form Z₇ and Z₅; 20/20 cheapest-press plans matched on the engine.
 - **Row 13 (`bfs_plan` "exhausted"):**
-  - 7 of 25 games returned "exhausted" for goals humans reach. In 2 of them (g50t 7/101, sc25 4/4) row 14's test shows the masked frame key merged distinct states (raw-observation check pending). For the other 5 an incomplete action set is a hypothesis without a witness yet.
+  - 7 of 25 games returned "exhausted" for goals humans reach. Witnessed causes, using B0's replay-verified winning paths: missing actions in ka59, lf52 and su15 (adding them yields completing plans); masked-key state merging in g50t, sc25 and tn36 (still exhausted with the winning path's actions present). In g50t and sc25 even the raw observation does not determine state (raw-key conflicts 124/150 and 96/142). sb26 is unresolved.
   - "Unreachable in the model" is not "unreachable".
