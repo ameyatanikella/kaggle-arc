@@ -29,3 +29,13 @@ For each principle the agent uses, this lists the assumptions it needs, the exac
 
 ## Measured relevance to the competition score (2026-10-12)
 B0's public-game loss splits into 50.9 points from levels not completed and 2.6 points from action inefficiency (`scripts/analyze_franzen_log.py`). Tools that minimize **real actions** (principles 7 and 9) therefore address the smaller loss term. Raising every level's actions by 25% would cost 3.2 points. In this regime, the binding cost of an experiment is the model's **tokens** (deliberation), not its actions. Principles 11–13 (separation and decision relevance) remain relevant. Principle 9 is kept as a correct tool, but it is not on the competition path unless a measurement shows value.
+
+## Sandbox tools exposed to the model (`B2_TOOLS`, `kaggle/b2/sandbox_tools.py`; verified in `docs/algebra_verification.md`)
+| Tool | Principle (row above) | Assumptions the model must satisfy | Honest-output guarantees |
+|---|---|---|---|
+| `gf2_solve` | 6, 7 | Presses commute; each press adds its column mod 2; **additive** costs (order-dependent travel is not modelled) | Exact minimum when `exact` is True. `None` means the linear toggle model is wrong |
+| `zm_solve` | 8 | The same, mod m (any m) | Exact by enumeration; raises if the space exceeds `max_states` |
+| `fit_boolean` | 1–4 | Inputs exactly 0/1; degree ≤ 2; at most 4 terms (MDL preference, not proof) | `unidentified` = the nullspace support of the observed design (exact). `alternatives` counts equally sparse rules. `complete` False if the time budget cut the search |
+| `fit_guarded` | 15 | One guard, 1-D, held at a constant beyond it | Slope from points that cannot be capped; wall location reported as an interval |
+| `distinguish` | 13 | Deterministic model simulators with known current states | Shortest separating sequence within depth and time. Crashes are reported, not counted. `exhausted` proves only within the model space |
+| `bfs_plan` | — (BFS) | Deterministic simulator, hashable states | Shortest plan in the model. "Unreachable" holds only within the model |
