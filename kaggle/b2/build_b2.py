@@ -16,7 +16,9 @@ sys.path.insert(0, str(ROOT / "kaggle" / "b0"))
 import build_b0  # noqa: E402
 
 
-def main(username: str, variant: str, switches: dict) -> Path:
+def main(username: str, variant: str, switches: dict, commit_mode: str = "smoke") -> Path:
+    """commit_mode: "smoke" = 2-game 20-min commit; "minimal" = commit boots the server and installs
+    the patches but skips the benchmark (about 12 min). The rerun path is identical in both."""
     build_b0.main(username)
     pdir = ROOT / "kaggle" / "b0" / "push"
     nb = json.loads((pdir / "notebook.ipynb").read_text())
@@ -41,6 +43,11 @@ def main(username: str, variant: str, switches: dict) -> Path:
                     if c["cell_type"] == "code" and "B0 commit-mode smoke test" in "".join(c["source"]))
     nb["cells"].insert(hook_idx + 1, {"cell_type": "code", "metadata": {}, "outputs": [],
                                       "execution_count": None, "source": cell_src})
+    if commit_mode == "minimal":
+        run_cell = next(c for c in nb["cells"] if c["cell_type"] == "code" and "await bm.run(" in "".join(c["source"]))
+        rs = "".join(run_cell["source"])
+        assert rs.count("await bm.run(") == 1
+        run_cell["source"] = rs.replace("await bm.run(", "if TRUE_SUBMISSION:  # minimal commit: no benchmark\n    await bm.run(", 1)
     # report B2 counters at the end
     nb["cells"].append({"cell_type": "code", "metadata": {}, "outputs": [], "execution_count": None,
                         "source": "import b2_patches, json\nprint('B2 summary:', json.dumps(b2_patches.b2_summary()))\n"})
@@ -49,7 +56,10 @@ def main(username: str, variant: str, switches: dict) -> Path:
         "Base: [Daniel Franzen's Milestone 2 solution](https://www.kaggle.com/code/dfranzen/arc-agi-3-milestone-2-solution) "
         "(Apache-2.0), built on Tufa Labs' Duck harness (Jeroen Cottaar). Solved-level memory is a port of rellik13's M85 "
         "(Apache-2.0, github.com/LohitSiriki/arc-agi-3-milestone2-solution). All credit to the original authors.\n\n"
-        f"B2 switches: `{json.dumps(switches)}`. The commit run is a 2-game smoke test; the competition rerun is the full run.")
+        f"B2 switches: `{json.dumps(switches)}`. "
+        + ("The commit run only boots the model server and installs the patches (no games); "
+           if commit_mode == "minimal" else "The commit run is a 2-game smoke test; ")
+        + "the competition rerun is the full run.")
     out = HERE / "push" / variant
     out.mkdir(parents=True, exist_ok=True)
     (out / "notebook.ipynb").write_text(json.dumps(nb, indent=1))
@@ -62,5 +72,9 @@ def main(username: str, variant: str, switches: dict) -> Path:
 
 if __name__ == "__main__":
     user, variant = sys.argv[1], sys.argv[2]
-    sw = dict(kv.split("=", 1) for kv in sys.argv[3:])
-    main(user, variant, sw)
+    mode = "smoke"
+    args = sys.argv[3:]
+    if args and args[0].startswith("--commit="):
+        mode = args.pop(0).split("=", 1)[1]
+    sw = dict(kv.split("=", 1) for kv in args)
+    main(user, variant, sw, mode)
