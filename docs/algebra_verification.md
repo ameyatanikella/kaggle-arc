@@ -63,3 +63,14 @@ Submit the `pair-algebra` notebook, whose rerun is B0 + B2c + TOOLS, **unless** 
 If a blocking condition occurs, fix the cause and submit the corrected algebra notebook if a smoke run passes. Otherwise submit B2c and keep the algebra tools as a research branch.
 
 **Dependency.** The Oct 14 submission includes the B2c changes. If `pair-b2c` shows B2c itself regressing against B0 under rule 4, the algebra submission will be rebuilt on plain B0 (B0+TOOLS), with a 2-game smoke run first.
+
+## 6. Change of plan (2026-10-12, 17:50 UTC): quota
+The 8-hour paired run (`pair-algebra`) was cancelled before it started, to conserve this week's 30 h RTX quota. About 18 h of it was already committed to B0 smoke, `pair-b2c` and `pair-nudge`.
+
+The Oct 14 submission will be `axizcc/arc3-b2-algebra`. Its scored rerun is B0 + B2c + TOOLS, re-verified by executing the install cell as the rerun would. Its commit run is a 20-minute, 2-game smoke test that costs about 0.6 h of quota.
+
+**Rules for Oct 14:**
+- The section 5 decision rule now applies with gates 1–3 evaluated on that smoke run.
+- Gate 4 (paired regression) cannot be evaluated without a paired run. It is replaced by the readiness gate's gross-regression check against B0's smoke run: levels on ls20+vc33 not fewer than B0's by more than 1.
+- Tool-usage counts from the smoke run are reported as a small-sample mechanism check.
+- The full ablation set required by the brief needs off-Kaggle GPUs (the user's student cluster, if suitable), with **token-matched** budgets (`max_generated_tokens_per_game`) so results do not depend on hardware speed.
