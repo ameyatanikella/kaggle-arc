@@ -91,3 +91,17 @@ def test_paired_builder_rerun_and_commit_paths():
     j2 = "\n".join("".join(c["source"]) for c in json.loads((out2 / "notebook.ipynb").read_text())["cells"])
     assert "SUBMIT_SWITCHES = {}" in j2                                   # submit arm a = plain B0 rerun
     shutil.rmtree(out2)
+
+
+def test_b2_minimal_commit_skips_only_benchmark():
+    import build_b2
+    out = build_b2.main("tester", "b2min", {"B2_TOOLS": "1"}, "minimal")
+    nb = json.loads((out / "notebook.ipynb").read_text())
+    srcs = ["".join(c["source"]) for c in nb["cells"] if c["cell_type"] == "code"]
+    run = next(s for s in srcs if "await bm.run(" in s)
+    assert "if TRUE_SUBMISSION:  # minimal commit: no benchmark\n    await bm.run(" in run
+    assert "submission.parquet" in run                      # commit still writes the required file
+    assert any("b2_patches.install()" in s and "if TRUE_SUBMISSION" not in s for s in srcs)  # installs in commit too
+    assert all(_code_ok(s) for s in srcs)
+    import shutil
+    shutil.rmtree(out)
