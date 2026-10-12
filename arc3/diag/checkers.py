@@ -351,8 +351,9 @@ class AlgebraicChecker:
         ident = [x[0] for x in excl if "identity" in x[1]]
         if ident:
             e.ambiguity["identity_uncertain"] = ident
-        # --- diagnosis by syndrome matching
+        # --- diagnosis (GF(2): parity syndrome; Q: hitting sets with an exact consistency check)
         t2 = time.perf_counter()
+        self._cur = (comp, elig, ys, st, violated)
         self._diagnose(e, st, usable, violated, ids, fld)
         e.costs.update({"structure_s": st["setup_s"], "relation_eval_s": eval_s,
                         "diagnosis_s": time.perf_counter() - t2, "total_s": time.perf_counter() - t0,
@@ -385,7 +386,15 @@ class AlgebraicChecker:
                 m = 0
                 for i in D:
                     m = (m ^ emask[i]) if fld == "gf2" else (m | emask[i])
-                if m == vmask:
+                if fld == "gf2":
+                    # binary values: flipping D must reproduce the parity syndrome exactly (no
+                    # cancellation assumption: two flips in one relation cancel and are predicted to)
+                    if m == vmask:
+                        found.append(D)
+                elif (m & vmask) == vmask and self._complement_consistent(D):
+                    # real values: D hits every violated relation AND the rest is exactly consistent.
+                    # (Requiring every relation through D to be violated would assume errors never
+                    # cancel, which fails for small integer errors.)
                     found.append(D)
         if not found:
             e.verdict = "hypothesis-inadequate"
@@ -405,6 +414,15 @@ class AlgebraicChecker:
                                             f"at {ids[cut]}" if suffix_ok else
                                             "no regime split: the hypothesis family is likely inadequate")})
             return
+        # verdict from minimum-cardinality diagnoses (parsimony, stated); larger subset-minimal
+        # diagnoses are kept as explicit alternatives, never silently dropped
+        mc = min(len(D) for D in found)
+        larger = [D for D in found if len(D) > mc]
+        found = [D for D in found if len(D) == mc]
+        if larger:
+            e.ambiguity["larger_alternative_diagnoses"] = [[ids[i] for i in D] for D in larger]
+            e.suggestions.append({"type": "parsimony-note", "alternatives": len(larger),
+                                  "why": "fewer faults assumed; the listed larger fault sets also explain the data"})
         e.diagnoses = [[ids[i] for i in D] for D in found]
         if len(found) == 1:
             e.verdict = "contradiction-localized"
@@ -421,6 +439,15 @@ class AlgebraicChecker:
                                          "in the same context splits them"})
         bad = {x for d in e.diagnoses for x in d}
         e.supporting = sorted({ids[i] for ci in usable for i in circuits[ci]} - bad)
+
+    def _complement_consistent(self, D):
+        comp, elig, ys, st, violated = self._cur
+        drop = set(D)
+        keep = [i for i in range(len(elig)) if i not in drop]
+        if comp.kind == "linear":
+            return solve([comp.row(elig[i].context) for i in keep], [ys[i] for i in keep]) is not None
+        # polynomial: no evaluated (violated) relation may lie entirely inside the complement
+        return not any(not (set(st["circuits"][ci]) & drop) for ci in violated)
 
     def _discrete_ambiguity(self, comp, elig, e):
         from arc3.diag.poly import Poly

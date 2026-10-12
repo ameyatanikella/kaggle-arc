@@ -95,4 +95,8 @@ The module never:
 When it is unsupported, out of budget or raises an exception, the safe fallback is ordinary prediction checking (B).
 
 ## Amendments
-(none)
+1. **2026-10-12 23:40 UTC, before the full stage-2 run.** For Q-valued components, C's implementation had required an exact syndrome match: every relation containing a diagnosed observation must be violated. That assumes errors never cancel inside a relation, which deviates from the registered "minimal hitting sets over violated relations".
+   - **How it surfaced:** a one-game probe (ls20, injected integer errors). C returned "inadequate" in 10% of k=2 and 30% of k=3 trials, where B localized all of them. That probe result is kept in `runs/diag/shadow_probe.json` and reported.
+   - **Fix:** a diagnosis must hit every violated relation, and the remaining observations must be exactly consistent. GF(2) keeps parity-syndrome matching, which is exact for bit flips.
+2. **Same time.** The verdict uses the **minimum-cardinality** diagnoses (a parsimony assumption, now stated in the output). Larger subset-minimal diagnoses are listed as explicit alternatives. This is the reading of "unique minimal diagnosis" under which fixture F2 was registered: without parsimony, {y12} and {y02, y22} explain F2 equally.
+   - No success criterion was changed.
