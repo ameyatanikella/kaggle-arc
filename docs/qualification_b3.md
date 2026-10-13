@@ -54,3 +54,18 @@ In the 61 frontier-at-cap runs, **56% of all actions changed nothing visible** (
 - **Mechanism check:** the no-op share of actions in the previously frontier-at-cap runs must fall.
 
 Reported regardless: per-category failure counts after the change.
+
+## Change 1 result (2026-10-13; `runs/b3/qual/B3c_noop`, `failure_diag_B3c_noop.json`)
+| | B3c (frozen) | B3c + change 1 |
+|---|---|---|
+| Levels (25 × 5 seeds) | 53 | **61** |
+| Paired levels per game | | **+0.064, 90% CI [+0.016, +0.120]** |
+| RHAE (mean) | 0.253 | +0.021 [−0.032, +0.082] |
+| Errors / time caps | 0 / 0 | 0 / 0 (max wall 84 s per game) |
+| No-op share, previously frontier-at-cap runs | 0.564 | **0.458** |
+| Failed level-1 game-seeds | 78 | 73 (frontier-at-cap 61 → 56; others unchanged) |
+
+- **Per game:** gains in lp85 (+0.6 levels per game), lf52 (+0.4), s5i5 (+0.4), cd82 (+0.2) and ft09 (+0.2); a loss in tn36 (−0.2).
+- **Decision:** **qualifies** under the registered rule, and the mechanism check passes.
+- **New frozen candidate:** `--agent b3 --config '{"plan_cache":"projected","noop_order":true}'` at the commit that records this section.
+- **Next largest category:** still exploration at the cap (56 game-seeds). The exhausted-looping base flaw (8) is the clearest single fix after that.

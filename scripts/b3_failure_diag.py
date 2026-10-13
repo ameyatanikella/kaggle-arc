@@ -34,7 +34,7 @@ from diag_shadow import ENV_DIR, arc_agi, list_games, quiet, replay  # noqa: E40
 from exhausted_witness import level1_segments  # noqa: E402
 from arc3.perception import VolatileMask, background_color, components  # noqa: E402
 
-Q = ROOT / "runs" / "b3" / "qual" / "B3c"
+Q = ROOT / "runs" / "b3" / "qual" / (sys.argv[1] if len(sys.argv) > 1 else "B3c")
 
 
 def mask_from_hex(h):
@@ -176,7 +176,7 @@ def main():
               f"depth {ex.get('reached_depth')} missing {ex.get('missing_action_steps')} wasted {ex['wasted_actions']} conflicts {ex['conflicts']} "
               f"frames {ex['distinct_frames_seen']}", flush=True)
     print("TALLY (failed game-seeds):", dict(tally))
-    (ROOT / "runs" / "b3" / "qual" / "failure_diag.json").write_text(json.dumps({"per_game": out, "tally": tally}, indent=1, default=str))
+    (ROOT / "runs" / "b3" / "qual" / ("failure_diag.json" if Q.name == "B3c" else f"failure_diag_{Q.name}.json")).write_text(json.dumps({"per_game": out, "tally": tally}, indent=1, default=str))
 
 
 if __name__ == "__main__":
