@@ -164,8 +164,9 @@ class Fitter:
 
 # ------------------------------------------------------------------ B
 class OrdinaryChecker:
-    def __init__(self, k_max=3, draws=2000, poly_draws=300, seed=0):
+    def __init__(self, k_max=3, draws=2000, poly_draws=300, seed=0, span=False):
         self.k_max, self.draws, self.poly_draws, self.seed = k_max, draws, poly_draws, seed
+        self.span = span          # standard RANSAC degeneracy guard: only subsets that span the design
 
     def check(self, comp, observations):
         t0 = time.perf_counter()
@@ -183,6 +184,17 @@ class OrdinaryChecker:
             subsets = list(combinations(range(n), m))
         else:
             subsets = [tuple(sorted(rng.sample(range(n), m))) for _ in range(budget)]
+        if self.span and comp.kind == "linear":
+            full = S.rank(F.rows, comp.field)
+            m2 = min(n, max(m, full))
+            keep = []
+            for sub in subsets:
+                tries = 0
+                while S.rank([F.rows[i] for i in sub], comp.field) < full and tries < 20:
+                    sub = tuple(sorted(rng.sample(range(n), m2)))
+                    tries += 1
+                keep.append(sub)
+            subsets = keep
         fits = []
         for sub in subsets:
             th = F.fit(sub)
