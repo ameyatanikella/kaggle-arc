@@ -45,7 +45,7 @@ The cache comparison (candidate vs B3-nocache) must additionally show the agent 
 In the 61 frontier-at-cap runs, **56% of all actions changed nothing visible** (86–91% in ar25, dc22, m0r0, ft09, cd82; about 0% in re86 and tr87, which are breadth explosions instead).
 
 ## Change 1 (registered before running): no-op-aware candidate ordering
-**Change.** `noop_order: true`. An action class (key id; or a click on a component of a given colour and size bucket) that has produced no visible change at ≥ 3 distinct states, and never a change, is moved to the back of the candidate order at new states. It is never removed, so exploration stays complete. Counts persist across levels.
+**Change.** `noop_order: true`. An action class (key id; or a click on a component of a given colour and size bucket) that is **historically unchanged** — it has produced no visible change at ≥ 3 distinct states, and never a change, is moved to the back of the candidate order at new states. It is never removed, so exploration stays complete. Counts persist across levels.
 
 **Comparison.** Frozen B3c vs B3c + change 1, same protocol (25 games × seeds 0–4).
 
@@ -69,3 +69,18 @@ Reported regardless: per-category failure counts after the change.
 - **Decision:** **qualifies** under the registered rule, and the mechanism check passes.
 - **New frozen candidate:** `--agent b3 --config '{"plan_cache":"projected","noop_order":true}'` at the commit that records this section.
 - **Next largest category:** still exploration at the cap (56 game-seeds). The exhausted-looping base flaw (8) is the clearest single fix after that.
+
+
+## Tightened conclusions (review of 2026-10-13)
+1. **Levels vs score.** 61 vs 53 levels supports no-op-aware ordering on this development set, and the paired level CI excludes zero. The **score gain is uncertain** (RHAE +0.021, CI [−0.032, +0.082] includes zero). Finding more solutions and finding efficient solutions are separate achievements.
+2. **Replay success is narrow evidence.** A winning loop-free reference path that survives B3's masked keys shows only that **those particular paths** are representable and executable. It does not establish the absence of hidden-state or perception failures: a frame-keyed model can execute a winning path while merging other histories. The earlier hidden-state evidence (g50t, sc25 conflicts; raw-key Markov conflicts) stands. The table's "0" therefore means "no failure in which the reference path itself breaks", not "no hidden-state problems".
+3. **Deferral is not effective completeness.** Deferred ("historically unchanged") actions are never removed, but under a finite budget they can stay untried forever. An unchanged end frame can also hide a useful transition, e.g. information shown only in animation frames or a hidden counter. The tn36 regression (−0.2 levels per game) is examined below.
+
+## Change 2 (registered before running): purposeful resets
+**Change.** `reset_purpose: true`. With no reachable frontier from the current node, B3 resets only if the **recorded exploration graph** shows the start node reaching an unfinished frontier, or the start has untried candidates. Otherwise it does not reset: it expands candidates or keeps acting in place. No true game graph is assumed.
+
+**Comparison.** Change 1 (`noop_order`) vs change 1 + change 2, same protocol (25 × seeds 0–4).
+
+**Criteria.**
+- The promotion rule (paired level delta ≥ 0, no new error class, no runtime overrun, RHAE not worse than −1).
+- **Mechanism:** reset/fallback-loop actions in the 8 previously looping runs fall.

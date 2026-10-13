@@ -165,6 +165,7 @@ class B3Agent(Agent):
         self.max_clicks = int(c.get("max_clicks", 48))
         self.level_allowance = int(c.get("level_allowance", 600))
         self.noop_order = bool(c.get("noop_order", False))
+        self.reset_purpose = bool(c.get("reset_purpose", False))
         self.cls_stats: dict = {}            # action class -> [states where it was a no-op, effective count]
         self.rng = random.Random(seed)
         self.vmask = VolatileMask()
@@ -178,7 +179,9 @@ class B3Agent(Agent):
                   "pred_change_fn", "resets", "tier_expansions", "fallback_actions", "mask_remaps", "levels_seen",
                   "graph_nodes", "graph_conflicts"):
             s[k] = 0
-        s["config"] = {"plan_cache": "projected" if self.use_cache else "none", "noop_order": self.noop_order}
+        s["config"] = {"plan_cache": "projected" if self.use_cache else "none", "noop_order": self.noop_order,
+                       "reset_purpose": self.reset_purpose}
+        s["resets_skipped_no_purpose"] = 0
         s["noop_deferred"] = 0
         s["choice_reasons"] = {}
         self.effect_bbox: dict = {}
@@ -253,7 +256,7 @@ class B3Agent(Agent):
             cache[(x, y)] = int((lab == lab[y, x]).sum())
         return cache[(x, y)]
 
-    def _useless(self, c) -> bool:
+    def _hist_unchanged(self, c) -> bool:
         st = self.cls_stats.get(c)
         return bool(st) and st[1] == 0 and len(st[0]) >= 3
 
@@ -261,10 +264,10 @@ class B3Agent(Agent):
         tried = self.graph.tried.get(node, ())
         u = [a for a in self._candidates(node, avail) if a not in tried]
         if self.noop_order and u:
-            good = [a for a in u if not self._useless(self._cls(node, a))]
+            good = [a for a in u if not self._hist_unchanged(self._cls(node, a))]
             if len(good) < len(u):
                 self.stats["noop_deferred"] += 1
-                u = good + [a for a in u if self._useless(self._cls(node, a))]
+                u = good + [a for a in u if self._hist_unchanged(self._cls(node, a))]
         return u
 
     def _remap(self):
@@ -424,7 +427,16 @@ class B3Agent(Agent):
                     self.active = [list(acts), list(nodes), 0]
                 return acts[0], "plan"
         if obs.level_actions_used > 0 and node != self.start_node:
-            return "RESET", "reset to reach frontier"
+            if not self.reset_purpose:
+                return "RESET", "reset to reach frontier"
+            # reset only with a concrete purpose: the RECORDED graph shows the start reaching an
+            # unfinished frontier (or the start itself has untried candidates)
+            st = self.start_node
+            purpose = bool(self._untried(st, avail)) or self._timed(
+                "search", lambda: self.graph.bfs(st, is_goal)[0]) is not None
+            if purpose:
+                return "RESET", "reset to reach frontier"
+            s["resets_skipped_no_purpose"] += 1
         if self.tier < 2 and 6 in avail:
             self.tier += 1
             s["tier_expansions"] += 1
