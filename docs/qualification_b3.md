@@ -90,3 +90,23 @@ Reported regardless: per-category failure counts after the change.
 - Change 2 also looks the start up in the graph, which raised the KeyError.
 - **Fixed** (the start key is re-keyed with everything else).
 - Because the fix also changes change 1's behaviour, change 1 is **re-run with the fix** (`B3c_noop_fix`) as change 2's comparator. The erroring run (`B3c_noop_reset`, 61 levels with 6 errors) is kept and reported but not used.
+
+## Change 2 result (`runs/b3/qual/B3c_noop_reset_fix` vs `B3c_noop_fix`)
+| | Change 1 (with fix) | + Change 2 |
+|---|---|---|
+| Levels (25 × 5) | 61 | **65** |
+| Paired levels per game | | +0.032, 90% CI [0.000, +0.096] |
+| RHAE | | +0.000 [0.000, +0.001] |
+| Errors / time caps | 0 / 0 | 0 / 0 |
+
+- **Concentration:** the entire gain is in tu93 (1.4 → 2.2 levels per seed). The evidence is narrow.
+- **Mechanism:**
+  - g50t: loop actions about 2,700 → about 2,050 per run, with 1,500–1,600 purposeless resets skipped;
+  - tu93 seed 4: 2,645 → 717 loop actions, and it completed 3 levels;
+  - ls20: essentially unchanged.
+- **Decision:** qualifies under the registered rule.
+
+**tn36 regression under change 1, examined.** On seed 4, B3c completes level 1 at its 484th action with a click at (36, 55), class `('click', colour 9, size bucket 7)`. Under change 1 that class had been a no-op at 4 earlier states with 0 effects, so it was "historically unchanged" and deferred, and the level was never completed in 3,000 actions. This is a concrete instance of the review's caveat: an action's effect can depend on context, so deferral is not effective completeness under a finite budget. The trade-off is net positive on this set (+8 levels) but not free.
+
+## Frozen integration baseline
+`--agent b3 --config '{"plan_cache":"projected","noop_order":true,"reset_purpose":true}'` at the commit recording this section: 65 levels on 25 × 5. This is "frozen B3 with its simpler cache" for the Franzen/Qwen integration comparison (`docs/prereg_b3_franzen.md`).
