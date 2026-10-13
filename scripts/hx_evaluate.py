@@ -23,6 +23,7 @@ def load(d: Path) -> dict:
     for r in rs:
         g = per.setdefault(r["game_id"], {"levels": {}, "score": {}, "actions": {}, "err": 0, "dec": [], "stats": []})
         g["levels"][r["seed"]] = r.get("levels_completed", 0)
+        g.setdefault("lact", {})[r["seed"]] = list(r.get("level_actions") or [])
         g["score"][r["seed"]] = r.get("score", 0.0)
         g["err"] += 1 if r.get("error") else 0
         st = r.get("agent_stats") or {}
@@ -47,6 +48,13 @@ def compare(base: dict, arm: dict, boot: int = 10000) -> dict:
     err_a = sum(arm[g]["err"] for g in games)
     tb = np.median([x for g in games for x in base[g]["dec"]])
     ta = np.median([x for g in games for x in arm[g]["dec"]])
+    # action efficiency on levels completed in BOTH arms (same game, seed, level index)
+    ratios = []
+    for g in games:
+        for sd in set(base[g].get("lact", {})) & set(arm[g].get("lact", {})):
+            for x, y in zip(base[g]["lact"][sd], arm[g]["lact"][sd]):
+                if x > 0 and y > 0:
+                    ratios.append(y / x)
     verdict = "NEUTRAL"
     if d.mean() > 0 and lo >= 0 and err_a <= err_b and ta <= 2 * max(tb, 1e-9):
         verdict = "RETAIN"
@@ -56,8 +64,11 @@ def compare(base: dict, arm: dict, boot: int = 10000) -> dict:
     lv_a = sum(sum(arm[g]["levels"].values()) for g in games)
     return {"games": len(games), "levels_base": lv_b, "levels_arm": lv_a, "delta_per_game": round(float(d.mean()), 3),
             "ci90": [round(float(lo), 3), round(float(hi), 3)], "score_delta_per_game": round(float(np.mean(ds)), 3),
-            "errors": [err_b, err_a], "decision_ms_median": [round(tb * 1000, 2), round(ta * 1000, 2)],
+            "errors": [err_b, err_a], "decision_ms_median": [round(float(tb) * 1000, 2), round(float(ta) * 1000, 2)],
             "verdict": verdict,
+            "matched_levels": len(ratios),
+            "actions_ratio_median": round(float(np.median(ratios)), 3) if ratios else None,
+            "actions_ratio_geomean": round(float(np.exp(np.mean(np.log(ratios)))), 3) if ratios else None,
             "per_game": {g: round(float(x), 2) for g, x in zip(games, d) if x != 0}}
 
 
@@ -71,7 +82,7 @@ def main():
         print(f"{arm:>12s} vs {base:<4s} levels {r['levels_base']:4d} -> {r['levels_arm']:4d}  "
               f"d/game {r['delta_per_game']:+.3f} CI90 [{r['ci90'][0]:+.3f}, {r['ci90'][1]:+.3f}]  "
               f"score d {r['score_delta_per_game']:+.3f}  err {r['errors']}  dec ms {r['decision_ms_median']}  "
-              f"=> {r['verdict']}  {r['per_game']}")
+              f"=> {r['verdict']}  matched-level actions ratio (geo) {r['actions_ratio_geomean']} n={r['matched_levels']}  {r['per_game']}")
     (root / "evaluation.json").write_text(json.dumps(out, indent=1))
 
 
