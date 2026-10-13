@@ -2,9 +2,9 @@
 from collections import deque
 from itertools import product
 
-from arc3.agents.b3.abstraction import bisimulation_quotient, check_quotient
-from arc3.agents.b3.agent import B3Agent
-from arc3.agents.b3.synthetic import CorridorGame, play
+from arc3.research.b3_ablation.abstraction import bisimulation_quotient, check_quotient
+from arc3.research.b3_ablation.agent import B3Agent
+from arc3.research.b3_ablation.synthetic import CorridorGame, play
 
 BASE = {"plan_cache": "dependency", "temporal": True, "shuffle": False}
 BITS = [(k & 1, (k >> 1) & 1, (k >> 2) & 1) for k in range(8)]
@@ -89,7 +89,7 @@ def test_c5_destructive_effect_needs_fresh_start():
 
 
 def test_dependency_cache_preserves_unrelated_entries():
-    from arc3.agents.b3.plans import PlanCache
+    from arc3.research.b3_ablation.plans import PlanCache
     st = {}
     c = PlanCache("dependency", st)
     a = (1, ()); b = (2, ()); d = (3, ()); e = (4, ())

@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 from diag_shadow import ENV_DIR, arc_agi, level1_actions, list_games, quiet, replay, sig  # noqa: E402
-from arc3.agents.b3.correspond import Retained, commit_nearest  # noqa: E402
+from arc3.research.b3_ablation.correspond import Retained, commit_nearest  # noqa: E402
 from arc3.perception import background_color, components  # noqa: E402
 import numpy as np  # noqa: E402
 
