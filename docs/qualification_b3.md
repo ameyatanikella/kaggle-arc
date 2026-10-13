@@ -84,3 +84,9 @@ Reported regardless: per-category failure counts after the change.
 **Criteria.**
 - The promotion rule (paired level delta ≥ 0, no new error class, no runtime overrun, RHAE not worse than −1).
 - **Mechanism:** reset/fallback-loop actions in the 8 previously looping runs fall.
+
+**Bug found by change 2's first run (6 KeyErrors in vc33 and lp85).** `_remap()` re-keyed every stored frame after a HUD-mask change, but not `start_node`.
+- In the frozen candidate, the stale start key only fed the `node != start` reset test. After a mask remap that test was wrong, silently.
+- Change 2 also looks the start up in the graph, which raised the KeyError.
+- **Fixed** (the start key is re-keyed with everything else).
+- Because the fix also changes change 1's behaviour, change 1 is **re-run with the fix** (`B3c_noop_fix`) as change 2's comparator. The erroring run (`B3c_noop_reset`, 61 levels with 6 errors) is kept and reported but not used.
