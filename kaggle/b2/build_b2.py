@@ -81,6 +81,21 @@ def add_input_resolver(nb: dict) -> int:
     return n
 
 
+def hx_embed_lines() -> str:
+    """Lines for an install cell that write the HX package (arc3/perception + arc3/hx) and its harness
+    binding (hx_patch, hx_child) to /tmp, next to b2_patches.py. Written whether or not B2_HX is on,
+    so every arm of a paired notebook sees identical files."""
+    files = {"/tmp/hx_patch.py": HERE / "hx_patch.py", "/tmp/hx_child.py": HERE / "hx_child.py",
+             "/tmp/arc3/__init__.py": ROOT / "arc3" / "__init__.py",
+             "/tmp/arc3/perception.py": ROOT / "arc3" / "perception.py"}
+    for f in sorted((ROOT / "arc3" / "hx").glob("*.py")):
+        files[f"/tmp/arc3/hx/{f.name}"] = f
+    lines = ["os.makedirs('/tmp/arc3/hx', exist_ok=True)"]
+    for dst, src in files.items():
+        lines.append(f"open({dst!r}, 'w').write({src.read_text()!r})")
+    return "\n".join(lines) + "\n"
+
+
 def main(username: str, variant: str, switches: dict, commit_mode: str = "smoke") -> Path:
     """commit_mode: "smoke" = 2-game 20-min commit; "minimal" = commit boots the server and installs
     the patches but skips the benchmark (about 12 min). The rerun path is identical in both."""
@@ -97,6 +112,7 @@ def main(username: str, variant: str, switches: dict, commit_mode: str = "smoke"
         f"{env_lines}\n"
         "open('/tmp/b2_patches.py', 'w').write(" + repr(src) + ")\n"
         "open('/tmp/sandbox_tools.py', 'w').write(" + repr(tools_src) + ")\n"
+        + hx_embed_lines() +
         "sys.path.insert(0, '/tmp')\n"
         "import b2_patches\n"
         "importlib.reload(b2_patches)\n"

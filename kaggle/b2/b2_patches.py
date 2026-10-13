@@ -18,6 +18,10 @@ in behaviour to B0. Switches (env vars, read at install time):
                       rest of the game. Port of rellik13's M85 (Apache-2.0,
                       github.com/LohitSiriki/arc-agi-3-milestone2-solution).
 
+  B2_HX=1             HX layers (kaggle/b2/hx_patch.py): faithful events, hx_* sandbox tools and
+                      triggered evidence reports. Individually: B2_HX_EVENTS / B2_HX_TOOLS /
+                      B2_HX_TRIGGERS. Needs arc3/ (perception + hx) importable.
+
 `b2_summary()` returns counters showing whether each switch actually fired.
 """
 from __future__ import annotations
@@ -402,10 +406,26 @@ def install() -> dict:
     if _on("B2_STUCK_NUDGE"):
         _install_stuck_nudge(T)
         STATS["installed"].append("stuck_nudge")
+    hx_all = _on("B2_HX")
+    hx_layers = {k: hx_all or _on("B2_HX_" + k.upper()) for k in ("events", "tools", "triggers")}
+    if any(hx_layers.values()):
+        here = os.path.dirname(os.path.abspath(__file__))
+        if here not in __import__("sys").path:
+            __import__("sys").path.insert(0, here)
+        import hx_patch
+        hx_patch.install(**hx_layers)
+        STATS["installed"].append("hx:" + "+".join(k for k, v in hx_layers.items() if v))
     print("B2 patches installed:", json.dumps(STATS["installed"]), flush=True)
     return dict(STATS)
 
 
 def b2_summary() -> dict:
     with _LOCK:
-        return dict(STATS)
+        out = dict(STATS)
+    if any(x.startswith("hx:") for x in out.get("installed", [])):
+        try:
+            import hx_patch
+            out["hx"] = hx_patch.hx_summary()
+        except Exception as exc:  # noqa: BLE001
+            out["hx"] = {"error": f"{type(exc).__name__}: {exc}"}
+    return out

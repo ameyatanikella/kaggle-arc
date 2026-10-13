@@ -91,6 +91,7 @@ def main():
     import taaf.game_api
     from inference.framework.solver import HarnessSolver
     sys.path.insert(0, str(ROOT / "kaggle" / "b2"))
+    sys.path.insert(0, str(ROOT))                      # arc3 (HX) for B2_HX
     import b2_patches
     b2_patches.install()
 
