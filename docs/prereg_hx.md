@@ -102,4 +102,28 @@ Arms are cumulative unless marked otherwise. The ladder order differs from the b
 A feature ships only if it improves held-out performance (CPU holdout for CPU-side behaviour; leaderboard draws for the LLM agent) without a larger loss from reduced inference throughput. Otherwise the final notebook is B0, plus at most the retained switches.
 
 ## Amendments
-(none yet)
+**Amendment 1** (2026-10-13 ~17:40 UTC). Made during tuning, before any holdout run. All changes come from tuning-split telemetry only.
+
+**Measurement bugs fixed:**
+- The virtual-edge error count read the algebra's own conflict flag, which can never fire. It now uses B3's stored-successor comparison.
+- The homing module (Aa) returned early at fully explored conflicted states, so it never fired (pair_tests = 0).
+
+**Prospective trust gate for the algebra (C2+).**
+- Predictions are untrusted until verified: 1 prediction in 8, and every prediction made while untrusted, is left as an audit and scored when B3 tries the action.
+- Virtual edges are used only when:
+  - at least 10 audited or executed outcomes exist;
+  - the Beta(1,1) precision is at least 0.9;
+  - the current level has fewer than 2 same-board/same-action conflicts.
+
+  The conflict condition is direct evidence against the visible-Markov assumption.
+
+**Motivation:** tu93's virtual edges were wrong 30–46% of the time, against about 1–2% in vc33. The rule "use a relation only if it predicts future observations" is part of the brief and of this design, and it was not enforced.
+
+**Speed:**
+- `_untried` results are cached within one decision;
+- goal-distance results are cached per state;
+- the goal-frontier search is capped at 12 targets.
+
+**Unchanged:** min_support (3, 2, 2), the mover gate (0.9 accuracy on at least 8 checks) and lambda = 0.5.
+
+The tuning arms C2–C5, Aa and Ab are re-run with this code. The first tuning pass is kept in `runs/hx/tune_v1`.

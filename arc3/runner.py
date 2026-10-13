@@ -35,6 +35,7 @@ AGENTS = {
     "explorer": "arc3.agents.explorer:ExplorerAgent",
     "b3_ablation": "arc3.research.b3_ablation.agent:B3Agent",
     "b3": "arc3.agents.b3.agent:B3Agent",
+    "hx": "arc3.agents.hx.agent:HXAgent",
 }
 
 
