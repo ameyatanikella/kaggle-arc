@@ -281,6 +281,8 @@ class B3Agent(Agent):
         for n, g in self.rep.items():
             rep2.setdefault(new_of[n], g)
         self.graph, self.rep, self.cands = g2, rep2, {}
+        if self.start_node is not None:                 # bug fix 2026-10-13: the start key must be re-keyed too
+            self.start_node = new_of.get(self.start_node, self._key(self.rep.get(self.start_node, next(iter(rep2.values())))))
         self.cache = PlanCache(self.use_cache, self.stats)
         self.active = None
         self.mask_version += 1
