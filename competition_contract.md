@@ -90,6 +90,8 @@ M2 prizes appear to have gone to Qwen3.8-Flash-Next solutions (P: thread 744792)
 
 | **Our B0 (`arc3-b0-franzen-m2-repro`), submission 57112928** | **26.92** (scored 2026-10-13 01:30 UTC) | O: our submission. Within the distribution of unedited copies, so B0 is a faithful reproduction |
 
+| **Our B2-algebra v2 (B0 + B2c + tools), submission 57126140** | **24.20** | O. Within the single-draw distribution (B0 26.92; copies 25.8 ± 3.9). No detectable effect of B2c + tools; the predicted 80% range was 20–32 |
+
 **Quota (O, 2026-10-13 01:35 UTC).** GPU used 16.43 h of 45 h. Our commits and paired runs account for about 17 h. B0's roughly 9 h scored rerun (16:27 → 01:30) would have pushed usage to about 26 h, so **competition reruns do not consume the weekly GPU quota**.
 **Submission limits (O).** One pending submission per team (`FAILED_PRECONDITION`), and 1 per day ("0 submissions remaining today").
 
