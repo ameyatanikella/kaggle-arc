@@ -164,6 +164,8 @@ class B3Agent(Agent):
         self.use_cache = c.get("plan_cache", "projected") != "none"
         self.max_clicks = int(c.get("max_clicks", 48))
         self.level_allowance = int(c.get("level_allowance", 600))
+        self.noop_order = bool(c.get("noop_order", False))
+        self.cls_stats: dict = {}            # action class -> [states where it was a no-op, effective count]
         self.rng = random.Random(seed)
         self.vmask = VolatileMask()
         self.mask_version = 0
@@ -176,7 +178,8 @@ class B3Agent(Agent):
                   "pred_change_fn", "resets", "tier_expansions", "fallback_actions", "mask_remaps", "levels_seen",
                   "graph_nodes", "graph_conflicts"):
             s[k] = 0
-        s["config"] = {"plan_cache": "projected" if self.use_cache else "none"}
+        s["config"] = {"plan_cache": "projected" if self.use_cache else "none", "noop_order": self.noop_order}
+        s["noop_deferred"] = 0
         s["choice_reasons"] = {}
         self.effect_bbox: dict = {}
         self._new_level()
@@ -186,6 +189,7 @@ class B3Agent(Agent):
         self.cache = PlanCache(self.use_cache, self.stats)
         self.rep: dict = {}                  # node -> representative grid
         self.cands: dict = {}
+        self._size_cache: dict = {}
         self.prev = None                     # (node, action, predicted, grid)
         self.active = None                   # [acts, nodes, i]
         self.level_steps = 0
@@ -230,9 +234,38 @@ class B3Agent(Agent):
         self.cands[k] = head + tail
         return self.cands[k]
 
+    def _cls(self, node, a):
+        if a[0] != 6:
+            return ("key", a[0])
+        g = self.rep.get(node)
+        if g is None:
+            return ("click", None)
+        x, y = a[1], a[2]
+        col = int(g[y, x])
+        return ("click", col, int(self._comp_size(node, x, y)).bit_length())
+
+    def _comp_size(self, node, x, y):
+        cache = self._size_cache.setdefault(node, {})
+        if (x, y) not in cache:
+            g = self.rep[node]
+            from scipy import ndimage
+            lab, _ = ndimage.label(g == g[y, x])
+            cache[(x, y)] = int((lab == lab[y, x]).sum())
+        return cache[(x, y)]
+
+    def _useless(self, c) -> bool:
+        st = self.cls_stats.get(c)
+        return bool(st) and st[1] == 0 and len(st[0]) >= 3
+
     def _untried(self, node, avail):
         tried = self.graph.tried.get(node, ())
-        return [a for a in self._candidates(node, avail) if a not in tried]
+        u = [a for a in self._candidates(node, avail) if a not in tried]
+        if self.noop_order and u:
+            good = [a for a in u if not self._useless(self._cls(node, a))]
+            if len(good) < len(u):
+                self.stats["noop_deferred"] += 1
+                u = good + [a for a in u if self._useless(self._cls(node, a))]
+        return u
 
     def _remap(self):
         """HUD mask grew: re-key every known frame (keys only merge) and rebuild the graph."""
@@ -286,6 +319,13 @@ class B3Agent(Agent):
             post = FATAL if fatal else node
             self.graph.add(n_p, a_p, post)
             changed = (not fatal) and node != n_p
+            if self.noop_order:
+                c = self._cls(n_p, a_p)
+                st = self.cls_stats.setdefault(c, [set(), 0])
+                if changed:
+                    st[1] += 1
+                elif not fatal:
+                    st[0].add(n_p)
             if pred is not None:
                 s["predictions"] += 1
                 s["pred_correct"] += int(pred == post)
