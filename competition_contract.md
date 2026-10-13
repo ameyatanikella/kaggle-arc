@@ -84,7 +84,7 @@ M2 prizes appear to have gone to Qwen3.8-Flash-Next solutions (P: thread 744792)
 | Reference | Score | Status |
 |---|---|---|
 | Public LB #1 (Yi-Chia Chen) / #2 (Tufa Labs) / #5 | 67.49 / 56.52 / 42.55 | V (leaderboard) |
-| Franzen M2 notebook (Apache-2.0), public LB | 33.68 (v3), best 34.30 (v1) | V (notebook page) |
+| Franzen M2 notebook (Apache-2.0), public LB | 33.68 (v3), best 34.30 (v1) | V (notebook page). **These are maxima, not single draws:** the page shows the best score of all submissions of a version, and anyone can submit the same version without re-running (notebook comments; v1 showed 31.47 earlier, then rose). Scored path v1 = v3 = our B0: cell-by-cell hashes match except the commit-only branch of the customization hook (v1: 1 pass, 15 of 25 games excluded, 25 min; v3: 4 passes, all games), checked 2026-10-13 |
 | Unedited Franzen copies, single draws | mean 25.77, SD 3.93, median 26.19 | P ([thread 745062](https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/745062)) |
 | Franzen v3 on the 25 public games, 4 passes, competition-scaled budget | mean 46.49 per run (33 of 100 runs won) | O (notebook output) |
 
