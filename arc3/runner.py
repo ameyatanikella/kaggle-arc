@@ -33,6 +33,7 @@ ENV_DIR = ROOT / "data" / "environment_files"
 AGENTS = {
     "random": "arc3.agents.random_agent:RandomAgent",
     "explorer": "arc3.agents.explorer:ExplorerAgent",
+    "b3": "arc3.agents.b3.agent:B3Agent",
 }
 
 
@@ -117,6 +118,11 @@ def play_one(args: dict) -> dict:
     res["actions"] = env.actions_used if env else 0
     res["resets"] = env.resets if env else 0
     res["level_actions"] = env.level_action_counts if env else []
+    if agent is not None and hasattr(agent, "finalize"):
+        try:
+            agent.finalize()
+        except Exception as e:  # recorded, never hidden
+            res["finalize_error"] = f"{type(e).__name__}: {e}"
     res["agent_stats"] = getattr(agent, "stats", {}) if agent else {}
     res["max_rss_mb"] = round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / (1024 * 1024 if sys.platform == "darwin" else 1024), 1)
     # Official score for this game (in-process scorecard).
