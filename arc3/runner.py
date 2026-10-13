@@ -33,6 +33,7 @@ ENV_DIR = ROOT / "data" / "environment_files"
 AGENTS = {
     "random": "arc3.agents.random_agent:RandomAgent",
     "explorer": "arc3.agents.explorer:ExplorerAgent",
+    "b3_ablation": "arc3.research.b3_ablation.agent:B3Agent",
     "b3": "arc3.agents.b3.agent:B3Agent",
 }
 
@@ -97,7 +98,9 @@ def play_one(args: dict) -> dict:
             if time.time() >= deadline:
                 stop_reason = "time_cap"
                 break
+            ta = time.perf_counter()
             act = agent.act(obs, deadline)
+            res["agent_seconds"] = res.get("agent_seconds", 0.0) + time.perf_counter() - ta
             if act is None:
                 stop_reason = "agent_stop"
                 break
@@ -116,6 +119,7 @@ def play_one(args: dict) -> dict:
         res["traceback"] = traceback.format_exc()
     res["wall_seconds"] = round(time.time() - t_start, 2)
     res["actions"] = env.actions_used if env else 0
+    res["engine_seconds"] = round(sum(r.get("dt", 0.0) for r in log), 3)
     res["resets"] = env.resets if env else 0
     res["level_actions"] = env.level_action_counts if env else []
     if agent is not None and hasattr(agent, "finalize"):
