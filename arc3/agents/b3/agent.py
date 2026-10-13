@@ -229,6 +229,9 @@ class B3Agent(Agent):
                         if (int(xx), int(yy)) not in seen:
                             seen.add((int(xx), int(yy)))
                             acts.append((6, int(xx), int(yy)))
+        if 6 in avail:                              # targets added by a representation revision
+            have = set(acts)
+            acts += [(6, x, y) for x, y in getattr(self, "extra_clicks", ()) if (6, x, y) not in have]
         head = [a for a in acts if a[0] != 6]
         tail = [a for a in acts if a[0] == 6]
         r = random.Random(zlib.crc32(node) * 1000003 + 7919 * self.tier + self.seed)   # order-independent
