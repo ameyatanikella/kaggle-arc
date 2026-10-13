@@ -69,3 +69,24 @@ Arm 3 is context, not a criterion:
 - if arm 1 ≥ arm 2, the LLM adds nothing over B3 alone.
 
 With 1 pass × 8 games and a nondeterministic LLM, all comparisons are descriptive. There are no significance claims, and nothing is concluded about unseen games.
+
+## Gate results and pre-evaluation amendments (2026-10-13, before any evaluation game)
+**Verification.**
+- **Mock model, scripted.** Every channel worked:
+  - b3 status, candidates, transitions and plan returned the documented keys;
+  - LLM actions (20) were attributed `llm`; B3 actions requested via `b3_run` (90) were attributed `b3_tool`;
+  - delegation → 380 autonomous B3 actions → a "delegation done" trigger;
+  - revisions were recorded;
+  - an invalid method returned its exact error to the model (`unknown b3 method 'no_such_method'`);
+  - contradiction triggers reached the model.
+- **Qwen, vc33, 15 min** (`runs/b3f/verify_qwen_vc33`):
+  - observation → Qwen's own click proposals → executed through B3 → NO-OP outcomes returned;
+  - Qwen then switched to `b3("candidates" / "transitions" / "plan_to_frontier" / "status")` and executed B3's suggested frontier actions (effects observed);
+  - no schema errors in any Qwen b3 call;
+  - result: 2 levels, both completed by B3 autonomy; 6 LLM turns (263 s of inference).
+  - No representation revision or contradiction occurred in that game, so the "useful revision" leg is shown only as a change of strategy after failed proposals, not as model revision.
+- **Dead endpoint** (`127.0.0.1:9`, 3 min): 7 failed LLM turns; B3 continued (393 autonomous actions), completed level 1 and used the full budget. Inference failure does not end the game.
+
+**Amendment 1 (engineering, all arms equal).** The harness serializes the whole history (every frame) to its runtime-state file after **every** action, which is O(n²): about 0.23 s per action by the time a few hundred actions have accumulated. The file is read only by the analyzer at the start of a turn, and `_llm_turn` writes it there. B3's autonomous actions now defer that write. Unchanged behaviour during LLM turns; the unchanged-Franzen arm is unaffected. Measured: 0.030 s per action, and the B3 arm reaches 3,000 actions within budget.
+
+**Amendment 2.** `--minimal-diagnostics 1` (the competition-rerun setting) for every arm. Measured overhead was the same either way.
