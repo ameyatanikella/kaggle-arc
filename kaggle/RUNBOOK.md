@@ -53,3 +53,17 @@ Then push and submit as in step 1. Do this only after the paired A/B clears the 
 KAGGLE_API_TOKEN=... .venv/bin/kaggle kernels output dfranzen/arc-agi-3-milestone-2-solution -p data/franzen_v3_output \
    --file-pattern '(benchmark\.json|summary\.txt|transcripts/.*|serve\.log)'
 ```
+
+## Input mount layout varies between kernels (observed 2026-10-12/13)
+- **Kernels pushed on Oct 12** (B0 smoke, pair-b2c, pair-nudge) mounted inputs under the new layout:
+  - `/kaggle/input/datasets/<owner>/<slug>`
+  - `/kaggle/input/models/<owner>/<model>/transformers/default/1`
+  - `/kaggle/input/competitions/<slug>/...`
+- **`arc3-b2-algebra` (pushed Oct 13)** mounted datasets and competition data under the legacy layout (`/kaggle/input/<slug>`), but models under the new layout.
+  - v1 failed in cell 2 (`cp: cannot stat .../datasets/dfranzen/taaf-kaggle-source-bundle-copy`).
+- **Fix:** `build_b2.add_input_resolver` inserts a resolver cell and wraps the notebook's 6 input-path literals.
+  - When the expected path exists, it is used unchanged.
+  - Otherwise the slug is searched under `/kaggle/input`.
+  - The cell prints the mount tree, and the submit script refuses to submit if any path is `NOT FOUND`.
+- **Every future push must go through `build_b2.py`.** A plain `build_b0.py` notebook would fail on a legacy-layout kernel.
+- **Only one pending submission per team** (`FAILED_PRECONDITION`): `kaggle/submit_when_free.sh` waits for scoring to finish, then submits.
