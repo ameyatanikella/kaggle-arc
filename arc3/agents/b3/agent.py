@@ -291,8 +291,16 @@ class B3Agent(Agent):
 
     # ------------------------------------------------------------------
     def act(self, obs, deadline):
+        """Frozen-candidate entry point: observe the outcome of the previous action, then decide."""
+        self.stats["decisions"] += 1
+        self.observe(obs)
+        return self.decide(obs)
+
+    def observe(self, obs):
+        """Record the outcome of the last executed action (B3's own or an external one announced with
+        note_external). Returns {'node', 'post', 'changed', 'contradiction', 'level_changed'}."""
         s = self.stats
-        s["decisions"] += 1
+        info = {"contradiction": False, "level_changed": False, "changed": False}
         t = self.clock.start()
         if obs.levels_completed != self.level:
             if self.level >= 0:
@@ -300,6 +308,7 @@ class B3Agent(Agent):
                 self._snapshot()
             self.level = obs.levels_completed
             self._new_level()
+            info["level_changed"] = True
         grid = obs.grid
         fatal = obs.state == "GAME_OVER"
         remap = None
@@ -331,9 +340,11 @@ class B3Agent(Agent):
                     st[1] += 1
                 elif not fatal:
                     st[0].add(n_p)
+            info["changed"] = changed
             if pred is not None:
                 s["predictions"] += 1
                 s["pred_correct"] += int(pred == post)
+                info["contradiction"] = pred != post
                 pc = pred != FATAL and pred != n_p
                 s["pred_change_tp"] += int(pc and changed)
                 s["pred_change_fp"] += int(pc and not changed)
@@ -354,7 +365,14 @@ class B3Agent(Agent):
                     s["plan_breaks"] += 1
                     self.active = None
         self.clock.add("inference", t)
+        self._obs_node, self._obs_grid, self._obs_fatal = node, grid, fatal
+        info["node"] = node
+        return info
 
+    def decide(self, obs):
+        """B3's own policy for the current observation (call observe() first). Returns an Act."""
+        s = self.stats
+        node, grid, fatal = self._obs_node, self._obs_grid, self._obs_fatal
         t = self.clock.start()
         self._nested = [0.0, 0.0]
         if fatal:
@@ -383,6 +401,18 @@ class B3Agent(Agent):
         if choice[0] == 6:
             return Act(6, choice[1], choice[2], why=why)
         return Act(choice[0], why=why)
+
+    def note_external(self, choice):
+        """An action chosen outside B3 (e.g. by the reasoning layer) is about to execute from the last
+        observed state: record it so the next observe() books the transition and checks B3's prediction.
+        choice is (a,) or (6, x, y); RESET (0,) clears the pending transition."""
+        if choice[0] == 0:
+            self.prev, self.active = None, None
+            return
+        node = self._obs_node
+        self.prev = (node, choice, self.graph.edges.get(node, {}).get(choice), self._obs_grid)
+        if self.active is not None and self.active[0][self.active[2]] != choice:
+            self.active = None                  # an external action pre-empts B3's active plan
 
     def _end_policy(self, t):
         w = time.perf_counter() - t[0] - self._nested[0]
