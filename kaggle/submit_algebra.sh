@@ -7,6 +7,7 @@ cd "$(dirname "$0")/.."
 export KAGGLE_API_TOKEN="$(cat .kaggle/access_token)"
 K=.venv/bin/kaggle
 KERNEL=axizcc/arc3-b2-algebra
+VERSION=${1:-2}          # kernel version this push creates (v1 failed: input mount path)
 log() { echo "$(date -u +%H:%M:%S) $*"; }
 
 # 1. wait for a free GPU session slot (max 2 concurrent) and push
@@ -30,7 +31,7 @@ while true; do
 done
 
 # 3. validate the commit log and outputs
-mkdir -p runs/kaggle/b2_algebra_commit
+rm -rf runs/kaggle/b2_algebra_commit; mkdir -p runs/kaggle/b2_algebra_commit
 $K kernels output $KERNEL -p runs/kaggle/b2_algebra_commit --file-pattern '^(submission\.parquet|.*\.log)$' >/dev/null 2>&1
 LOGF=$(ls runs/kaggle/b2_algebra_commit/*.log 2>/dev/null | head -1)
 python3 - "$LOGF" <<'EOF' || { log "validation FAILED - not submitting"; exit 3; }
@@ -45,6 +46,7 @@ checks = {
     'patches installed': "B2 install: {'installed': ['bar_fix', 'solved_memory', 'tools', 'prompt_fixes']" in text,
     'no traceback': 'Traceback (most recent call last)' not in text,
     'b2 errors 0': "'errors': 0" in text,
+    'inputs resolved': 'B2 input path NOT FOUND' not in text,
 }
 print(checks)
 sys.exit(0 if all(checks.values()) else 1)
@@ -53,7 +55,7 @@ test -s runs/kaggle/b2_algebra_commit/submission.parquet || { log "no submission
 
 # 4. wait for the next daily slot, then submit
 until [ "$(date -u +%Y%m%d)" -ge 20261013 ]; do sleep 120; done
-out=$($K competitions submit arc-prize-2026-arc-agi-3 -k $KERNEL -v 1 -f submission.parquet \
+out=$($K competitions submit arc-prize-2026-arc-agi-3 -k $KERNEL -v $VERSION -f submission.parquet \
       -m "B2-algebra v1: B0 + bar/prompt fixes + solved-level memory + algebra sandbox tools" 2>&1 | tail -2)
 log "submit: $out"
 sleep 20

@@ -105,3 +105,42 @@ def test_b2_minimal_commit_skips_only_benchmark():
     assert all(_code_ok(s) for s in srcs)
     import shutil
     shutil.rmtree(out)
+
+
+def test_b2_input_resolver_handles_both_mount_layouts(tmp_path, monkeypatch):
+    import shutil
+    import build_b2
+    out = build_b2.main("axizcc", "b2resolver", {"B2_TOOLS": "1"}, "minimal")
+    nb = json.loads((out / "notebook.ipynb").read_text())
+    shutil.rmtree(out)
+    srcs = ["".join(c["source"]) for c in nb["cells"] if c["cell_type"] == "code"]
+    assert srcs[0].startswith("# B2 input-path resolver")
+    assert all(_code_ok(s) for s in srcs)
+    joined = "\n".join(srcs[1:])
+    import re
+    assert not re.search(r"""(?<!_b2_inp\()["']/kaggle/input/""", joined)       # every literal wrapped
+    expected = {
+        "/kaggle/input/datasets/dfranzen/taaf-kaggle-source-bundle-copy": "taaf-kaggle-source-bundle-copy",
+        "/kaggle/input/datasets/dfranzen/pennyroyal-v253": "pennyroyal-v253",
+        "/kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1":
+            "intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1",
+        "/kaggle/input/competitions/arc-prize-2026-arc-agi-3/arc_agi_3_wheels": "arc-prize-2026-arc-agi-3/arc_agi_3_wheels",
+    }
+    # legacy layout: /kaggle/input/<slug>/...
+    legacy = tmp_path / "legacy"
+    for rel in expected.values():
+        (legacy / rel).mkdir(parents=True)
+    monkeypatch.setenv("B2_INPUT_ROOT", str(legacy))
+    ns = {}
+    exec(srcs[0], ns)
+    for p, rel in expected.items():
+        assert ns["_b2_inp"](p) == str(legacy / rel)
+    # new layout: identity
+    new = tmp_path / "new"
+    for p in expected:
+        (new / p[len("/kaggle/input/"):]).mkdir(parents=True)
+    monkeypatch.setenv("B2_INPUT_ROOT", str(new))
+    ns = {}
+    exec(srcs[0], ns)
+    for p in expected:
+        assert ns["_b2_inp"](p) == str(new / p[len("/kaggle/input/"):])

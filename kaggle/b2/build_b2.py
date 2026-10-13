@@ -16,6 +16,71 @@ sys.path.insert(0, str(ROOT / "kaggle" / "b0"))
 import build_b0  # noqa: E402
 
 
+INPUT_RESOLVER = r'''# B2 input-path resolver. The B0 notebook hard-codes the new mount layout
+# (/kaggle/input/{datasets,models,competitions}/...). A commit on 2026-10-13 found the dataset
+# missing there. When the expected path exists it is returned unchanged (identical behaviour);
+# otherwise the slug is searched under /kaggle/input (depth <= 3, e.g. the legacy layout).
+import os as _b2os
+_B2_ROOT = _b2os.environ.get("B2_INPUT_ROOT", "/kaggle/input")
+
+
+def _b2_inp(p):
+    q = p.replace("/kaggle/input", _B2_ROOT, 1)
+    if _b2os.path.exists(q):
+        return q
+    parts = p[len("/kaggle/input/"):].split("/")
+    if parts[0] in ("datasets", "models") and len(parts) >= 3:
+        slug, tail = parts[2], parts[3:]
+    elif parts[0] == "competitions" and len(parts) >= 2:
+        slug, tail = parts[1], parts[2:]
+    else:
+        return q
+    for root, dirs, _ in _b2os.walk(_B2_ROOT):
+        if root[len(_B2_ROOT):].count("/") >= 3:
+            dirs[:] = []
+            continue
+        if slug in dirs:
+            base = _b2os.path.join(root, slug)
+            for t in (tail, [x.lower() for x in tail], [x[:1].upper() + x[1:] for x in tail]):
+                cand = _b2os.path.join(base, *t)
+                if _b2os.path.exists(cand):
+                    print(f"B2 input path: {p} -> {cand}")
+                    return cand
+    print(f"B2 input path NOT FOUND: {p}")
+    return q
+
+
+for _r, _d, _f in _b2os.walk(_B2_ROOT):
+    _lvl = _r[len(_B2_ROOT):].count("/")
+    if _lvl >= 3:
+        _d[:] = []
+        continue
+    print("B2 inputs:", "  " * _lvl + (_r[len(_B2_ROOT):] or "/"), f"({len(_f)} files)")
+'''
+
+
+def add_input_resolver(nb: dict) -> int:
+    """Insert the resolver before the first code cell and wrap every '/kaggle/input/...' string
+    literal in code cells with _b2_inp(...). Returns the number of literals wrapped."""
+    import re
+    pat = re.compile(r"""(["'])(/kaggle/input/[^"'\n]+)\1""")
+    n = 0
+    for c in nb["cells"]:
+        if c["cell_type"] != "code":
+            continue
+        src = "".join(c["source"])
+        if "open('/tmp/b2_patches.py'" in src:
+            continue                                   # embedded file contents are data, not paths
+        new, k = pat.subn(lambda m: f"_b2_inp({m.group(1)}{m.group(2)}{m.group(1)})", src)
+        if k:
+            c["source"] = new
+            n += k
+    first = next(i for i, c in enumerate(nb["cells"]) if c["cell_type"] == "code")
+    nb["cells"].insert(first, {"cell_type": "code", "metadata": {}, "outputs": [], "execution_count": None,
+                               "source": INPUT_RESOLVER})
+    return n
+
+
 def main(username: str, variant: str, switches: dict, commit_mode: str = "smoke") -> Path:
     """commit_mode: "smoke" = 2-game 20-min commit; "minimal" = commit boots the server and installs
     the patches but skips the benchmark (about 12 min). The rerun path is identical in both."""
@@ -60,6 +125,8 @@ def main(username: str, variant: str, switches: dict, commit_mode: str = "smoke"
         + ("The commit run only boots the model server and installs the patches (no games); "
            if commit_mode == "minimal" else "The commit run is a 2-game smoke test; ")
         + "the competition rerun is the full run.")
+    n_paths = add_input_resolver(nb)
+    assert n_paths == 6, n_paths                       # the six input paths of the B0 notebook
     out = HERE / "push" / variant
     out.mkdir(parents=True, exist_ok=True)
     (out / "notebook.ipynb").write_text(json.dumps(nb, indent=1))

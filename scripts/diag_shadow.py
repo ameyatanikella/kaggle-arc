@@ -301,6 +301,7 @@ def main():
     p.add_argument("--instances", type=int, default=4)
     p.add_argument("--trials", type=int, default=30)
     p.add_argument("--out", default=str(ROOT / "runs" / "diag" / "shadow.json"))
+    p.add_argument("--b-span", action="store_true", help="exploratory: B with spanning-subset RANSAC")
     a = p.parse_args()
     arc = arc_agi.Arcade(operation_mode=arc_agi.OperationMode.OFFLINE, environments_dir=str(ENV_DIR), logger=quiet())
     games = list_games() if a.games == "all" else [g for g in list_games() if g.split("-")[0] in a.games.split(",")]
@@ -353,7 +354,7 @@ def main():
         cache = S.StructureCache(enabled=True)
         C = AlgebraicChecker(cache=cache)
         Cn = AlgebraicChecker(cache=S.StructureCache(enabled=False))
-        B = OrdinaryChecker()
+        B = OrdinaryChecker(span=a.b_span)
         times = {"B": [], "C": [], "Cnocache": []}
         for comp, obs in chosen:
             elig = [o for o in obs if comp.applies(o)[0]]
