@@ -79,4 +79,13 @@ Unit: sums over 25 games × 3 seeds unless noted. "Levels" means levels complete
 After the development comparison, the chosen configuration is frozen by commit hash before any closed evaluation that the existing protocol permits. No closed evaluation is planned in this cycle.
 
 ## Amendments
-(none)
+**1. 2026-10-13, before any registered development run.** Only smoke tests on ≤ 5 games and synthetic controls had been run.
+- (a) **Negative search results are cached.** Both caches reuse "no frontier reachable from node". The ordinary/projected cache invalidates on any structural graph change, tier change or rebuild. The dependency cache invalidates only when a new edge leaves the cached reachable set, or on a tier change or refinement of a member frame. Motivation: smoke runs showed that failed searches, repeated while the agent acts in an exhausted region, dominate repeated search. The brief asks to cache reusable model computations, not only plans.
+- (b) **Refinement is iterative on logged evidence.** A conflict raises a frame's history length repeatedly until its logged edges are deterministic or L_MAX = 6 is reached.
+- (c) **Irrelevant-state compression is implemented as goal-plan reuse projected on dependency regions.** The plan is the shortest known path to the completing step, keyed on the start frame restricted to the plan's dependency region, validated step by step on that region and invalidated on a counterexample. It is a **separate switch** (`goal_reuse`) and a separate version, **V4b = V4 + goal_reuse**. V5/V5s build on V4, not V4b, so effects stay attributable. Its criterion is the same as V4's, applied V4b vs V4.
+- (d) **Temporal experiments** start only when no frontier is reachable. They use R = 5 repetitions beyond the known no-change application. "Separate" restores freshness with a level reset (charged as overhead).
+- (e) **Components O and D were evaluated on traces and offline before the development runs, as registered.**
+  - O: commit vs retained correspondence on B0's level-1 traces.
+  - D: the offline benchmark plus the verification controls.
+  - D's in-agent profile is the duplicate-action-word count in plan caches during the development runs.
+- (f) Versions run: B1, V1, V2, V3, V4, V4b, V5, V5s. Criteria unchanged.

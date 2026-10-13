@@ -47,6 +47,7 @@ class PlanCache:
         self.by_edge: dict = {}      # (node, action) -> {pid}
         self.by_goal: dict = {}      # goal -> {pid}
         self.entries: dict = {}
+        self._words: set = set()
         self.neg: dict = {}          # node -> stamp (projected) | frozenset reachable set (dependency)
         self.neg_by_node: dict = {}  # dependency: node in reachable set -> {source nodes}
         for k in ("neg_built", "neg_hits", "neg_invalidated",
@@ -60,6 +61,10 @@ class PlanCache:
         if self.mode == "none" or not actions:
             return None
         t0 = time.perf_counter()
+        w = tuple(actions)                              # dedup profile: identical action words
+        if w in self._words:
+            self.stats["cache_dup_words"] = self.stats.get("cache_dup_words", 0) + 1
+        self._words.add(w)
         e = PlanEntry(self.next_id, start, list(actions), list(nodes), goal, version,
                       allowance=len(actions) + slack)
         self.next_id += 1
