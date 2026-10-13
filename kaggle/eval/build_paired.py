@@ -26,6 +26,8 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path.insert(0, str(ROOT / "kaggle" / "b0"))
 import build_b0  # noqa: E402
+sys.path.insert(0, str(ROOT / "kaggle" / "b2"))
+import build_b2  # noqa: E402
 
 ARM_SECONDS_PER_PASS = 6840   # 1.9 h; two arms x 2 passes = 7.6 h + about 10 min startup < 9 h
 
@@ -59,6 +61,7 @@ def main(user, variant, arm_a: dict, arm_b: dict, submit: str, passes: int, orde
         "open('/tmp/b2_patches.py', 'w').write(" + repr(b2_src) + ")\n"
         "open('/tmp/sandbox_tools.py', 'w').write(" + repr(tools_src) + ")\n"
         "open('/tmp/run_arm.py', 'w').write(" + repr(arm_src) + ")\n"
+        + build_b2.hx_embed_lines() +
         "sys.path.insert(0, '/tmp')\n"
         "if TRUE_SUBMISSION and SUBMIT_SWITCHES:\n"
         "    os.environ.update(SUBMIT_SWITCHES)\n"
@@ -102,6 +105,8 @@ def main(user, variant, arm_a: dict, arm_b: dict, submit: str, passes: int, orde
         "(Apache-2.0) on Tufa Labs' Duck harness. Solved-level memory ports rellik13's M85 (Apache-2.0).\n\n"
         f"Arm a: `{json.dumps(arm_a)}`; arm b: `{json.dumps(arm_b)}`; order {order}; {passes} pass(es) each on the public games "
         f"(commit run). Competition rerun: B0 + switches `{json.dumps(submit_sw)}`.")
+    n_paths = build_b2.add_input_resolver(nb)
+    assert n_paths == 6, n_paths                       # the six input paths of the B0 notebook
     out = HERE / "push" / variant
     out.mkdir(parents=True, exist_ok=True)
     (out / "notebook.ipynb").write_text(json.dumps(nb, indent=1))

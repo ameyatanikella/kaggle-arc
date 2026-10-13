@@ -49,6 +49,15 @@ bm.solver.concurrency = 25 * passes
 bm.solver.max_runtime_s_per_game = T
 
 env_dir = str(Path("/kaggle/input/competitions/arc-prize-2026-arc-agi-3/arc_agi_3_wheels").parent / "environment_files")
+if not Path(env_dir).is_dir():                     # mount layout varies between kernels (RUNBOOK)
+    for _root, _dirs, _files in os.walk("/kaggle/input"):
+        if _root.count("/") > 6:
+            _dirs[:] = []
+            continue
+        if "environment_files" in _dirs:
+            env_dir = os.path.join(_root, "environment_files")
+            break
+print(f"[arm {arm}] environment_files: {env_dir}", flush=True)
 spec = taaf.game_api.ArcadeSpec(operation_mode=arc_agi.OperationMode.OFFLINE, environments_dir=env_dir)
 arcade = arc_agi.Arcade(operation_mode=arc_agi.OperationMode.OFFLINE, environments_dir=env_dir)
 ids = [e.game_id for e in arcade.available_environments]
