@@ -270,6 +270,14 @@ def make_session_class():
             if self.b3_arm == "b3_franzen" and self.b3_trigger is None:
                 self.b3_trigger = why
 
+        def write_runtime_state(self):
+            # The serialized runtime state (whole history, every frame) is read only by the analyzer at
+            # the start of a turn, and _llm_turn writes it there. Writing it after every AUTONOMOUS B3
+            # action is O(n^2) work nobody reads, so it is deferred; during LLM turns it is unchanged.
+            if getattr(self, "_b3_defer_state", False):
+                return
+            super().write_runtime_state()
+
         # ---------------------------------------------------------------- B3 autonomy
         def _b3_step(self):
             obs = self.b3_last_obs or self._b3_obs()
@@ -280,6 +288,7 @@ def make_session_class():
                 self._set_trigger("B3 has no reachable unexplored state in its recorded graph")
             choice = (act.action,) if act.action != 6 else (6, act.x, act.y)
             self.b3_source = "b3_reset" if act.action == 0 else "b3_auto"
+            self._b3_defer_state = True
             try:
                 if act.action == 0:
                     self._execute_action(arcengine.ActionInput(id=arcengine.GameAction.RESET, data={}),
@@ -289,6 +298,7 @@ def make_session_class():
                 payload = self.step_env({"actions": [self._harness(choice)]})
             finally:
                 self.b3_source = None
+                self._b3_defer_state = False
             if not payload.get("executed"):
                 node = self.b3._obs_node
                 self.b3.graph.tried.setdefault(node, set()).add(choice)
@@ -540,13 +550,16 @@ def main():
     p.add_argument("--base-url", default="http://localhost:11434/v1")
     p.add_argument("--model", default="qwen3.5:35b")
     p.add_argument("--out", required=True)
+    p.add_argument("--minimal-diagnostics", type=int, default=1,
+                   help="1 = competition-rerun setting (no per-action viewer writes); applied to every arm")
     a = p.parse_args()
     env = dict(B0_SETUP_ENV)
     env.update(B0_PRIORITY_ENV)
     env["ARC3_MAX_ACTIVE_STREAMS"] = 1
     env.update({"LOCAL_ANALYZER_BASE_URL": a.base_url, "OPENAI_BASE_URL": a.base_url,
                 "LOCAL_ANALYZER_MODEL_ID": a.model, "INFERENCE_ANALYZER_MODEL": a.model, "MPLBACKEND": "Agg",
-                "TAAF_RUN_AS_SUBMISSION": "0", "TAAF_MINIMAL_DIAGNOSTICS": "0", "OPERATION_MODE": "offline"})
+                "TAAF_RUN_AS_SUBMISSION": "0", "TAAF_MINIMAL_DIAGNOSTICS": str(a.minimal_diagnostics),
+                "OPERATION_MODE": "offline"})
     os.environ.update({k: str(v) for k, v in env.items()})
     os.environ["ONLY_RESET_LEVELS"] = "true"
     src = Path(a.src)
@@ -572,7 +585,8 @@ def main():
                                                      "b3_config": B3_CONFIG}, indent=1, default=str))
     t0 = time.time()
     soft_end = datetime.now() + timedelta(minutes=a.minutes * len(games) + 5)
-    asyncio.run(bm.run(soft_end_time=soft_end, runtime_environment=None, minimal_diagnostics=False))
+    asyncio.run(bm.run(soft_end_time=soft_end, runtime_environment=None,
+                       minimal_diagnostics=bool(a.minimal_diagnostics)))
     (out / "b3_channel_stats.json").write_text(json.dumps(dict(STATS), indent=1))
     print(f"done in {time.time() - t0:.1f}s; outputs in {out}")
 
