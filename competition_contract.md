@@ -88,6 +88,11 @@ M2 prizes appear to have gone to Qwen3.8-Flash-Next solutions (P: thread 744792)
 | Unedited Franzen copies, single draws | mean 25.77, SD 3.93, median 26.19 | P ([thread 745062](https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/745062)) |
 | Franzen v3 on the 25 public games, 4 passes, competition-scaled budget | mean 46.49 per run (33 of 100 runs won) | O (notebook output) |
 
+| **Our B0 (`arc3-b0-franzen-m2-repro`), submission 57112928** | **26.92** (scored 2026-10-13 01:30 UTC) | O: our submission. Within the distribution of unedited copies, so B0 is a faithful reproduction |
+
+**Quota (O, 2026-10-13 01:35 UTC).** GPU used 16.43 h of 45 h. Our commits and paired runs account for about 17 h. B0's roughly 9 h scored rerun (16:27 → 01:30) would have pushed usage to about 26 h, so **competition reruns do not consume the weekly GPU quota**.
+**Submission limits (O).** One pending submission per team (`FAILED_PRECONDITION`), and 1 per day ("0 submissions remaining today").
+
 **Implication.** A single LB draw has an SD of about 4 points. One submission per day cannot separate changes smaller than about 5 points. Local multi-pass evaluation on public games is needed for anything finer, and that needs RTX-class GPU hours.
 
 ## Open items (U) needed from the user
