@@ -23,6 +23,7 @@ in behaviour to B0. Switches (env vars, read at install time):
                       B2_HX_TRIGGERS. Needs arc3/ (perception + hx) importable.
   B2_HX_LEDGER=1      HX2 per-game hypothesis ledger (goal refutation, forecasts, hidden-state
                       splits, camera shifts) + hx_ledger(); implies the tools and triggers layers.
+  B2_HX_QUIET=1       no triggered reports at all (events + tools only), e.g. the ledger as a tool.
 
 `b2_summary()` returns counters showing whether each switch actually fired.
 """
@@ -411,7 +412,8 @@ def install() -> dict:
     hx_all = _on("B2_HX")
     hx_layers = {k: hx_all or _on("B2_HX_" + k.upper()) for k in ("events", "tools", "triggers")}
     hx_layers["ledger"] = _on("B2_HX_LEDGER")              # HX2 hypothesis ledger: its own switch
-    if any(hx_layers.values()):
+    hx_layers["quiet"] = _on("B2_HX_QUIET")                # no triggered reports (tools and events only)
+    if any(v for k, v in hx_layers.items() if k != "quiet"):
         here = os.path.dirname(os.path.abspath(__file__))
         if here not in __import__("sys").path:
             __import__("sys").path.insert(0, here)
