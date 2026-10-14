@@ -98,3 +98,22 @@ A leaderboard claim needs an actual leaderboard draw.
 **Scope.**
 - First tuning pass: A 28, B 30, C 30, D 34 levels, kept in `runs/hx2/tune_v1`.
 - B, C and D are re-run on tuning with the fix. A is unaffected.
+
+**Amendment 2** (2026-10-14, about 01:00 UTC, before any HX2 Kaggle run). The LLM-host contrast changes.
+
+**Why.** HX v1's counterbalanced Kaggle result was pooled −3.86 (CI −8.25 to +0.35), with equal throughput. Its only behavioural channels were:
+- the faithful sandbox fields;
+- the optional tools;
+- about 208 triggered reports per session.
+
+The reports are the most intrusive of these and the likeliest cause.
+
+**New contrast.** B0 vs B0 + `B2_HX_EVENTS` + `B2_HX_LEDGER` + `B2_HX_QUIET`: faithful events, the HX tools and `hx_ledger()`, with no triggered reports.
+- Two sessions, counterbalanced, 1 pass per arm each (about 8 GPU-hours).
+- The quota expires on 17 Oct.
+- Not submitted from these notebooks (`--submit none`).
+
+**Reading.**
+- Differences under about 8 points are not effects.
+- The result tells whether exposing tools and events without reports avoids v1's loss.
+- A leaderboard submission of any HX variant still needs a pooled Δ ≥ −2 and your explicit OK.

@@ -101,11 +101,14 @@ def system_doc() -> str:
     return doc
 
 
-def install(events: bool = True, tools: bool = True, triggers: bool = True, ledger: bool = False) -> dict:
+def install(events: bool = True, tools: bool = True, triggers: bool = True, ledger: bool = False,
+            quiet: bool = False) -> dict:
     """Idempotent. Any layer implies the host event log (needed by tools and triggers). The HX2 ledger
     (B2_HX_LEDGER) needs the sandbox channel and the triggers, so it switches both on."""
     if ledger:
         tools = triggers = True
+    if quiet:
+        triggers = False
     if _STATE["installed"]:
         return dict(_STATE)
     import numpy as np
