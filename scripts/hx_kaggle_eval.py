@@ -24,7 +24,8 @@ from pathlib import Path
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
-SESSIONS = {"ba": ROOT / "runs/kaggle/pair_hx_ba", "ab": ROOT / "runs/kaggle/pair_hx_ab"}
+PREFIX = sys.argv[1] if len(sys.argv) > 1 else "pair_hx"          # e.g. pair_hx2q for the quiet-ledger runs
+SESSIONS = {"ba": ROOT / f"runs/kaggle/{PREFIX}_ba", "ab": ROOT / f"runs/kaggle/{PREFIX}_ab"}
 
 
 def load_arm(d: Path) -> dict:
@@ -61,7 +62,7 @@ def tool_use(d: Path) -> dict:
                         codes[hash(c)] = c
     cnt = Counter()
     for c in codes.values():
-        for k in ("hx_check(", "hx_probe(", "hx_goals(", "hx_relations(", "hx_wins(", "moves", ".kind"):
+        for k in ("hx_check(", "hx_probe(", "hx_goals(", "hx_relations(", "hx_wins(", "hx_ledger(", "moves", ".kind"):
             if k in c:
                 cnt[k] += 1
     cnt["unique_tool_calls"] = len(codes)
@@ -128,7 +129,7 @@ def main():
         rule = p["delta"] >= -2 and any((res[s].get("hx") or {}).get("reports_delivered", 0) > 0 for s in ("ba", "ab"))
         res["prereg_lb_rule_pass"] = bool(rule)
         print(f"   pre-registered leaderboard rule (pooled delta >= -2 and triggers fired): {'PASS' if rule else 'FAIL'}")
-    (ROOT / "runs/hx/kaggle_eval.json").write_text(json.dumps(res, indent=1, default=str))
+    (ROOT / f"runs/hx/kaggle_eval_{PREFIX}.json").write_text(json.dumps(res, indent=1, default=str))
 
 
 if __name__ == "__main__":
