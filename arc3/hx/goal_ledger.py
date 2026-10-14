@@ -36,9 +36,24 @@ def describe(h: tuple) -> str:
     return f"{describe_fact(h[1])} achieved earlier, THEN {describe_fact(h[2])}"
 
 
+BORDER = 4
+
+
+def _with_border(mask):
+    """Goal facts ignore the 4-cell border (the harness's HUD convention): level-complete indicators
+    drawn there at a win are not goal evidence (amendment 1, prereg_hx2: seen in sb26 on Kaggle)."""
+    m = np.zeros((64, 64), dtype=bool) if mask is None else np.array(mask, dtype=bool, copy=True)
+    m[:BORDER, :] = True
+    m[-BORDER:, :] = True
+    m[:, :BORDER] = True
+    m[:, -BORDER:] = True
+    return m
+
+
 class GoalLedger:
     def __init__(self, mask_fn=None, max_pairs: int = 10, max_new: int = 40):
-        self.mask_fn = mask_fn or (lambda: None)
+        base = mask_fn or (lambda: None)
+        self.mask_fn = lambda: _with_border(base())
         self.max_pairs = max_pairs
         self.max_new = max_new
         self.h: dict = {}                 # hypothesis -> record
