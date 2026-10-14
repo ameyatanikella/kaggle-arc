@@ -86,4 +86,15 @@ These were measured during the build; they are not evidence of score.
 A leaderboard claim needs an actual leaderboard draw.
 
 ## Amendments
-(none yet)
+**Amendment 1** (2026-10-14, after the tuning pass, before any holdout run).
+
+**Change.** Goal-ledger facts now ignore the 4-cell border, the harness's own HUD convention.
+
+**Why.**
+- In the Kaggle B0 + HX transcripts (sb26), the win frame carried a level-complete indicator in the top row: a bar recoloured from 5 to 0.
+- HX reported it as the goal fact `absent(colour 5)` (distance 260).
+- Win-time UI drawn in the border is not goal evidence.
+
+**Scope.**
+- First tuning pass: A 28, B 30, C 30, D 34 levels, kept in `runs/hx2/tune_v1`.
+- B, C and D are re-run on tuning with the fix. A is unaffected.
