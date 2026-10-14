@@ -50,8 +50,19 @@ HX_DOC = (
     "the winning action and the board at the moment of the win.\n"
 )
 
+HX_LEDGER_DOC = (
+    "  - `hx_ledger()` -> {'forecasts', 'goals', 'hidden_state', 'camera_shifts'}: the per-game hypothesis "
+    "ledger. 'forecasts': how often each built-in model (graph = transitions seen before, algebra, history, "
+    "undo variants) predicted your actions' outcomes BEFORE they happened, with 'effect_accuracy' counted only on "
+    "actions that changed the board. 'goals': 'sufficient_candidates' (true at earlier wins, never yet true "
+    "without a level-up) and 'prerequisites' (true at wins but also seen without one, so not enough alone). "
+    "'hidden_state': same-board/same-action conflicts and which history feature explains them, if any. "
+    "'camera_shifts': detected view translations (frames are screen coordinates).\n"
+)
+
 _HX_TL = 8.0
 _HX_TOOLS_ON = True      # hx_patch rewrites this line when only the events layer is installed
+_HX_LEDGER_ON = False    # hx_patch rewrites this line when the HX2 ledger is installed
 _HX_RG = None
 
 
@@ -103,6 +114,8 @@ def _hx_refresh(rg):
             f = globals().get(n)
             if f is not None:
                 rg[n] = f
+    if _HX_LEDGER_ON:
+        rg["hx_ledger"] = hx_ledger
 
 
 def _hx_ascii(x):
@@ -330,6 +343,10 @@ def hx_goals(limit=8):
 
 def hx_relations(min_support=2, limit=20):
     return _hx_call("relations", min_support=min_support, limit=limit)
+
+
+def hx_ledger(limit=6):
+    return _hx_call("ledger", limit=limit)
 
 
 def hx_wins():

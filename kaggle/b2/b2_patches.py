@@ -21,6 +21,8 @@ in behaviour to B0. Switches (env vars, read at install time):
   B2_HX=1             HX layers (kaggle/b2/hx_patch.py): faithful events, hx_* sandbox tools and
                       triggered evidence reports. Individually: B2_HX_EVENTS / B2_HX_TOOLS /
                       B2_HX_TRIGGERS. Needs arc3/ (perception + hx) importable.
+  B2_HX_LEDGER=1      HX2 per-game hypothesis ledger (goal refutation, forecasts, hidden-state
+                      splits, camera shifts) + hx_ledger(); implies the tools and triggers layers.
 
 `b2_summary()` returns counters showing whether each switch actually fired.
 """
@@ -408,6 +410,7 @@ def install() -> dict:
         STATS["installed"].append("stuck_nudge")
     hx_all = _on("B2_HX")
     hx_layers = {k: hx_all or _on("B2_HX_" + k.upper()) for k in ("events", "tools", "triggers")}
+    hx_layers["ledger"] = _on("B2_HX_LEDGER")              # HX2 hypothesis ledger: its own switch
     if any(hx_layers.values()):
         here = os.path.dirname(os.path.abspath(__file__))
         if here not in __import__("sys").path:

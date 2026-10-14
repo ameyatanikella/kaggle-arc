@@ -24,7 +24,7 @@ from collections import Counter
 _HOST = threading.local()
 STATS = Counter()
 _LOCK = threading.Lock()
-_STATE = {"installed": False, "events": False, "tools": False, "triggers": False}
+_STATE = {"installed": False, "events": False, "tools": False, "triggers": False, "ledger": False}
 
 _CHILD_SRC_ANCHOR = "HOST_STDOUT = sys.stdout"
 _CHILD_REFRESH_ANCHOR = '        runtime_globals["last_action_call_result"] = action_result\n'
@@ -39,6 +39,7 @@ _HOST_SRC = '''            if msg_type == "hx":
                 continue
 '''
 _TOOLS_ON_LINE = "_HX_TOOLS_ON = True      # hx_patch rewrites this line when only the events layer is installed"
+_LEDGER_ON_LINE = "_HX_LEDGER_ON = False    # hx_patch rewrites this line when the HX2 ledger is installed"
 
 
 def _bump(k, n=1):
@@ -68,18 +69,21 @@ def _request(session, req: dict) -> dict:
     if session is None:
         return {"error": "HX is not available in this session."}
     method = str(req.get("method") or "")
-    if method not in ("goals", "relations", "wins", "status"):
+    if method not in ("goals", "relations", "wins", "status", "ledger"):
         return {"error": f"unknown hx method {method!r}"}
     _bump("req_" + method)
     return _json_safe(session.request(method, dict(req.get("args") or {})))
 
 
-def _child_source(tools_on: bool) -> str:
+def _child_source(tools_on: bool, ledger_on: bool = False) -> str:
     here = os.path.dirname(os.path.abspath(__file__))
     src = open(os.path.join(here, "hx_child.py")).read()
     if not tools_on:
         assert src.count(_TOOLS_ON_LINE) == 1
         src = src.replace(_TOOLS_ON_LINE, "_HX_TOOLS_ON = False")
+    if ledger_on:
+        assert src.count(_LEDGER_ON_LINE) == 1
+        src = src.replace(_LEDGER_ON_LINE, "_HX_LEDGER_ON = True")
     return src
 
 
@@ -92,11 +96,16 @@ def system_doc() -> str:
     doc = mod.HX_EVENTS_DOC if _STATE["events"] else ""
     if _STATE["tools"]:
         doc += mod.HX_DOC
+    if _STATE["ledger"]:
+        doc += mod.HX_LEDGER_DOC
     return doc
 
 
-def install(events: bool = True, tools: bool = True, triggers: bool = True) -> dict:
-    """Idempotent. Any layer implies the host event log (needed by tools and triggers)."""
+def install(events: bool = True, tools: bool = True, triggers: bool = True, ledger: bool = False) -> dict:
+    """Idempotent. Any layer implies the host event log (needed by tools and triggers). The HX2 ledger
+    (B2_HX_LEDGER) needs the sandbox channel and the triggers, so it switches both on."""
+    if ledger:
+        tools = triggers = True
     if _STATE["installed"]:
         return dict(_STATE)
     import numpy as np
@@ -105,13 +114,13 @@ def install(events: bool = True, tools: bool = True, triggers: bool = True) -> d
     from inference.framework import solver as SV
     from arc3.hx.session import HXSession
 
-    _STATE.update(events=bool(events), tools=bool(tools), triggers=bool(triggers))
+    _STATE.update(events=bool(events), tools=bool(tools), triggers=bool(triggers), ledger=bool(ledger))
 
     # ---- sandbox child: helpers + refresh hook (events and/or tools)
     if events or tools:
         b = S._SANDBOX_BOOTSTRAP
         assert b.count(_CHILD_SRC_ANCHOR) == 1 and b.count(_CHILD_REFRESH_ANCHOR) == 1, "sandbox bootstrap changed"
-        b = b.replace(_CHILD_SRC_ANCHOR, _child_source(tools) + "\n\n" + _CHILD_SRC_ANCHOR, 1)
+        b = b.replace(_CHILD_SRC_ANCHOR, _child_source(tools, ledger) + "\n\n" + _CHILD_SRC_ANCHOR, 1)
         b = b.replace(_CHILD_REFRESH_ANCHOR, _CHILD_REFRESH_ANCHOR + "        _hx_refresh(runtime_globals)\n", 1)
         S._SANDBOX_BOOTSTRAP = b
 
@@ -145,7 +154,7 @@ def install(events: bool = True, tools: bool = True, triggers: bool = True) -> d
 
     def play(self):
         try:
-            self._hx = HXSession(triggers=triggers)
+            self._hx = HXSession(triggers=triggers, ledger=ledger)
             st = self.game.current_state
             self._hx.start(np.asarray(SV._grid_from_state(st), dtype=np.uint8), int(st.levels_completed))
             _bump("sessions")
