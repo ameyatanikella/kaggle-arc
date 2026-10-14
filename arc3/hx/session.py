@@ -22,8 +22,13 @@ from ..perception import VolatileMask
 from .algebra import COMMUTE, IDEM, INVERSE, INVOL, NOOP, OVERRIDE, Algebra
 from .context import GridContext
 from .events import DEATH, GAME_WIN, MOVE, RESET, WIN, EventLog
+from .goal_ledger import GoalLedger
+from .goal_ledger import describe as describe_h
 from .goals import GoalModel, describe
+from .history import HistorySplitter, HistoryTracker, UndoAllModel, UndoLastModel, UndoModel
+from .ledger import ForecastLedger
 from .objects import describe_match, match, parse
+from .scene import camera_shift
 
 NOOP_STREAK = 4          # consecutive interior no-ops (across calls) before the noops report
 MAX_REPORT_LINES = 9
@@ -54,8 +59,12 @@ def word_text(word) -> str:
     return " then ".join(out)
 
 
+def action_cls(a: tuple) -> str:
+    return "click" if a[0] == 6 else action_text(a)
+
+
 class HXSession:
-    def __init__(self, triggers: bool = True):
+    def __init__(self, triggers: bool = True, ledger: bool = False):
         self.log = EventLog()
         self.vm = VolatileMask()
         self.ctx = GridContext(self.log, self.vm)
@@ -70,11 +79,25 @@ class HXSession:
         self.last_win_report: dict = {}
         self.stats = Counter()
         self.started = False
+        self.use_ledger = ledger
+        if ledger:                       # HX2: per-game hypothesis ledger (docs/prereg_hx2.md)
+            self.fl = ForecastLedger()
+            self.gl = GoalLedger(mask_fn=lambda: self.vm.mask)
+            self.hist = HistoryTracker()
+            self.split = HistorySplitter()
+            self.undo = UndoModel()
+            self.undo1 = UndoLastModel()
+            self.undo_all = UndoAllModel()
+            self.camera: list = []
+            self.goal_reports: Counter = Counter()
+            self.camera_reported: set = set()
 
     # ------------------------------------------------------------------ recording
     def start(self, grid, level: int = 0):
         self.log.start(np.asarray(grid, dtype=np.uint8), level)
         self.started = True
+        if self.use_ledger:
+            self.gl.start_level(level, self.log.grid(self.log.current), self.ctx.key(self.log.current))
 
     def _algebra(self, level: int, rebuild: bool):
         if self.alg is None or self.alg_level != level or rebuild:
@@ -101,15 +124,22 @@ class HXSession:
             self.vm.update(g0, g1)
             grown = not np.array_equal(old, self.vm.mask)
             k0, k1 = self.ctx.key(st.pre), self.ctx.key(st.post)
+            fresh = self.alg is None or self.alg_level != st.level or grown
+            forecasts = None
+            if self.use_ledger and not fresh:
+                forecasts = self._forecasts(k0, st.action)          # from the pre-state only
             alg = self._algebra(st.level, grown)
             if not grown:
                 info = alg.observe(k0, st.action, k1)
             else:
                 info = {"conflict": False}          # the rebuild already contains this step
                 alg.observe(k0, st.action, k1)
+            split_info = None
+            if self.use_ledger:
+                split_info = self._ledger_move(st, g0, g1, k0, k1, forecasts)
             if info.get("conflict"):
                 self.stats["conflicts"] += 1
-                self._hidden_report(st, alg)
+                self._hidden_report(st, alg, split_info)
             if k0 == k1:
                 self.noop_streak += 1
                 if self.noop_streak >= NOOP_STREAK and not self.noop_fired:
@@ -119,14 +149,111 @@ class HXSession:
                 self.noop_streak, self.noop_fired = 0, False
         elif st.kind in (WIN, GAME_WIN):
             self.noop_streak, self.noop_fired = 0, False
-            self._win_report(st)
+            if self.use_ledger:
+                self._ledger_win(st)
+            else:
+                self._win_report(st)
         elif st.kind == DEATH:
             self.noop_streak, self.noop_fired = 0, False
             if st.terminal is not None:
                 self.goals.observe_death(self.log.grid(st.pre), self.log.grid(st.terminal))
         elif st.kind == RESET:
             self.noop_streak, self.noop_fired = 0, False
+            if self.use_ledger:
+                self.hist.reset_level()
+                self.undo.reset_level()
+                self.undo1.reset_level()
+                self.undo_all.reset_level()
+                if st.post is not None:
+                    self.gl.observe_state(self.ctx.key(st.post), self.log.grid(st.post))
         return out
+
+    # ------------------------------------------------------------------ HX2 ledger
+    def _forecasts(self, k0, a) -> dict:
+        alg = self.alg
+        known = alg.succ(k0, a)
+        feats = self.hist.features(a)
+        self._feats = feats
+        hist_dep = a[0] == UndoModel.UNDO
+        return {"graph": known,
+                "algebra": None if (known is not None or hist_dep) else (alg.predict(k0, a) or (None,))[0],
+                "history": self.split.predict(k0, a, feats),
+                "undo": self.undo.predict(k0, a),
+                "undo1": self.undo1.predict(k0, a),
+                "undo_all": self.undo_all.predict(k0, a)}
+
+    def _ledger_move(self, st, g0, g1, k0, k1, forecasts):
+        a = st.action
+        feats = getattr(self, "_feats", None) or self.hist.features(a)
+        self._feats = None
+        sp = self.split.observe(k0, a, feats, k1)
+        cam = None
+        if float((g0 != g1).mean()) > 0.05:
+            cam = camera_shift(g0, g1, self.vm.mask)
+            if cam is not None:
+                self.camera.append((st.level, st.t, cam[0], cam[1]))
+                self.stats["camera_shifts"] += 1
+                if st.level not in self.camera_reported:
+                    self.camera_reported.add(st.level)
+                    self._push("camera", [
+                        f"HX evidence: after {action_text(a)} the whole view shifted by {cam[0]} rows and {cam[1]} "
+                        f"columns ({int(cam[2] * 100)}% of the board matches the shifted previous frame). Positions "
+                        "in frames are SCREEN coordinates: the same tile is now at (row + dy, col + dx). Track "
+                        "positions in world coordinates and convert back before you click."])
+        if forecasts is not None:
+            cause = "binding" if cam is not None else ("latent" if sp.get("conflict") else "transition")
+            self.fl.score(k0, action_cls(a), forecasts, k1, cause)
+        self.undo.observe(k0, a, k1)
+        self.undo1.observe(k0, a, k1)
+        self.undo_all.observe(k0, a, k1)
+        self.hist.update(a, k0 != k1)
+        refuted = self.gl.observe_state(k1, g1)
+        if refuted:
+            self.stats["goal_refutations"] += len(refuted)
+            if self.goal_reports[st.level] < 2:
+                self.goal_reports[st.level] += 1
+                self._push("goal", [
+                    "HX evidence: these goal hypotheses from earlier wins now hold on this level WITHOUT a level-up, "
+                    "so none of them is sufficient on its own (each may still be a prerequisite): "
+                    + "; ".join(describe_h(h) for h in refuted[:4]) + "."])
+        return sp
+
+    def _ledger_win(self, st):
+        lv = st.level
+        win = self.log.grid(st.terminal)
+        new = self.gl.observe_win(lv, win)
+        lines = []
+        if win is None:
+            lines.append(f"HX: level {lv + 1} completed by {action_text(st.action)}; no separate win frame was "
+                         "returned, so no win-state evidence is available.")
+        else:
+            m = match(parse(self.log.grid(st.pre), mask=self.vm.mask), parse(win, mask=self.vm.mask))
+            ch = describe_match(m, limit=3)[:5]
+            lines.append(f"HX evidence: level {lv + 1} was completed by {action_text(st.action)} after "
+                         f"{self.log.actions_on_level(lv)} actions on that level. In the winning step: "
+                         + ("; ".join(ch) if ch else "no object-level change outside the masked border") + ".")
+        suff = self.gl.ranked("sufficient?", 4)
+        if suff:
+            lines.append("Goal hypotheses never yet seen without a level-up (candidates for 'sufficient'; "
+                         "[levels explained]): " + "; ".join(f"{describe_h(h)} [{len(r['support'])}]" for h, r in suff) + ".")
+        pre = [h for h, r in self.gl.ranked("prerequisite", 40) if lv in r["support"]][:3]
+        if pre:
+            lines.append("True at this win but also earlier without a win (at most prerequisites): "
+                         + "; ".join(describe_h(h) for h in pre) + ".")
+        if st.kind == WIN and st.init is not None:
+            self.gl.start_level(lv + 1, self.log.grid(st.init), self.ctx.key(st.init))
+            open_ = [(h, self.gl.distance(h, self.log.grid(st.init))) for h, _ in self.gl.ranked("sufficient?", 4)]
+            if open_:
+                lines.append(f"On level {lv + 2}'s first frame (heuristic distance): "
+                             + "; ".join(f"{describe_h(h)} ({d:.0f})" for h, d in open_) + ".")
+            lines.append("A win supports a goal hypothesis but does not prove it; a hypothesis that holds without a "
+                         "level-up is refuted as sufficient.")
+        self.hist.reset_level()
+        self.undo.reset_level()
+        self.undo1.reset_level()
+        self.undo_all.reset_level()
+        self.last_win_report = {"level": lv, "lines": lines}
+        self._push("level", lines)
 
     # ------------------------------------------------------------------ triggers
     def _push(self, kind: str, lines: list):
@@ -171,7 +298,7 @@ class HXSession:
         self.last_win_report = {"level": lv, "lines": lines}
         self._push("level", lines)
 
-    def _hidden_report(self, st, alg):
+    def _hidden_report(self, st, alg, split_info=None):
         k = (self.ctx.key(st.pre), st.action)
         if k in self.conflicts_reported:
             return
@@ -182,7 +309,9 @@ class HXSession:
             f"HX evidence: {action_text(st.action)} from the same board (ignoring the masked border) gave a different "
             f"result now than at step(s) {earlier[-3:]} of this level. The outcome depends on something the board "
             "does not show (an earlier action, a counter, a timer, or the masked border). A model of the current "
-            "frame alone cannot predict it; include what happened before."])
+            "frame alone cannot predict it; include what happened before."
+            + ((" So far the outcome is consistent with depending on " + self.split.explain(k[0], st.action) + ".")
+               if self.use_ledger and split_info and split_info.get("feature") else "")])
 
     def _noop_report(self, st, alg):
         lines = [f"HX evidence: the last {self.noop_streak} actions changed nothing inside the board."]
@@ -249,6 +378,18 @@ class HXSession:
                             "start_grid": self.log.grid(w["start"]).tolist() if w["start"] is not None else None,
                             "actions_on_level": self.log.actions_on_level(w["level"])})
             return {"wins": out}
+        if method == "ledger" and self.use_ledger:
+            gl = {"sufficient_candidates": [{"hypothesis": describe_h(h), "levels_explained": [x + 1 for x in r["support"]],
+                                             "later_wins_where_false": r["win_false"]}
+                                            for h, r in self.gl.ranked("sufficient?", int(args.get("limit", 8)))],
+                  "prerequisites": [{"hypothesis": describe_h(h), "held_without_win": r["nonwin"],
+                                     "levels_explained": [x + 1 for x in r["support"]]}
+                                    for h, r in self.gl.ranked("prerequisite", int(args.get("limit", 8)))],
+                  "counts": dict(self.gl.n)}
+            splits = [{"state": k.hex()[:8], "action": action_text(a), "explanation": self.split.explain(k, a)}
+                      for (k, a) in list(self.split.split)[-6:]]
+            return {"forecasts": self.fl.summary(), "goals": gl, "hidden_state": {**self.split.counts, "examples": splits},
+                    "camera_shifts": [{"level": lv + 1, "dy": dy, "dx": dx} for lv, t, dy, dx in self.camera[-5:]]}
         if method == "status":
             return {"level": self.log.level + 1, "steps": len(self.log.steps), "stats": dict(self.stats),
                     "masked_border_cells": int(self.vm.mask.sum())}

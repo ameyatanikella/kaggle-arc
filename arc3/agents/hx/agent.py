@@ -28,7 +28,11 @@ import numpy as np
 
 from ...hx.algebra import Algebra
 from ...hx.events import EventLog
+from ...hx.goal_ledger import GoalLedger
 from ...hx.goals import GoalModel
+from ...hx.history import HistorySplitter, HistoryTracker, UndoAllModel, UndoLastModel, UndoModel
+from ...hx.ledger import ForecastLedger
+from ...hx.scene import camera_shift, refined_match
 from ...hx.objects import match, parse
 from ..b3.agent import FATAL, B3Agent, background_color
 
@@ -95,7 +99,8 @@ class HXAgent(B3Agent):
         cfg = {"plan_cache": "projected", "noop_order": True, "reset_purpose": True}
         cfg.update(config or {})
         # fields used by _new_level(), which B3's constructor calls
-        self.on = {k: bool(cfg.get(k, False)) for k in ("events", "algebra", "memory", "models", "probes", "homing", "goals")}
+        self.on = {k: bool(cfg.get(k, False)) for k in ("events", "algebra", "memory", "models", "probes", "homing", "goals",
+                                                        "ledger", "history", "certify")}
         self.min_support = tuple(cfg.get("min_support", (3, 2, 2)))
         self.alg = None
         self._prior = None
@@ -108,8 +113,18 @@ class HXAgent(B3Agent):
         for k in ("virtual_edges", "virtual_checked", "virtual_wrong", "pred_calls", "mover_preds", "mover_checked",
                   "mover_correct", "mover_pruned", "mover_reordered", "goal_wins_seen", "goal_frontier_choices",
                   "goal_reorders", "conflicts_seen", "pair_tests", "ambiguous_edges_excluded", "transfer_prior_rel",
-                  "hx_seconds"):
+                  "hx_seconds", "plans_dropped_history", "certified_edges", "soft_demoted", "camera_shifts",
+                  "goal_refutations"):
             s[k] = 0
+        # HX2 (docs/prereg_hx2.md): hypothesis ledger, history state, certified pruning
+        self.fl = ForecastLedger() if self.on["ledger"] else None
+        self.gl = GoalLedger(mask_fn=lambda: self.vmask.mask) if self.on["ledger"] else None
+        self._fc = None
+        self._gl_started = False
+        if self.on["history"]:
+            self.tracker, self.splitter = HistoryTracker(), HistorySplitter()
+            self.undos = {"undo": UndoModel(), "undo1": UndoLastModel(), "undo_all": UndoAllModel()}
+        self._feats = None
         self.events = EventLog() if self.on["events"] else None
         self.virtual = set()           # (node, action) virtual edges added on the current level
         self._pred_seen = {}           # (node, action) -> algebra instance count at last prediction
@@ -143,11 +158,30 @@ class HXAgent(B3Agent):
 
     def _gscore(self, node):
         """Goal distance of a known state, cached until the goal model changes."""
+        if self.gl is not None:
+            ver = (self.gl.n["wins"], self.gl.n["refuted_sufficient"], int(self.vmask.mask.sum()))
+            c = self._gcache.get(node)
+            if c is None or c[0] != ver:
+                tg = self._gl_targets()
+                c = self._gcache[node] = (ver, float(sum(self.gl.distance(h, self.rep[node]) for h in tg)))
+            return c[1]
         ver = (self.goalm.n["levels"], int(self.vmask.mask.sum()))
         c = self._gcache.get(node)
         if c is None or c[0] != ver:
             c = self._gcache[node] = (ver, self.goalm.score(self.rep[node]))
         return c[1]
+
+    def _gl_targets(self, top: int = 3):
+        """Planning targets: hypotheses true at every win so far (win_false == 0), most-explaining first;
+        sufficiency is not required (a prerequisite is still worth reaching)."""
+        items = [(h, r) for h, r in self.gl.h.items() if r["win_false"] == 0]
+        items.sort(key=lambda hr: (-len(hr[1]["support"]), hr[1]["status"] != "sufficient?", hr[0][0] != "fact", hr[0]))
+        return [h for h, _ in items[:top]]
+
+    def _goal_active(self) -> bool:
+        if self.gl is not None:
+            return bool(self.gl.h)
+        return self.goalm is not None and bool(self.goalm.ranked(1))
 
     def _parse(self, node):
         v = self._parse_cache.get(node)
@@ -246,15 +280,83 @@ class HXAgent(B3Agent):
                         self.conflicted.add(n_p)
             if self.on["models"] and a_p[0] != 6:
                 self._learn_mover(prev[3], a_p, obs.grid, n_p, node)
+        self._hx2_observe(obs, info, prev, lvl_before, mv_before)
         self._last_grid = obs.grid.copy()
         s["hx_seconds"] += self._t() - t0
         return info
+
+    def _hx2_observe(self, obs, info, prev, lvl_before, mv_before):
+        s = self.stats
+        node = info["node"]
+        fc, self._fc = self._fc, None
+        moved_ok = prev is not None and not info["level_changed"] and obs.state != "GAME_OVER"
+        cam = None
+        if moved_ok and self.on["history"]:
+            g0 = prev[3]
+            if float((g0 != obs.grid).mean()) > 0.05:
+                cam = camera_shift(g0, obs.grid, self.vmask.mask)
+                if cam is not None:
+                    s["camera_shifts"] += 1
+        sp = {}
+        if moved_ok and self.on["history"]:
+            n_p, a_p = prev[0], prev[1]
+            feats = self._feats if self._feats is not None else self.tracker.features(a_p)
+            sp = self.splitter.observe(n_p, a_p, feats, node)
+            for m in self.undos.values():
+                m.observe(n_p, a_p, node)
+            self.tracker.update(a_p, n_p != node)
+        self._feats = None
+        if self.fl is not None and moved_ok and fc is not None and fc[0] == prev[0] and fc[1] == prev[1]:
+            cause = "binding" if cam is not None else ("latent" if sp.get("conflict") else "transition")
+            self.fl.score(prev[0], self._cls_name(prev[1]), fc[2], node, cause)
+        if info["level_changed"] or obs.state == "GAME_OVER" or (prev is None and self._last_act == (0,)):
+            if self.on["history"]:
+                self.tracker.reset_level()
+                for m in self.undos.values():
+                    m.reset_level()
+        if self.gl is not None:
+            if not self._gl_started:
+                self.gl.start_level(max(0, self.level), obs.grid, node)
+                self._gl_started = True
+            elif info["level_changed"]:
+                self.gl.observe_win(lvl_before, obs.frames[-2] if len(obs.frames) >= 2 else None)
+                self.gl.start_level(self.level, obs.grid, node)
+            elif obs.state != "GAME_OVER":
+                r = self.gl.observe_state(node, obs.grid)
+                s["goal_refutations"] += len(r)
+
+    @staticmethod
+    def _cls_name(a):
+        return "click" if a[0] == 6 else "a%d" % a[0]
+
+    def _hist_dependent(self, node, a) -> bool:
+        return a[0] == 7 or (self.on["history"] and self.splitter.history_dependent(node, a))
 
     def decide(self, obs):
         self._ucache = {}                    # _untried results are stable within one decision
         act = super().decide(obs)
         self._last_act = (act.action,) if act.action != 6 else (6, act.x, act.y)
         self._last_avail = tuple(obs.available_actions)
+        if (self.fl is not None or self.on["history"]) and act.action != 0:
+            node, a = self._obs_node, self._last_act
+            if self.on["history"]:
+                self._feats = self.tracker.features(a)
+            if self.fl is not None:
+                known = self.graph.edges.get(node, {}).get(a)
+                virt = (node, a) in self.virtual
+                fc = {"graph": None if (virt or known == FATAL) else known,
+                      "algebra": known if virt else None}
+                if fc["algebra"] is None and self.alg is not None and known is None and not self._hist_dependent(node, a):
+                    p = self.alg.predict(node, a)
+                    fc["algebra"] = p[0] if p else None
+                if self.on["models"] and a[0] != 6:
+                    mp = self._mover_predict(node, a)
+                    fc["mover"] = mp if isinstance(mp, bytes) else (mp[1] if isinstance(mp, tuple) else None)
+                if self.on["history"]:
+                    fc["history"] = self.splitter.predict(node, a, self._feats)
+                    for k, m in self.undos.items():
+                        fc[k] = m.predict(node, a)
+                self._fc = (node, a, fc)
         return act
 
     # ------------------------------------------------------------------ models (C4)
@@ -389,7 +491,7 @@ class HXAgent(B3Agent):
         t0 = self._t()
         s = self.stats
         keep = []
-        novel, known = [], []
+        novel, known, demote = [], [], []
         for a in u:
             pk = None
             if self.alg is not None:
@@ -398,7 +500,17 @@ class HXAgent(B3Agent):
                 if last is None or inst >= 2 * last + 100:
                     self._pred_seen[(node, a)] = inst
                     s["pred_calls"] += 1
-                    p = self.alg.predict(node, a)
+                    p = self.alg.predict(node, a) if not self._hist_dependent(node, a) else None
+                    if p is not None and self.on["certify"]:
+                        fc = {"algebra": p[0]}
+                        if self.on["models"] and a[0] != 6:
+                            mp = self._mover_predict(node, a)
+                            fc["mover"] = mp if isinstance(mp, bytes) else None
+                        if not (self.fl is not None and self.fl.certified(fc, self._cls_name(a))):
+                            demote.append(a)               # uncertified: a soft search prior, not a prune
+                            self.stats["soft_demoted"] += 1
+                            continue
+                        self.stats["certified_edges"] += 1
                     if p is not None:
                         self._n_pred += 1
                         if self._n_pred % 8 == 0 or not self._alg_trusted():
@@ -434,7 +546,8 @@ class HXAgent(B3Agent):
         if novel or known:
             s["mover_reordered"] += 1
             keep = novel + keep + known
-        if self.on["probes"] and self.goalm is not None and self.goalm.ranked(1) and node == getattr(self, "_obs_node", None):
+        keep = keep + demote
+        if self.on["probes"] and self._goal_active() and node == getattr(self, "_obs_node", None):
             keep = self._goal_order(node, keep)
         s["hx_seconds"] += self._t() - t0
         return keep
@@ -488,7 +601,13 @@ class HXAgent(B3Agent):
 
     def _choose(self, node, obs):
         """Ab / C5: choose frontier targets by goal distance when goal hypotheses exist."""
-        if (self.on["goals"] or self.on["probes"]) and self.goalm is not None and self.goalm.ranked(1) \
+        if self.on["history"] and self.active is not None:
+            acts, nodes, i = self.active
+            hp = self.splitter.predict(node, acts[i], self.tracker.features(acts[i]))
+            if hp is not None and hp != nodes[i]:
+                self.active = None                    # the history model expects this plan step to diverge
+                self.stats["plans_dropped_history"] += 1
+        if (self.on["goals"] or self.on["probes"] or self.on["ledger"]) and self._goal_active() \
                 and self.active is None and not self._untried_cached_current(node, obs.available_actions):
             plan = self._goal_frontier(node, obs)
             if plan is not None:
