@@ -110,9 +110,11 @@ Nine games were unplayed in each session's first arm:
 **Scope of the fault.**
 - **It is not a T3 code error.** The B2 error count is 0, every arm exited with code 0, and the kernel logs contain no tracebacks.
 - **It does not touch B0's scored path,** where the early release is intended.
-- **It does affect any paired commit notebook.** It may also have biased earlier paired sessions toward the second arm, whereas `decision_report_03` saw the *first* arm do better; the server's load time may have changed since.
+- **It is new to T3.** A check on 22 October found 0 unplayed games in every arm of the earlier paired sessions (`pair_b2c`, `pair_hx_ab/ba`, `pair_hx2q_ab/ba`), so those results are unaffected. The likely cause is a server load that now takes longer than the release deadline.
 
 **Required before the T8 main screen.** In the paired builder only, make the first arm wait for a server-ready health check before it starts. Pre-register that change as an amendment, and re-freeze before the push.
+
+**Status, 22 October:** done, in `kaggle/eval/build_paired_ready.py` with `tests/test_build_paired_ready.py`. See Amendment 1 of [grcm_action_plan.md](grcm_action_plan.md).
 
 ## Deviations and limits
 

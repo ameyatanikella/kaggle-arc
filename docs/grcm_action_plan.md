@@ -95,3 +95,36 @@ Stop GRCM for the deadline, leave B0 as the submission, and write the negative r
 | Queue delays push results past 31 October | Push by the morning of 29 October; no later pushes for decisions |
 | Sleep or Ollama incidents during local screens | AC power, lid open, `caffeinate -i -s`; `num_ctx` 16384 ([AGENTS.md](../AGENTS.md) §2) |
 | Another session edits `kaggle/b2/hx_patch.py` or `hx_child.py` (both currently uncommitted) | Coordinate before T6. GRCM goes in new files with a thin hook only |
+
+## Amendment 1 (22 October 2026, after T3 and before any T8 build, freeze or push)
+
+**Why.** T3 found a start-up fault in the paired commit notebook ([grcm_t3_reach_report.md](grcm_t3_reach_report.md)).
+- Franzen's start-up cell releases the benchmark about 722 s after notebook start, even while SGLang is still loading.
+- The first arm then abandons games after 11 failed analyzer requests. That left 9 of 25 games unplayed in each T3 session's first arm.
+- Earlier paired sessions were not affected: each arm of `pair_b2c`, `pair_hx_*` and `pair_hx2q_*` had 0 unplayed games.
+
+Without a fix, every T8 contrast would be confounded by arm position.
+
+**Change.** T8 and T9 notebooks are built with `kaggle/eval/build_paired_ready.py`, not `build_paired.py`.
+- **Same arguments,** plus `--ready-timeout`, default 1,800 s.
+- **The wait.** Before the first arm, the paired cell polls the same `http://127.0.0.1:8001/health` endpoint the start-up cell uses. It records `server_ready = {ready, waited_seconds}` in `paired_meta.json`.
+- **If the server is never ready,** no arm is played, and that is stated in the log and the metadata.
+- **Scope.** Only the commit run is affected; the competition rerun path is byte-identical. `build_paired.py` stays unchanged, because it is a frozen T3 input.
+- **Tests.** `tests/test_build_paired_ready.py` has 5 tests, which pass alongside `tests/test_notebook_builders.py`. They show three things:
+  - only the paired cell and the title cell differ from `build_paired` output;
+  - the wait is called only under `not TRUE_SUBMISSION` and before the arm loop;
+  - the wait handles both "ready after 503s" and "never ready", including running the patched cell end to end.
+
+**Session validity rule, to be copied into the T8 pre-registration before its freeze.** A T8 or T9 session is valid only if all of these hold:
+1. `paired_meta.json → server_ready.ready` is `true`;
+2. every arm played all 25 games: no `summary.txt` line reads `actions=0, tokens=0`;
+3. both arms exited with return code 0 and no timeout.
+
+**If a session is invalid:**
+- report it verbatim;
+- exclude it from every contrast;
+- re-run it once, quota permitting. If it can't be re-run, the contrast is reported as incomplete; it is never analysed with the invalid session.
+
+**Other T8 inputs.**
+- **Freeze contents.** The T8 freeze must include `build_paired_ready.py`, `build_paired.py`, `run_arm.py`, the B2 and HX sources, the built notebooks and their metadata, the T8 pre-registration and its analysis script.
+- **Budget.** The wait adds at most about 30 minutes per session, which fits inside the T8 budget: a 6,840 s × 2 arm session plus start-up and the wait stays under the 9 h notebook limit.
