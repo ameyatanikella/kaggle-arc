@@ -24,6 +24,11 @@ in behaviour to B0. Switches (env vars, read at install time):
   B2_HX_LEDGER=1      HX2 per-game hypothesis ledger (goal refutation, forecasts, hidden-state
                       splits, camera shifts) + hx_ledger(); implies the tools and triggers layers.
   B2_HX_QUIET=1       no triggered reports at all (events + tools only), e.g. the ledger as a tool.
+  B2_HX_STALL=1       at a registered stall, require one bounded hx_probe turn with two
+                      executable model hypotheses before the next action. Logs reach and follow-through.
+  B2_HX_STALL_NEUTRAL=1  same trigger with a neutral progress review as a prompt-cost control.
+  B2_HX_CAUSAL_REPORT=1  per-turn non-blocking action-algebra report (Part A A1).
+  B2_HX_CAUSAL_NEUTRAL=1 same-length neutral progress report (Part A A2).
 
 `b2_summary()` returns counters showing whether each switch actually fired.
 """
@@ -413,12 +418,18 @@ def install() -> dict:
     hx_layers = {k: hx_all or _on("B2_HX_" + k.upper()) for k in ("events", "tools", "triggers")}
     hx_layers["ledger"] = _on("B2_HX_LEDGER")              # HX2 hypothesis ledger: its own switch
     hx_layers["quiet"] = _on("B2_HX_QUIET")                # no triggered reports (tools and events only)
+    hx_layers["stall"] = _on("B2_HX_STALL")
+    hx_layers["stall_neutral"] = _on("B2_HX_STALL_NEUTRAL")
+    hx_layers["causal_report"] = _on("B2_HX_CAUSAL_REPORT")
+    hx_layers["causal_neutral"] = _on("B2_HX_CAUSAL_NEUTRAL")
     if any(v for k, v in hx_layers.items() if k != "quiet"):
         here = os.path.dirname(os.path.abspath(__file__))
         if here not in __import__("sys").path:
             __import__("sys").path.insert(0, here)
         import hx_patch
-        hx_patch.install(**hx_layers)
+        hx_patch.install(**hx_layers,
+                         stall_turns=int(os.environ.get("B2_HX_STALL_TURNS", "5")),
+                         stall_tokens=int(os.environ.get("B2_HX_STALL_TOKENS", "20000")))
         STATS["installed"].append("hx:" + "+".join(k for k, v in hx_layers.items() if v))
     print("B2 patches installed:", json.dumps(STATS["installed"]), flush=True)
     return dict(STATS)

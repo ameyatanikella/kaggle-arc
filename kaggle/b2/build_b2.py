@@ -90,7 +90,10 @@ def hx_embed_lines() -> str:
              "/tmp/arc3/perception.py": ROOT / "arc3" / "perception.py"}
     for f in sorted((ROOT / "arc3" / "hx").glob("*.py")):
         files[f"/tmp/arc3/hx/{f.name}"] = f
-    lines = ["os.makedirs('/tmp/arc3/hx', exist_ok=True)"]
+    for f in sorted((ROOT / "arc3" / "learning").glob("*.py")):
+        files[f"/tmp/arc3/learning/{f.name}"] = f
+    lines = ["os.makedirs('/tmp/arc3/hx', exist_ok=True)",
+             "os.makedirs('/tmp/arc3/learning', exist_ok=True)"]
     for dst, src in files.items():
         lines.append(f"open({dst!r}, 'w').write({src.read_text()!r})")
     return "\n".join(lines) + "\n"
